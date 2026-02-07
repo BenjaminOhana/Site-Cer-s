@@ -61,7 +61,7 @@ const Bio = () => {
             ref={sectionRef}
             style={{
                 position: 'relative',
-                backgroundColor: '#111111', // Fond noir pour éviter le blanc
+                backgroundColor: 'var(--color-blanc-nacre)', // Fond clair pour transition fluide
                 overflow: 'hidden',
                 paddingBottom: '4rem'
             }}

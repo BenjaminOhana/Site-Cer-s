@@ -100,42 +100,36 @@ const Offer = () => {
                 overflow: 'hidden'
             }}
         >
-            {/* Image container avec titre superposé */}
+            {/* Titre au-dessus comme le Hero */}
+            <h2
+                ref={titleRef}
+                style={{
+                    fontFamily: 'var(--font-editorial)',
+                    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
+                    fontWeight: 400,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-bordeaux)',
+                    textAlign: 'center',
+                    marginBottom: '2.5rem',
+                    opacity: 0
+                }}
+            >
+                Horoscope personnalisé
+            </h2>
+
+            {/* Image container */}
             <div style={{
                 position: 'relative',
                 width: '100%',
                 maxWidth: '500px',
                 marginBottom: '3rem'
             }}>
-                {/* Titre flottant au-dessus */}
-                <h2
-                    ref={titleRef}
-                    style={{
-                        position: 'absolute',
-                        top: '-2rem',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        zIndex: 10,
-                        fontFamily: 'var(--font-editorial)',
-                        fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-                        fontWeight: 400,
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
-                        color: 'var(--color-bordeaux)',
-                        whiteSpace: 'nowrap',
-                        textShadow: '0 2px 20px rgba(255,255,255,0.8)',
-                        opacity: 0
-                    }}
-                >
-                    Horoscope personnalisé
-                </h2>
-
                 {/* Image */}
                 <div
                     ref={imageRef}
                     style={{
                         width: '100%',
-                        paddingTop: '10%', // Espace pour le titre
                         opacity: 0
                     }}
                 >
