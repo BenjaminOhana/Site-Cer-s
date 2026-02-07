@@ -9,22 +9,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Offer = () => {
     const sectionRef = useRef(null);
-    const imageRef = useRef(null);
+    const imageContainerRef = useRef(null);
     const titleRef = useRef(null);
     const contentRef = useRef(null);
 
     useEffect(() => {
         const section = sectionRef.current;
-        const image = imageRef.current;
+        const imageContainer = imageContainerRef.current;
         const title = titleRef.current;
         const content = contentRef.current;
 
-        // Image reveal avec parallax léger
-        gsap.fromTo(image,
+        // Image container reveal
+        gsap.fromTo(imageContainer,
             {
                 opacity: 0,
                 scale: 1.05,
-                y: 30
+                y: 40
             },
             {
                 opacity: 1,
@@ -40,7 +40,7 @@ const Offer = () => {
             }
         );
 
-        // Titre avec effet blur→net
+        // Titre avec effet blur→net (légèrement décalé)
         gsap.fromTo(title,
             {
                 opacity: 0,
@@ -54,8 +54,8 @@ const Offer = () => {
                 ease: 'power2.out',
                 scrollTrigger: {
                     trigger: section,
-                    start: 'top 60%',
-                    end: 'top 30%',
+                    start: 'top 65%',
+                    end: 'top 35%',
                     scrub: 0.5
                 }
             }
@@ -100,50 +100,62 @@ const Offer = () => {
                 overflow: 'hidden'
             }}
         >
-            {/* Titre au-dessus comme le Hero */}
-            <h2
-                ref={titleRef}
+            {/* Image container avec titre superposé - Style Hero */}
+            <div
+                ref={imageContainerRef}
                 style={{
-                    fontFamily: 'var(--font-editorial)',
-                    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-                    fontWeight: 400,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-bordeaux)',
-                    textAlign: 'center',
-                    marginBottom: '2.5rem',
+                    position: 'relative',
+                    width: '100%',
+                    maxWidth: '500px',
+                    marginBottom: '3rem',
                     opacity: 0
                 }}
             >
-                Horoscope personnalisé
-            </h2>
-
-            {/* Image container */}
-            <div style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '500px',
-                marginBottom: '3rem'
-            }}>
-                {/* Image */}
-                <div
-                    ref={imageRef}
+                {/* L'image */}
+                <img
+                    src={horoscopeImage}
+                    alt="Femme lisant un magazine Ceres"
                     style={{
                         width: '100%',
+                        height: 'auto',
+                        display: 'block'
+                    }}
+                />
+
+                {/* Overlay gradient léger */}
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 70%)',
+                    pointerEvents: 'none'
+                }} />
+
+                {/* Titre superposé sur l'image */}
+                <h2
+                    ref={titleRef}
+                    style={{
+                        position: 'absolute',
+                        bottom: '8%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '90%',
+                        textAlign: 'center',
+                        fontFamily: 'var(--font-editorial)',
+                        fontSize: 'clamp(1.6rem, 5vw, 2.2rem)',
+                        fontWeight: 400,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        color: 'white',
+                        textShadow: '0 2px 10px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3)',
+                        margin: 0,
                         opacity: 0
                     }}
                 >
-                    <img
-                        src={horoscopeImage}
-                        alt="Femme lisant un magazine Ceres"
-                        style={{
-                            width: '100%',
-                            height: 'auto',
-                            display: 'block',
-                            boxShadow: '0 20px 60px rgba(0,0,0,0.15)'
-                        }}
-                    />
-                </div>
+                    Horoscope personnalisé
+                </h2>
             </div>
 
             {/* Content */}
@@ -195,13 +207,6 @@ const Offer = () => {
                     7,99€/mois
                 </p>
             </div>
-
-            {/* Desktop Styles */}
-            <style>{`
-                @media (min-width: 768px) {
-                    /* On desktop, keep centered layout but larger */
-                }
-            `}</style>
         </section>
     );
 };
