@@ -1,98 +1,211 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Import local image
+import horoscopeImage from '../assets/horoscope-magazine.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Offer = () => {
-    // Placeholder image: Summer ambiance, golden light, sea
-    const image = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2673&auto=format&fit=crop";
+    const sectionRef = useRef(null);
+    const imageRef = useRef(null);
+    const titleRef = useRef(null);
+    const contentRef = useRef(null);
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        const image = imageRef.current;
+        const title = titleRef.current;
+        const content = contentRef.current;
+
+        // Image reveal avec parallax léger
+        gsap.fromTo(image,
+            {
+                opacity: 0,
+                scale: 1.05,
+                y: 30
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    end: 'top 30%',
+                    scrub: 0.6
+                }
+            }
+        );
+
+        // Titre avec effet blur→net
+        gsap.fromTo(title,
+            {
+                opacity: 0,
+                filter: 'blur(10px)',
+                y: 20
+            },
+            {
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 60%',
+                    end: 'top 30%',
+                    scrub: 0.5
+                }
+            }
+        );
+
+        // Contenu apparaît après
+        gsap.fromTo(content,
+            {
+                opacity: 0,
+                y: 30
+            },
+            {
+                opacity: 1,
+                y: 0,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 40%',
+                    end: 'top 10%',
+                    scrub: 0.5
+                }
+            }
+        );
+
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+    }, []);
 
     return (
-        <section style={{
-            backgroundColor: '#F9F5F0', // Crème léger
-            position: 'relative',
-        }}>
-            <div className="offer-container" style={{
+        <section
+            ref={sectionRef}
+            style={{
+                backgroundColor: 'var(--color-blanc-nacre)',
+                position: 'relative',
+                minHeight: '100vh',
                 display: 'flex',
-                flexDirection: 'column', // Mobile first
-                minHeight: '100vh'
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '6rem 20px',
+                overflow: 'hidden'
+            }}
+        >
+            {/* Image container avec titre superposé */}
+            <div style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '500px',
+                marginBottom: '3rem'
             }}>
-                {/* Image */}
-                <div className="offer-image" style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '50vh',
-                    backgroundImage: `url(${image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}>
-                    {/* Mobile Title Overlay */}
-                    <h2 className="mobile-title" style={{
+                {/* Titre flottant au-dessus */}
+                <h2
+                    ref={titleRef}
+                    style={{
                         position: 'absolute',
-                        bottom: '20px',
-                        left: '0',
+                        top: '-2rem',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        zIndex: 10,
+                        fontFamily: 'var(--font-editorial)',
+                        fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+                        fontWeight: 400,
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: 'var(--color-bordeaux)',
+                        whiteSpace: 'nowrap',
+                        textShadow: '0 2px 20px rgba(255,255,255,0.8)',
+                        opacity: 0
+                    }}
+                >
+                    Horoscope personnalisé
+                </h2>
+
+                {/* Image */}
+                <div
+                    ref={imageRef}
+                    style={{
                         width: '100%',
-                        textAlign: 'center',
-                        color: 'white',
-                        textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                        fontSize: '2.5rem',
-                        margin: 0
-                    }}>
-                        Ton horoscope personnalisé
-                    </h2>
-                </div>
-
-                {/* Content */}
-                <div className="offer-content" style={{
-                    flex: 1,
-                    padding: '3rem 20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center'
-                }}>
-                    <h2 className="desktop-title" style={{ display: 'none', marginBottom: '2rem', fontSize: '3rem' }}>
-                        Ton horoscope personnalisé
-                    </h2>
-
-                    <div style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '1.2rem', marginBottom: '3rem' }}>
-                        <p>Une boussole pour ton mois.</p>
-                        <p>Rédigée par mes soins, pour ton signe.</p>
-                        <br />
-                        <p style={{ fontWeight: 600 }}>Savoir où tu vas — avant même de partir.</p>
-                    </div>
-
-                    <a href="#horoscope" className="btn-primary">
-                        Recevoir mon horoscope
-                    </a>
-
-                    <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
-                        7,99€/mois
-                    </p>
+                        paddingTop: '10%', // Espace pour le titre
+                        opacity: 0
+                    }}
+                >
+                    <img
+                        src={horoscopeImage}
+                        alt="Femme lisant un magazine Ceres"
+                        style={{
+                            width: '100%',
+                            height: 'auto',
+                            display: 'block',
+                            boxShadow: '0 20px 60px rgba(0,0,0,0.15)'
+                        }}
+                    />
                 </div>
             </div>
 
+            {/* Content */}
+            <div
+                ref={contentRef}
+                style={{
+                    textAlign: 'center',
+                    maxWidth: '500px',
+                    opacity: 0
+                }}
+            >
+                <div style={{
+                    fontFamily: 'var(--font-body)',
+                    fontWeight: 300,
+                    fontSize: '1.15rem',
+                    lineHeight: 1.8,
+                    marginBottom: '2.5rem',
+                    color: 'var(--color-noir)'
+                }}>
+                    <p style={{ marginBottom: '0.5rem' }}>Une boussole pour ton mois.</p>
+                    <p style={{ marginBottom: '1.5rem' }}>Rédigée par mes soins, pour ton signe.</p>
+                    <p style={{
+                        fontWeight: 600,
+                        fontSize: '1.25rem',
+                        color: 'var(--color-bordeaux)'
+                    }}>
+                        Savoir où tu vas — avant même de partir.
+                    </p>
+                </div>
+
+                <a
+                    href="#horoscope"
+                    className="btn-primary"
+                    style={{
+                        display: 'inline-block',
+                        padding: '1rem 2.5rem'
+                    }}
+                >
+                    Recevoir mon horoscope
+                </a>
+
+                <p style={{
+                    marginTop: '1.2rem',
+                    fontSize: '0.95rem',
+                    color: '#888',
+                    fontFamily: 'var(--font-body)',
+                    fontWeight: 300
+                }}>
+                    7,99€/mois
+                </p>
+            </div>
+
+            {/* Desktop Styles */}
             <style>{`
                 @media (min-width: 768px) {
-                    .offer-container {
-                        flex-direction: row !important;
-                        height: 100vh;
-                    }
-                    .offer-image {
-                        width: 50% !important;
-                        height: auto !important;
-                        min-height: 100%;
-                    }
-                    .offer-content {
-                        width: 50%;
-                        align-items: flex-start !important;
-                        text-align: left !important;
-                        padding: 6rem !important;
-                    }
-                    .mobile-title {
-                        display: none;
-                    }
-                    .desktop-title {
-                        display: block !important;
-                    }
+                    /* On desktop, keep centered layout but larger */
                 }
             `}</style>
         </section>
