@@ -210,26 +210,18 @@ const Offer = () => {
                     <div style={{
                         fontFamily: 'var(--font-body)',
                         fontWeight: 300,
-                        fontSize: '1.1rem',
-                        lineHeight: 2,
+                        fontSize: '1.15rem',
+                        lineHeight: 1.8,
                         marginBottom: '2.5rem',
-                        color: 'var(--color-noir)',
-                        textAlign: 'center'
+                        color: 'var(--color-noir)'
                     }}>
-                        <p style={{ marginBottom: '0.8rem' }}>
-                            <span style={{ color: 'var(--color-bordeaux)', marginRight: '0.6rem' }}>✦</span>
-                            Une boussole pour ton mois.
-                        </p>
-                        <p style={{ marginBottom: '0.8rem' }}>
-                            <span style={{ color: 'var(--color-bordeaux)', marginRight: '0.6rem' }}>☽</span>
-                            Rédigée par mes soins, pour ton signe.
-                        </p>
+                        <p style={{ marginBottom: '0.5rem' }}>Une boussole pour ton mois.</p>
+                        <p style={{ marginBottom: '1.5rem' }}>Rédigée par mes soins, pour ton signe.</p>
                         <p style={{
-                            marginTop: '1.2rem',
-                            fontWeight: 500,
+                            fontWeight: 600,
+                            fontSize: '1.25rem',
                             color: 'var(--color-bordeaux)'
                         }}>
-                            <span style={{ marginRight: '0.6rem' }}>✧</span>
                             Savoir où tu vas — avant même de partir.
                         </p>
                     </div>
