@@ -145,16 +145,16 @@ const Offer = () => {
                         textAlign: 'center',
                         fontFamily: 'var(--font-editorial)',
                         fontSize: 'clamp(1.6rem, 5vw, 2.2rem)',
-                        fontWeight: 400,
+                        fontWeight: 500,
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
                         color: 'white',
-                        textShadow: '0 2px 10px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3)',
+                        textShadow: '0 2px 10px rgba(0,0,0,0.5), 0 4px 25px rgba(0,0,0,0.4)',
                         margin: 0,
                         opacity: 0
                     }}
                 >
-                    Horoscope personnalisé
+                    Ton horoscope personnalisé
                 </h2>
             </div>
 
