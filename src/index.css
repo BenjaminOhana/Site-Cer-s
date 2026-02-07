@@ -1,0 +1,96 @@
+:root {
+  --color-bordeaux: #800020;
+  --color-blanc-nacre: #FDFBF7;
+  --color-rose-vintage: #D4A5A5;
+  --color-vert-profond: #1A3C34;
+  --color-noir: #111111;
+  --color-text: #111111;
+
+  --font-title: 'Elsie', serif;
+  --font-editorial: 'Forum', cursive;
+  --font-body: 'Montserrat', sans-serif;
+
+  --spacing-section: 80px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-blanc-nacre);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-title);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--color-bordeaux);
+  color: #fff;
+  padding: 1rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 300;
+  /* Light/Fine */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Animations */
+.fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
