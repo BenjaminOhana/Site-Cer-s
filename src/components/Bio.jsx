@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Import local portrait image
+import portraitImage from '../assets/priscilla-portrait.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Bio = () => {
@@ -9,26 +12,25 @@ const Bio = () => {
     const imageRef = useRef(null);
     const imageWrapperRef = useRef(null);
 
-    // Placeholder: Warm, colorful portrait, close up
-    const portraitImage = "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=2548&auto=format&fit=crop";
-
     useEffect(() => {
         const section = sectionRef.current;
         const imageWrapper = imageWrapperRef.current;
         const image = imageRef.current;
 
-        // Reveal animation: clip-path from top to bottom
+        // Reveal animation: opacity + scale instead of clip-path to avoid white flash
         gsap.fromTo(imageWrapper,
             {
-                clipPath: 'inset(100% 0% 0% 0%)' // Complètement caché du haut
+                opacity: 0,
+                scale: 1.1
             },
             {
-                clipPath: 'inset(0% 0% 0% 0%)', // Entièrement visible
+                opacity: 1,
+                scale: 1,
                 ease: 'power2.out',
                 scrollTrigger: {
                     trigger: section,
-                    start: 'top 80%',
-                    end: 'top 20%',
+                    start: 'top 90%',
+                    end: 'top 30%',
                     scrub: 0.8
                 }
             }
@@ -36,9 +38,9 @@ const Bio = () => {
 
         // Parallax subtil sur l'image elle-même
         gsap.fromTo(image,
-            { y: '-15%' },
+            { y: '-10%' },
             {
-                y: '0%',
+                y: '5%',
                 ease: 'none',
                 scrollTrigger: {
                     trigger: section,
@@ -59,7 +61,7 @@ const Bio = () => {
             ref={sectionRef}
             style={{
                 position: 'relative',
-                backgroundColor: '#ffffff',
+                backgroundColor: '#111111', // Fond noir pour éviter le blanc
                 overflow: 'hidden',
                 paddingBottom: '4rem'
             }}
@@ -77,7 +79,7 @@ const Bio = () => {
                         width: '100%',
                         height: '65vh',
                         overflow: 'hidden',
-                        clipPath: 'inset(100% 0% 0% 0%)' // Initial state
+                        opacity: 0 // Initial state
                     }}
                 >
                     <div
@@ -85,11 +87,11 @@ const Bio = () => {
                         className="bio-image"
                         style={{
                             width: '100%',
-                            height: '120%', // Plus grand pour le parallax
+                            height: '120%',
                             backgroundImage: `url(${portraitImage})`,
                             backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            transform: 'translateY(-15%)' // Position initiale parallax
+                            backgroundPosition: 'center top',
+                            transform: 'translateY(-10%)'
                         }}
                     />
                 </div>
@@ -100,7 +102,8 @@ const Bio = () => {
                     textAlign: 'center',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    backgroundColor: 'var(--color-blanc-nacre)'
                 }}>
                     <h2 style={{
                         fontSize: '3rem',
