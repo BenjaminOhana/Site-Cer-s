@@ -210,20 +210,59 @@ const Offer = () => {
                     <div style={{
                         fontFamily: 'var(--font-body)',
                         fontWeight: 300,
-                        fontSize: '1.15rem',
+                        fontSize: '1.1rem',
                         lineHeight: 1.8,
                         marginBottom: '2.5rem',
                         color: 'var(--color-noir)'
                     }}>
-                        <p style={{ marginBottom: '0.5rem' }}>Une boussole pour ton mois.</p>
-                        <p style={{ marginBottom: '1.5rem' }}>Rédigée par mes soins, pour ton signe.</p>
-                        <p style={{
-                            fontWeight: 600,
-                            fontSize: '1.25rem',
-                            color: 'var(--color-bordeaux)'
+                        {/* Bénéfice 1 - Boussole */}
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.8rem',
+                            marginBottom: '1rem'
                         }}>
-                            Savoir où tu vas — avant même de partir.
-                        </p>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="var(--color-bordeaux)" fillOpacity="0.15" />
+                            </svg>
+                            <span>Une boussole pour ton mois.</span>
+                        </div>
+
+                        {/* Bénéfice 2 - Étoile/Signe */}
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.8rem',
+                            marginBottom: '1rem'
+                        }}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z" fill="var(--color-bordeaux)" fillOpacity="0.1" />
+                            </svg>
+                            <span>Rédigée par mes soins, pour ton signe.</span>
+                        </div>
+
+                        {/* Bénéfice 3 - Clarté/Vision */}
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.8rem',
+                            marginTop: '1.5rem'
+                        }}>
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="12" cy="12" r="3" fill="var(--color-bordeaux)" fillOpacity="0.2" />
+                                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                            </svg>
+                            <span style={{
+                                fontWeight: 500,
+                                color: 'var(--color-bordeaux)'
+                            }}>
+                                Savoir où tu vas — avant même de partir.
+                            </span>
+                        </div>
                     </div>
 
                     <a
