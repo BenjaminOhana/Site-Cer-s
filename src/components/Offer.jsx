@@ -210,60 +210,28 @@ const Offer = () => {
                     <div style={{
                         fontFamily: 'var(--font-body)',
                         fontWeight: 300,
-                        fontSize: '1.05rem',
-                        lineHeight: 1.8,
+                        fontSize: '1.1rem',
+                        lineHeight: 2,
                         marginBottom: '2.5rem',
                         color: 'var(--color-noir)',
-                        textAlign: 'left'
+                        textAlign: 'center'
                     }}>
-                        {/* Bénéfice 1 - Boussole */}
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-start',
-                            gap: '1rem',
-                            marginBottom: '1.2rem'
+                        <p style={{ marginBottom: '0.8rem' }}>
+                            <span style={{ color: 'var(--color-bordeaux)', marginRight: '0.6rem' }}>✦</span>
+                            Une boussole pour ton mois.
+                        </p>
+                        <p style={{ marginBottom: '0.8rem' }}>
+                            <span style={{ color: 'var(--color-bordeaux)', marginRight: '0.6rem' }}>☽</span>
+                            Rédigée par mes soins, pour ton signe.
+                        </p>
+                        <p style={{
+                            marginTop: '1.2rem',
+                            fontWeight: 500,
+                            color: 'var(--color-bordeaux)'
                         }}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                                <circle cx="12" cy="12" r="10" />
-                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="var(--color-bordeaux)" fillOpacity="0.2" />
-                            </svg>
-                            <span>Une boussole pour ton mois.</span>
-                        </div>
-
-                        {/* Bénéfice 2 - Étoile/Signe */}
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-start',
-                            gap: '1rem',
-                            marginBottom: '1.2rem'
-                        }}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                                <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z" fill="var(--color-bordeaux)" fillOpacity="0.15" />
-                            </svg>
-                            <span>Rédigée par mes soins, pour ton signe.</span>
-                        </div>
-
-                        {/* Bénéfice 3 - Clarté/Vision */}
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-start',
-                            gap: '1rem',
-                            marginTop: '0.5rem'
-                        }}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                                <circle cx="12" cy="12" r="3" fill="var(--color-bordeaux)" fillOpacity="0.25" />
-                                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-                            </svg>
-                            <span style={{
-                                fontWeight: 500,
-                                color: 'var(--color-bordeaux)'
-                            }}>
-                                Savoir où tu vas — avant même de partir.
-                            </span>
-                        </div>
+                            <span style={{ marginRight: '0.6rem' }}>✧</span>
+                            Savoir où tu vas — avant même de partir.
+                        </p>
                     </div>
 
                     <a
