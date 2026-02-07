@@ -89,8 +89,7 @@ const Offer = () => {
         <>
             {/* Élément de liaison / Respiration visuelle */}
             <div style={{
-                height: '12vh',
-                marginTop: '-4vh',
+                height: '10vh',
                 backgroundColor: 'var(--color-blanc-nacre)',
                 display: 'flex',
                 alignItems: 'center',

@@ -63,7 +63,7 @@ const Bio = () => {
                 position: 'relative',
                 backgroundColor: 'var(--color-blanc-nacre)', // Fond clair pour transition fluide
                 overflow: 'hidden',
-                paddingBottom: '4rem'
+                paddingBottom: '1rem'
             }}
         >
             <div className="bio-container" style={{
