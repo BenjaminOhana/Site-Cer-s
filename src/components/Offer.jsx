@@ -89,10 +89,11 @@ const Offer = () => {
         <>
             {/* Élément de liaison / Respiration visuelle */}
             <div style={{
-                height: '10vh',
+                height: '18vh',
+                paddingTop: '3vh',
                 backgroundColor: 'var(--color-blanc-nacre)',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 justifyContent: 'center'
             }}>
                 {/* Séparateur élégant - style astrologique */}
