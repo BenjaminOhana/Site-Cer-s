@@ -112,20 +112,25 @@ const Offer = () => {
             }
         );
 
-        // Benefits container animation
-        gsap.fromTo(benefits,
-            { opacity: 0, y: 30 },
-            {
-                opacity: 1, y: 0,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: benefits,
-                    start: 'top 90%',
-                    end: 'top 60%',
-                    scrub: 0.5
-                }
-            }
-        );
+        // Benefits - Staggered animation (each item appears one by one)
+        if (benefits) {
+            const items = benefits.children;
+            Array.from(items).forEach((item, index) => {
+                gsap.fromTo(item,
+                    { opacity: 0, y: 25 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: benefits,
+                            start: `top ${85 - (index * 5)}%`,
+                            end: `top ${65 - (index * 5)}%`,
+                            scrub: 0.4
+                        }
+                    }
+                );
+            });
+        }
 
         // CTA
         gsap.fromTo(cta,
