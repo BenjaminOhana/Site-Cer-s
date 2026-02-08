@@ -112,15 +112,13 @@ const Offer = () => {
             }
         );
 
-        // Benefits - Staggered animation
-        const benefitItems = benefits.querySelectorAll('.benefit-item');
-        gsap.fromTo(benefitItems,
-            { opacity: 0, y: 20 },
+        // Benefits container animation
+        gsap.fromTo(benefits,
+            { opacity: 0, y: 30 },
             {
                 opacity: 1, y: 0,
-                duration: 0.6,
+                duration: 0.8,
                 ease: 'power2.out',
-                stagger: 0.12,
                 scrollTrigger: {
                     trigger: benefits,
                     start: 'top 85%',
