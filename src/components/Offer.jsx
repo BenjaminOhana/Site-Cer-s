@@ -117,19 +117,22 @@ const Offer = () => {
 
         // Benefits - Staggered animation like Promise.jsx
         benefits.forEach((benefit, index) => {
-            gsap.fromTo(benefit,
-                { opacity: 0, y: 25 },
-                {
-                    opacity: 1, y: 0,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: benefit, // Trigger on the element itself !
-                        start: 'top 85%', // Start when top of element hits 85% of viewport
-                        end: 'top 65%',   // End when top of element hits 65% of viewport
-                        scrub: 0.5
+            if (benefit) {
+                gsap.fromTo(benefit,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0,
+                        duration: 0.8,
+                        ease: 'power3.out', // Smooth ease
+                        scrollTrigger: {
+                            trigger: benefit,
+                            start: 'top 90%', // Triggers as soon as it enters viewport
+                            end: 'bottom 60%',
+                            toggleActions: 'play none none reverse' // Reverses when scrolling back up
+                        }
                     }
-                }
-            );
+                );
+            }
         });
 
         // CTA
