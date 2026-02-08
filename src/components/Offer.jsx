@@ -56,7 +56,10 @@ const Offer = () => {
     const imageContainerRef = useRef(null);
     const titleRef = useRef(null);
     const taglineRef = useRef(null);
-    const benefitsRef = useRef(null);
+    const benefit1Ref = useRef(null);
+    const benefit2Ref = useRef(null);
+    const benefit3Ref = useRef(null);
+    const benefit4Ref = useRef(null);
     const ctaRef = useRef(null);
 
     useEffect(() => {
@@ -64,7 +67,7 @@ const Offer = () => {
         const imageContainer = imageContainerRef.current;
         const title = titleRef.current;
         const tagline = taglineRef.current;
-        const benefits = benefitsRef.current;
+        const benefits = [benefit1Ref.current, benefit2Ref.current, benefit3Ref.current, benefit4Ref.current];
         const cta = ctaRef.current;
 
         // Image container reveal
@@ -112,25 +115,23 @@ const Offer = () => {
             }
         );
 
-        // Benefits - Staggered animation (each item appears one by one)
-        if (benefits) {
-            const items = benefits.children;
-            Array.from(items).forEach((item, index) => {
-                gsap.fromTo(item,
-                    { opacity: 0, y: 25 },
-                    {
-                        opacity: 1, y: 0,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: benefits,
-                            start: `top ${85 - (index * 5)}%`,
-                            end: `top ${65 - (index * 5)}%`,
-                            scrub: 0.4
-                        }
+        // Benefits - Staggered animation like Promise.jsx
+        benefits.forEach((benefit, index) => {
+            gsap.fromTo(benefit,
+                { opacity: 0, y: 25 },
+                {
+                    opacity: 1, y: 0,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: `top ${40 - index * 8}%`,
+                        end: `top ${20 - index * 8}%`,
+                        scrub: 0.5,
+                        toggleActions: 'play none none reverse'
                     }
-                );
-            });
-        }
+                }
+            );
+        });
 
         // CTA
         gsap.fromTo(cta,
@@ -306,39 +307,40 @@ const Offer = () => {
                 </p>
 
                 {/* Section Bénéfices */}
-                <div
-                    ref={benefitsRef}
-                    style={{
-                        width: '100%',
-                        maxWidth: '400px',
-                        padding: '0 24px',
-                        marginBottom: '2.5rem'
-                    }}
-                >
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={MoonIcon}
-                        title="Personnalisé pour ton signe"
-                        description="Pas de généralités, c'est écrit pour toi."
-                    />
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={StarIcon}
-                        title="Les dates clés de ton mois"
-                        description="Anticipe les moments forts et les tournants."
-                    />
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={PenIcon}
-                        title="Rédigé par Priscilla"
-                        description="Sa lecture, son intuition, ses mots."
-                    />
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={MailIcon}
-                        title="Dans ta boîte mail"
-                        description="Chaque mois, sans rien faire."
-                    />
+                <div style={{
+                    width: '100%',
+                    maxWidth: '400px',
+                    padding: '0 24px',
+                    marginBottom: '2.5rem'
+                }}>
+                    <div ref={benefit1Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{MoonIcon}</div>
+                        <div>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Personnalisé pour ton signe</p>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Pas de généralités, c'est écrit pour toi.</p>
+                        </div>
+                    </div>
+                    <div ref={benefit2Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{StarIcon}</div>
+                        <div>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Les dates clés de ton mois</p>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Anticipe les moments forts et les tournants.</p>
+                        </div>
+                    </div>
+                    <div ref={benefit3Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{PenIcon}</div>
+                        <div>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Rédigé par Priscilla</p>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Sa lecture, son intuition, ses mots.</p>
+                        </div>
+                    </div>
+                    <div ref={benefit4Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{MailIcon}</div>
+                        <div>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Dans ta boîte mail</p>
+                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Chaque mois, sans rien faire.</p>
+                        </div>
+                    </div>
                 </div>
 
 
