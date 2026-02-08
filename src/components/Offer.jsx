@@ -285,7 +285,20 @@ const Offer = () => {
                     </p>
                 </div>
 
-
+                {/* Titre discret section bénéfices */}
+                <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.75rem',
+                    fontWeight: 400,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.15em',
+                    color: 'var(--color-bordeaux)',
+                    opacity: 0.6,
+                    textAlign: 'center',
+                    marginBottom: '1.5rem'
+                }}>
+                    L'expérience Cérès
+                </p>
 
                 {/* Section Bénéfices */}
                 <div
