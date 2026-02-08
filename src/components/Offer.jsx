@@ -60,98 +60,97 @@ const Offer = () => {
     const ctaRef = useRef(null);
 
     useEffect(() => {
-        const section = sectionRef.current;
-        const imageContainer = imageContainerRef.current;
-        const title = titleRef.current;
-        const tagline = taglineRef.current;
-        const benefits = benefitsRef.current;
-        const cta = ctaRef.current;
+        let ctx = gsap.context(() => {
+            const section = sectionRef.current;
+            const imageContainer = imageContainerRef.current;
+            const title = titleRef.current;
+            const tagline = taglineRef.current;
+            const benefits = benefitsRef.current;
+            const cta = ctaRef.current;
 
-        // Image container reveal
-        gsap.fromTo(imageContainer,
-            { opacity: 0, scale: 1.05, y: 40 },
-            {
-                opacity: 1, scale: 1, y: 0,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 85%',
-                    end: 'top 40%',
-                    scrub: 0.6
+            // Image container reveal
+            gsap.fromTo(imageContainer,
+                { opacity: 0, scale: 1.05, y: 40 },
+                {
+                    opacity: 1, scale: 1, y: 0,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        end: 'top 40%',
+                        scrub: 0.6
+                    }
                 }
-            }
-        );
+            );
 
-        // Titre sur l'image
-        gsap.fromTo(title,
-            { opacity: 0, filter: 'blur(10px)', y: 15 },
-            {
-                opacity: 1, filter: 'blur(0px)', y: 0,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 50%',
-                    end: 'top 20%',
-                    scrub: 0.5
+            // Titre sur l'image
+            gsap.fromTo(title,
+                { opacity: 0, filter: 'blur(10px)', y: 15 },
+                {
+                    opacity: 1, filter: 'blur(0px)', y: 0,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 50%',
+                        end: 'top 20%',
+                        scrub: 0.5
+                    }
                 }
-            }
-        );
+            );
 
-        // Tagline
-        gsap.fromTo(tagline,
-            { opacity: 0, y: 20 },
-            {
-                opacity: 1, y: 0,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: tagline,
-                    start: 'top 85%',
-                    end: 'top 65%',
-                    scrub: 0.5
+            // Tagline
+            gsap.fromTo(tagline,
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1, y: 0,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: tagline,
+                        start: 'top 85%',
+                        end: 'top 65%',
+                        scrub: 0.5
+                    }
                 }
+            );
+
+            // Benefits - Robust Batch Animation using ScrollTrigger.batch
+            if (benefits) {
+                const items = benefits.querySelectorAll('.benefit-item');
+
+                // Set initial state via GSAP (safer than inline styles)
+                gsap.set(items, { opacity: 0, y: 30 });
+
+                ScrollTrigger.batch(items, {
+                    onEnter: batch => gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        stagger: 0.2,
+                        duration: 1,
+                        ease: 'power3.out',
+                        overwrite: true
+                    }),
+                    start: 'top 95%', // Starts almost immediately when entering viewport
+                    once: true // Play only once for performance 
+                });
             }
-        );
 
-        // Benefits - Robust Batch Animation using ScrollTrigger.batch
-        // This is the most reliable way to handle lists on mobile
-        if (benefits) {
-            const items = benefits.querySelectorAll('.benefit-item');
-
-            // Set initial state via GSAP (safer than inline styles)
-            gsap.set(items, { opacity: 0, y: 30 });
-
-            ScrollTrigger.batch(items, {
-                onEnter: batch => gsap.to(batch, {
-                    opacity: 1,
-                    y: 0,
-                    stagger: 0.15,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    overwrite: true
-                }),
-                start: 'top 85%', // Starts when top of element hits bottom 15% of viewport
-                once: true // Play only once for performance and cleaner ux on mobile
-            });
-        }
-
-        // CTA
-        gsap.fromTo(cta,
-            { opacity: 0, y: 20 },
-            {
-                opacity: 1, y: 0,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: cta,
-                    start: 'top 90%',
-                    end: 'top 70%',
-                    scrub: 0.5
+            // CTA
+            gsap.fromTo(cta,
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1, y: 0,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: cta,
+                        start: 'top 90%',
+                        end: 'top 70%',
+                        scrub: 0.5
+                    }
                 }
-            }
-        );
+            );
+        }, sectionRef); // Scope to section
 
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     // Icônes SVG élégantes
@@ -236,6 +235,7 @@ const Offer = () => {
                         src={horoscopeImage}
                         alt="Femme lisant un magazine Ceres"
                         style={{ width: '100%', height: 'auto', display: 'block' }}
+                        onLoad={() => ScrollTrigger.refresh()}
                     />
 
                     {/* Overlay gradient */}
@@ -316,34 +316,30 @@ const Offer = () => {
                         padding: '0 24px',
                         marginBottom: '2.5rem'
                     }}>
-                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
-                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{MoonIcon}</div>
-                        <div>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Personnalisé pour ton signe</p>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Pas de généralités, c'est écrit pour toi.</p>
-                        </div>
-                    </div>
-                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
-                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{StarIcon}</div>
-                        <div>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Les dates clés de ton mois</p>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Anticipe les moments forts et les tournants.</p>
-                        </div>
-                    </div>
-                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
-                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{PenIcon}</div>
-                        <div>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Rédigé par Priscilla</p>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Sa lecture, son intuition, ses mots.</p>
-                        </div>
-                    </div>
-                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
-                        <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{MailIcon}</div>
-                        <div>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Dans ta boîte mail</p>
-                            <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Chaque mois, sans rien faire.</p>
-                        </div>
-                    </div>
+                    <BenefitItem
+                        className="benefit-item"
+                        icon={MoonIcon}
+                        title="Personnalisé pour ton signe"
+                        description="Pas de généralités, c'est écrit pour toi."
+                    />
+                    <BenefitItem
+                        className="benefit-item"
+                        icon={StarIcon}
+                        title="Les dates clés de ton mois"
+                        description="Anticipe les moments forts et les tournants."
+                    />
+                    <BenefitItem
+                        className="benefit-item"
+                        icon={PenIcon}
+                        title="Rédigé par Priscilla"
+                        description="Sa lecture, son intuition, ses mots."
+                    />
+                    <BenefitItem
+                        className="benefit-item"
+                        icon={MailIcon}
+                        title="Dans ta boîte mail"
+                        description="Chaque mois, sans rien faire."
+                    />
                 </div>
 
 
