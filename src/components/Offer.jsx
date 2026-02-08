@@ -8,12 +8,13 @@ import horoscopeImage from '../assets/horoscope-magazine.png';
 gsap.registerPlugin(ScrollTrigger);
 
 // Composant pour un bénéfice avec icône
-const BenefitItem = ({ icon, title, description }) => (
-    <div style={{
+const BenefitItem = ({ icon, title, description, className }) => (
+    <div className={className} style={{
         display: 'flex',
         alignItems: 'flex-start',
         gap: '1rem',
-        marginBottom: '1.8rem'
+        marginBottom: '2.2rem',
+        opacity: 0
     }}>
         <div style={{
             flexShrink: 0,
@@ -112,17 +113,19 @@ const Offer = () => {
             }
         );
 
-        // Benefits
-        gsap.fromTo(benefits,
-            { opacity: 0, y: 30 },
+        // Benefits - Staggered animation
+        const benefitItems = benefits.querySelectorAll('.benefit-item');
+        gsap.fromTo(benefitItems,
+            { opacity: 0, y: 25 },
             {
                 opacity: 1, y: 0,
                 ease: 'power2.out',
+                stagger: 0.15,
                 scrollTrigger: {
                     trigger: benefits,
-                    start: 'top 85%',
-                    end: 'top 60%',
-                    scrub: 0.5
+                    start: 'top 80%',
+                    end: 'top 50%',
+                    scrub: 0.4
                 }
             }
         );
@@ -307,26 +310,29 @@ const Offer = () => {
                         width: '100%',
                         maxWidth: '400px',
                         padding: '0 24px',
-                        marginBottom: '2.5rem',
-                        opacity: 0
+                        marginBottom: '2.5rem'
                     }}
                 >
                     <BenefitItem
+                        className="benefit-item"
                         icon={MoonIcon}
                         title="Personnalisé pour ton signe"
                         description="Pas de généralités, c'est écrit pour toi."
                     />
                     <BenefitItem
+                        className="benefit-item"
                         icon={StarIcon}
                         title="Les dates clés de ton mois"
                         description="Anticipe les moments forts et les tournants."
                     />
                     <BenefitItem
+                        className="benefit-item"
                         icon={PenIcon}
                         title="Rédigé par Priscilla"
                         description="Sa lecture, son intuition, ses mots."
                     />
                     <BenefitItem
+                        className="benefit-item"
                         icon={MailIcon}
                         title="Dans ta boîte mail"
                         description="Chaque mois, sans rien faire."
