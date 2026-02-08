@@ -116,16 +116,16 @@ const Offer = () => {
         // Benefits - Staggered animation
         const benefitItems = benefits.querySelectorAll('.benefit-item');
         gsap.fromTo(benefitItems,
-            { opacity: 0, y: 25 },
+            { opacity: 0, y: 20 },
             {
                 opacity: 1, y: 0,
+                duration: 0.6,
                 ease: 'power2.out',
-                stagger: 0.15,
+                stagger: 0.12,
                 scrollTrigger: {
                     trigger: benefits,
-                    start: 'top 80%',
-                    end: 'top 50%',
-                    scrub: 0.4
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
                 }
             }
         );
