@@ -123,11 +123,10 @@ const Offer = () => {
                     opacity: 1, y: 0,
                     ease: 'power2.out',
                     scrollTrigger: {
-                        trigger: section,
-                        start: `top ${40 - index * 8}%`,
-                        end: `top ${20 - index * 8}%`,
-                        scrub: 0.5,
-                        toggleActions: 'play none none reverse'
+                        trigger: benefit, // Trigger on the element itself !
+                        start: 'top 85%', // Start when top of element hits 85% of viewport
+                        end: 'top 65%',   // End when top of element hits 65% of viewport
+                        scrub: 0.5
                     }
                 }
             );
