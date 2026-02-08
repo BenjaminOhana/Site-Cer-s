@@ -285,26 +285,7 @@ const Offer = () => {
                     </p>
                 </div>
 
-                {/* Séparateur avant les bénéfices */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginBottom: '2rem',
-                    opacity: 0.3
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        gap: '8px'
-                    }}>
-                        {[...Array(7)].map((_, i) => (
-                            <div key={i} style={{
-                                width: '12px',
-                                height: '1px',
-                                backgroundColor: 'var(--color-bordeaux)'
-                            }} />
-                        ))}
-                    </div>
-                </div>
+
 
                 {/* Section Bénéfices */}
                 <div
@@ -339,26 +320,7 @@ const Offer = () => {
                     />
                 </div>
 
-                {/* Séparateur avant CTA */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginBottom: '2rem',
-                    opacity: 0.3
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        gap: '8px'
-                    }}>
-                        {[...Array(7)].map((_, i) => (
-                            <div key={i} style={{
-                                width: '12px',
-                                height: '1px',
-                                backgroundColor: 'var(--color-bordeaux)'
-                            }} />
-                        ))}
-                    </div>
-                </div>
+
 
                 {/* CTA */}
                 <div
