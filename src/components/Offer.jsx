@@ -13,8 +13,7 @@ const BenefitItem = ({ icon, title, description, className }) => (
         display: 'flex',
         alignItems: 'flex-start',
         gap: '1rem',
-        marginBottom: '2.2rem',
-        opacity: 0
+        marginBottom: '2.2rem'
     }}>
         <div style={{
             flexShrink: 0,
