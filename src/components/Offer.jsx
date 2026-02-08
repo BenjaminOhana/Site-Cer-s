@@ -56,10 +56,7 @@ const Offer = () => {
     const imageContainerRef = useRef(null);
     const titleRef = useRef(null);
     const taglineRef = useRef(null);
-    const benefit1Ref = useRef(null);
-    const benefit2Ref = useRef(null);
-    const benefit3Ref = useRef(null);
-    const benefit4Ref = useRef(null);
+    const benefitsRef = useRef(null);
     const ctaRef = useRef(null);
 
     useEffect(() => {
@@ -67,7 +64,7 @@ const Offer = () => {
         const imageContainer = imageContainerRef.current;
         const title = titleRef.current;
         const tagline = taglineRef.current;
-        const benefits = [benefit1Ref.current, benefit2Ref.current, benefit3Ref.current, benefit4Ref.current];
+        const benefits = benefitsRef.current;
         const cta = ctaRef.current;
 
         // Image container reveal
@@ -115,25 +112,27 @@ const Offer = () => {
             }
         );
 
-        // Benefits - Staggered animation like Promise.jsx
-        benefits.forEach((benefit, index) => {
-            if (benefit) {
-                gsap.fromTo(benefit,
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1, y: 0,
-                        duration: 0.8,
-                        ease: 'power3.out', // Smooth ease
-                        scrollTrigger: {
-                            trigger: benefit,
-                            start: 'top 90%', // Triggers as soon as it enters viewport
-                            end: 'bottom 60%',
-                            toggleActions: 'play none none reverse' // Reverses when scrolling back up
-                        }
-                    }
-                );
-            }
-        });
+        // Benefits - Robust Batch Animation using ScrollTrigger.batch
+        // This is the most reliable way to handle lists on mobile
+        if (benefits) {
+            const items = benefits.querySelectorAll('.benefit-item');
+
+            // Set initial state via GSAP (safer than inline styles)
+            gsap.set(items, { opacity: 0, y: 30 });
+
+            ScrollTrigger.batch(items, {
+                onEnter: batch => gsap.to(batch, {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.15,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    overwrite: true
+                }),
+                start: 'top 85%', // Starts when top of element hits bottom 15% of viewport
+                once: true // Play only once for performance and cleaner ux on mobile
+            });
+        }
 
         // CTA
         gsap.fromTo(cta,
@@ -309,34 +308,36 @@ const Offer = () => {
                 </p>
 
                 {/* Section Bénéfices */}
-                <div style={{
-                    width: '100%',
-                    maxWidth: '400px',
-                    padding: '0 24px',
-                    marginBottom: '2.5rem'
-                }}>
-                    <div ref={benefit1Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                <div
+                    ref={benefitsRef}
+                    style={{
+                        width: '100%',
+                        maxWidth: '400px',
+                        padding: '0 24px',
+                        marginBottom: '2.5rem'
+                    }}>
+                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
                         <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{MoonIcon}</div>
                         <div>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Personnalisé pour ton signe</p>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Pas de généralités, c'est écrit pour toi.</p>
                         </div>
                     </div>
-                    <div ref={benefit2Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
                         <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{StarIcon}</div>
                         <div>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Les dates clés de ton mois</p>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Anticipe les moments forts et les tournants.</p>
                         </div>
                     </div>
-                    <div ref={benefit3Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
                         <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{PenIcon}</div>
                         <div>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Rédigé par Priscilla</p>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '0.9rem', color: '#666', fontStyle: 'italic' }}>Sa lecture, son intuition, ses mots.</p>
                         </div>
                     </div>
-                    <div ref={benefit4Ref} style={{ opacity: 0, display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
+                    <div className="benefit-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2.2rem' }}>
                         <div style={{ flexShrink: 0, width: '24px', marginTop: '2px' }}>{MailIcon}</div>
                         <div>
                             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '1rem', color: 'var(--color-noir)', marginBottom: '0.3rem' }}>Dans ta boîte mail</p>
