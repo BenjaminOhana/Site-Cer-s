@@ -16,31 +16,31 @@ const Hero = () => {
         // Set fixed height on mount to lock it in (prevents resize when address bar moves)
         setHeroHeight(`${window.innerHeight}px`);
 
-        // GSAP Parallax Animation - Optimized for Safari mobile
+        // GSAP Parallax Animation - Desktop ONLY (Safari mobile cannot handle it)
         const bg = bgRef.current;
         const container = containerRef.current;
+        const isDesktop = window.innerWidth >= 768;
 
-        if (bg && container) {
-            // Detect if mobile for different parallax intensity
-            const isMobile = window.innerWidth < 768;
-
+        if (bg && container && isDesktop) {
             gsap.to(bg, {
-                yPercent: isMobile ? 5 : 10, // Subtler on mobile (5% vs 10%)
+                yPercent: 10,
                 ease: "none",
-                force3D: true, // Force GPU acceleration for Safari
+                force3D: true,
                 scrollTrigger: {
                     trigger: container,
                     start: "top top",
                     end: "bottom top",
-                    scrub: 1, // Smooth with 1s delay instead of instant (true)
-                    invalidateOnRefresh: true // Recalculate on window resize
+                    scrub: 1,
+                    invalidateOnRefresh: true
                 }
             });
         }
 
         // Cleanup
         return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
+            if (isDesktop) {
+                ScrollTrigger.getAll().forEach(t => t.kill());
+            }
         };
     }, []);
 
