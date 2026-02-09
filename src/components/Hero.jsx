@@ -1,31 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
     const [loaded, setLoaded] = useState(false);
     // Use JS height to strictly prevent address-bar resize jumps
     const [heroHeight, setHeroHeight] = useState('100vh'); // Default for SSR/initial
+    const containerRef = useRef(null);
+    const bgRef = useRef(null);
 
     useEffect(() => {
         setLoaded(true);
         // Set fixed height on mount to lock it in (prevents resize when address bar moves)
         setHeroHeight(`${window.innerHeight}px`);
+
+        // GSAP Parallax Animation
+        const bg = bgRef.current;
+        const container = containerRef.current;
+
+        if (bg && container) {
+            gsap.to(bg, {
+                yPercent: 10, // Move image down by 10% of its height (subtle effect)
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        }
+
+        // Cleanup
+        return () => {
+            ScrollTrigger.getAll().forEach(t => t.kill());
+        };
     }, []);
 
     // Placeholder image: Black and white elegant portrait
-    const bgImage = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2550&auto=format&fit=crop";
+    const bgImageMobile = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop";
+    const bgImageDesktop = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2550&auto=format&fit=crop";
 
     return (
-        <section id="hero-section" style={{
-            height: heroHeight,
-            width: '100%', // 100% is safer than 100vw for scrollbars
-            position: 'relative',
-            overflow: 'hidden',
-        }} className="hero-section">
+        <section
+            id="hero-section"
+            ref={containerRef}
+            style={{
+                height: heroHeight,
+                minHeight: '100dvh', // Fallback/Modern mobile stability
+                width: '100%',
+                position: 'relative',
+                overflow: 'hidden',
+            }}
+            className="hero-section"
+        >
 
-            {/* 1. Fixed Background Image (The "Sticky" Part) */}
-            <div className="hero-fixed-background" style={{
-                backgroundImage: `url(${bgImage})`,
-            }}></div>
+            {/* 1. Background Image (Absolute with GSAP Parallax) */}
+            <div
+                className="hero-background"
+                ref={bgRef}
+            ></div>
 
             {/* 2. Content Overlay (Gradient) - Needs to be absolute to cover VIEWPORT */}
             <div style={{
@@ -86,12 +122,13 @@ const Hero = () => {
 
             <style>{`
                 /* Base Styles (Mobile Default) */
-                .hero-fixed-background {
-                    position: absolute; /* Mobile: Scrolls with page to prevent "jump" */
-                    top: 0;
+                .hero-background {
+                    position: absolute;
+                    top: -5%; /* Start slightly above to allow for downward parallax movement */
                     left: 0;
                     width: 100%;
-                    height: 100%;
+                    height: 110%; /* Slightly taller than viewport for parallax */
+                    background-image: url(${bgImageMobile});
                     background-size: cover;
                     background-position: center 30%; /* Default Mobile */
                     z-index: -1;
@@ -107,8 +144,8 @@ const Hero = () => {
                 
                 /* Desktop & Tablet */
                 @media (min-width: 768px) {
-                    .hero-fixed-background {
-                        position: fixed; /* Desktop: Restore Parallax/Fixed effect */
+                    .hero-background {
+                        background-image: url(${bgImageDesktop});
                         background-position: center center !important; /* Desktop Center */
                     }
                     .hero-text-container {

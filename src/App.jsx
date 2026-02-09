@@ -9,6 +9,7 @@ import Instagram from './components/Instagram';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import MobileStickyButton from './components/MobileStickyButton';
+import MobileMenu from './components/MobileMenu';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
             <Instagram />
             <Footer />
             <MobileStickyButton />
+            <MobileMenu />
         </main>
     );
 }

@@ -123,12 +123,12 @@ const Offer = () => {
                     opacity: 0,
                     y: 30,
                     filter: 'blur(10px)',
-                    duration: 1,
-                    stagger: 0.4, // Increased to 0.4s for distinct "phrase by phrase"
+                    duration: 1.5, // Slower duration for each item
+                    stagger: 0.8, // Much larger stagger to really separate them (almost 1s between each)
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: benefits, // Trigger the container
-                        start: 'top 85%',
+                        start: 'top 75%', // Trigger a bit earlier/higher to ensure visibility
                         toggleActions: 'play none none reverse'
                     }
                 });
@@ -221,168 +221,245 @@ const Offer = () => {
                     paddingBottom: '4rem'
                 }}
             >
-                {/* Image container - Full width on mobile */}
-                <div
-                    ref={imageContainerRef}
-                    className="offer-image-container"
-                    style={{
-                        position: 'relative',
-                        width: '100%',
-                        marginBottom: '2.5rem',
-                        opacity: 0
-                    }}
-                >
-                    <img
-                        src={horoscopeImage}
-                        alt="Femme lisant un magazine Ceres"
-                        style={{ width: '100%', height: 'auto', display: 'block' }}
-                        onLoad={() => ScrollTrigger.refresh()}
-                    />
+                {/* Desktop Split Layout Container */}
+                <div className="offer-content-wrapper">
 
-                    {/* Overlay gradient */}
-                    <div style={{
-                        position: 'absolute',
-                        top: 0, left: 0, right: 0, bottom: 0,
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 70%)',
-                        pointerEvents: 'none'
-                    }} />
+                    {/* Left Column: Image */}
+                    <div className="offer-column-left">
+                        <div
+                            ref={imageContainerRef}
+                            className="offer-image-container"
+                            style={{
+                                position: 'relative',
+                                width: '100%',
+                                marginBottom: '2.5rem',
+                                opacity: 0
+                            }}
+                        >
+                            <img
+                                src={horoscopeImage}
+                                alt="Femme lisant un magazine Ceres"
+                                style={{ width: '100%', height: 'auto', display: 'block' }}
+                                onLoad={() => ScrollTrigger.refresh()}
+                            />
 
-                    {/* Titre sur l'image */}
-                    <h2
-                        ref={titleRef}
-                        style={{
-                            position: 'absolute',
-                            bottom: '8%',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            width: '90%',
-                            textAlign: 'center',
-                            fontFamily: 'var(--font-editorial)',
-                            fontSize: 'clamp(1.6rem, 5vw, 2.2rem)',
-                            fontWeight: 500,
-                            letterSpacing: '0.1em',
+                            {/* Overlay gradient */}
+                            <div style={{
+                                position: 'absolute',
+                                top: 0, left: 0, right: 0, bottom: 0,
+                                background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 70%)',
+                                pointerEvents: 'none'
+                            }} />
+
+                            {/* Titre sur l'image */}
+                            <h2
+                                ref={titleRef}
+                                style={{
+                                    position: 'absolute',
+                                    bottom: '8%',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    width: '90%',
+                                    textAlign: 'center',
+                                    fontFamily: 'var(--font-editorial)',
+                                    fontSize: 'clamp(1.6rem, 5vw, 2.2rem)',
+                                    fontWeight: 500,
+                                    letterSpacing: '0.1em',
+                                    textTransform: 'uppercase',
+                                    color: 'white',
+                                    textShadow: '0 2px 10px rgba(0,0,0,0.5), 0 4px 25px rgba(0,0,0,0.4)',
+                                    margin: 0,
+                                    opacity: 0
+                                }}
+                            >
+                                Ton horoscope personnalisé
+                            </h2>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Text Content */}
+                    <div className="offer-column-right">
+                        {/* Tagline principale */}
+                        <div
+                            ref={taglineRef}
+                            style={{
+                                textAlign: 'center',
+                                marginBottom: '2rem',
+                                opacity: 0
+                            }}
+                        >
+                            <p style={{
+                                fontFamily: 'var(--font-body)',
+                                fontWeight: 600,
+                                fontSize: 'clamp(1.2rem, 4vw, 1.4rem)',
+                                color: 'var(--color-bordeaux)',
+                                lineHeight: 1.5
+                            }}>
+                                Savoir où tu vas — avant même de partir.
+                            </p>
+                        </div>
+
+                        {/* Titre discret section bénéfices */}
+                        <p style={{
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.75rem',
+                            fontWeight: 400,
                             textTransform: 'uppercase',
-                            color: 'white',
-                            textShadow: '0 2px 10px rgba(0,0,0,0.5), 0 4px 25px rgba(0,0,0,0.4)',
-                            margin: 0,
-                            opacity: 0
-                        }}
-                    >
-                        Ton horoscope personnalisé
-                    </h2>
-                </div>
+                            letterSpacing: '0.15em',
+                            color: 'var(--color-bordeaux)',
+                            opacity: 0.6,
+                            textAlign: 'center',
+                            marginBottom: '1.5rem'
+                        }}>
+                            L'expérience Cérès
+                        </p>
 
-                {/* Tagline principale */}
-                <div
-                    ref={taglineRef}
-                    style={{
-                        textAlign: 'center',
-                        padding: '0 20px',
-                        marginBottom: '2rem',
-                        opacity: 0
-                    }}
-                >
-                    <p style={{
-                        fontFamily: 'var(--font-body)',
-                        fontWeight: 600,
-                        fontSize: 'clamp(1.2rem, 4vw, 1.4rem)',
-                        color: 'var(--color-bordeaux)',
-                        lineHeight: 1.5
-                    }}>
-                        Savoir où tu vas — avant même de partir.
-                    </p>
-                </div>
-
-                {/* Titre discret section bénéfices */}
-                <p style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '0.75rem',
-                    fontWeight: 400,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.15em',
-                    color: 'var(--color-bordeaux)',
-                    opacity: 0.6,
-                    textAlign: 'center',
-                    marginBottom: '1.5rem'
-                }}>
-                    L'expérience Cérès
-                </p>
-
-                {/* Section Bénéfices */}
-                <div
-                    ref={benefitsRef}
-                    style={{
-                        width: '100%',
-                        maxWidth: '400px',
-                        padding: '0 24px',
-                        marginBottom: '2.5rem'
-                    }}>
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={MoonIcon}
-                        title="Personnalisé pour ton signe"
-                        description="Pas de généralités, c'est écrit pour toi."
-                    />
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={StarIcon}
-                        title="Les dates clés de ton mois"
-                        description="Anticipe les moments forts et les tournants."
-                    />
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={PenIcon}
-                        title="Rédigé par Priscilla"
-                        description="Sa lecture, son intuition, ses mots."
-                    />
-                    <BenefitItem
-                        className="benefit-item"
-                        icon={MailIcon}
-                        title="Dans ta boîte mail"
-                        description="Chaque mois, sans rien faire."
-                    />
-                </div>
+                        {/* Section Bénéfices */}
+                        <div
+                            ref={benefitsRef}
+                            style={{
+                                width: '100%',
+                                maxWidth: '400px',
+                                margin: '0 auto',
+                                marginBottom: '2.5rem'
+                            }}>
+                            <BenefitItem
+                                className="benefit-item"
+                                icon={MoonIcon}
+                                title="Personnalisé pour ton signe"
+                                description="Pas de généralités, c'est écrit pour toi."
+                            />
+                            <BenefitItem
+                                className="benefit-item"
+                                icon={StarIcon}
+                                title="Les dates clés de ton mois"
+                                description="Anticipe les moments forts et les tournants."
+                            />
+                            <BenefitItem
+                                className="benefit-item"
+                                icon={PenIcon}
+                                title="Rédigé par Priscilla"
+                                description="Sa lecture, son intuition, ses mots."
+                            />
+                            <BenefitItem
+                                className="benefit-item"
+                                icon={MailIcon}
+                                title="Dans ta boîte mail"
+                                description="Chaque mois, sans rien faire."
+                            />
+                        </div>
 
 
 
-                {/* CTA */}
-                <div
-                    id="offer-cta-container"
-                    ref={ctaRef}
-                    style={{
-                        textAlign: 'center',
-                        opacity: 0
-                    }}
-                >
-                    <a
-                        href="#horoscope"
-                        className="btn-primary"
-                        style={{
-                            display: 'inline-block',
-                            padding: '1rem 2.5rem'
-                        }}
-                    >
-                        Recevoir mon horoscope
-                    </a>
+                        {/* CTA */}
+                        <div
+                            id="offer-cta-container"
+                            ref={ctaRef}
+                            style={{
+                                textAlign: 'center',
+                                opacity: 0
+                            }}
+                        >
+                            <a
+                                href="#horoscope"
+                                className="btn-primary"
+                                style={{
+                                    display: 'inline-block',
+                                    padding: '1rem 2.5rem'
+                                }}
+                            >
+                                Recevoir mon horoscope
+                            </a>
 
-                    <p style={{
-                        marginTop: '1rem',
-                        fontSize: '0.95rem',
-                        color: '#888',
-                        fontFamily: 'var(--font-body)',
-                        fontWeight: 300
-                    }}>
-                        7,99€/mois
-                    </p>
+                            <p style={{
+                                marginTop: '1rem',
+                                fontSize: '0.95rem',
+                                color: '#888',
+                                fontFamily: 'var(--font-body)',
+                                fontWeight: 300
+                            }}>
+                                7,99€/mois
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Desktop Styles */}
                 <style>{`
-                    @media (min-width: 768px) {
-                        .offer-image-container {
-                            max-width: 600px !important;
-                            margin-top: 2rem;
+                    .offer-content-wrapper {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    .offer-column-left {
+                        width: 100%;
+                    }
+
+                    .offer-column-right {
+                        width: 100%;
+                        padding: 0 20px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    @media (min-width: 900px) {
+                        .offer-content-wrapper {
+                            flex-direction: row;
+                            align-items: flex-start; /* Align top */
+                            justify-content: center;
+                            max-width: 1200px;
+                            margin: 0 auto;
+                            gap: 4rem;
+                            padding: 2rem 40px;
                         }
+
+                        .offer-column-left {
+                            width: 50%;
+                            position: sticky; /* Optional: Keep image in view if text is long */
+                            top: 100px;
+                        }
+                        
+                        .offer-column-right {
+                            width: 50%;
+                            align-items: flex-start; /* Left align text on desktop */
+                            padding-top: 2rem;
+                        }
+
+                        /* Override image container specifically for grid */
+                        .offer-image-container {
+                            max-width: 100% !important; /* Reset generic desktop max-width */
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                        }
+
+                        /* Override text alignments for desktop */
+                        .offer-column-right .text-center, 
+                        .offer-column-right p,
+                        .offer-column-right div {
+                           /* text-align: left !important;  Keep some centering or adjust? 
+                              Let's keep benefits left-aligned naturally, but titles might need left align.
+                           */
+                        }
+                        
+                        /* Align specific elements to left on desktop */
+                        .offer-column-right > div[style*="text-align: center"] {
+                            text-align: left !important;
+                        }
+                        
+                         /* Align CTA container */
+                         #offer-cta-container {
+                            text-align: left !important;
+                            width: 100%;
+                         }
+                         
+                         /* Align Benefit container */
+                         .offer-column-right > div[style*="max-width: 400px"] {
+                             margin-left: 0 !important;
+                             margin-right: 0 !important;
+                         }
                     }
                 `}</style>
             </section>

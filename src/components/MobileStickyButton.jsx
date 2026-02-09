@@ -1,64 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const MobileStickyButton = () => {
-    const [visible, setVisible] = useState(false);
+    const buttonRef = useRef(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const hero = document.getElementById('hero-section');
-            const offer = document.getElementById('offer-section');
-            const premium = document.getElementById('premium-section');
-            const testimonials = document.getElementById('testimonials-section');
+        const btn = buttonRef.current;
+        if (!btn) return;
 
-            if (!hero) return;
+        // Helper functions for animation
+        // using overwite: 'auto' to handle conflicts gracefully
+        const showBtn = () => gsap.to(btn, {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+            overwrite: true,
+            pointerEvents: 'auto'
+        });
 
-            const heroRect = hero.getBoundingClientRect();
+        const hideBtn = () => gsap.to(btn, {
+            y: 100,
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.in',
+            overwrite: true,
+            pointerEvents: 'none'
+        });
 
-            // Default: Hide
-            let shouldShow = false;
+        // Initial state
+        gsap.set(btn, { y: 100, opacity: 0, pointerEvents: 'none' });
 
-            // 1. Show after Hero (Storytelling starts)
-            // heroRect.bottom < 0 means we have scrolled past the hero section
-            if (heroRect.bottom < 0) {
-                shouldShow = true;
-            }
+        // Batch triggers for better performance
+        // 1. Hero Section: Show when leaving hero, Hide when entering back
+        const heroTrigger = ScrollTrigger.create({
+            trigger: '#hero-section',
+            start: 'bottom top', // when bottom of hero hits top of viewport
+            onLeave: () => showBtn(),
+            onEnterBack: () => hideBtn(),
+        });
 
-            // 2. Hide ONLY when the actual Horoscope CTA appears on screen
-            // preventing duplicate buttons.
-            const offerCta = document.getElementById('offer-cta-container');
-            if (offerCta) {
-                const ctaRect = offerCta.getBoundingClientRect();
-                // If CTA is entering the viewport from the bottom OR is currently visible
-                // simple check: if top is less than window height (visible) AND bottom is > 0
-                if (ctaRect.top < window.innerHeight && ctaRect.bottom > 0) {
-                    shouldShow = false;
-                }
-            }
+        // 2. Offer CTA: Hide when visible
+        const offerTrigger = ScrollTrigger.create({
+            trigger: '#offer-cta-container',
+            start: 'top bottom',
+            end: 'bottom top',
+            onEnter: () => hideBtn(),
+            onLeave: () => showBtn(),
+            onEnterBack: () => hideBtn(),
+            onLeaveBack: () => showBtn()
+        });
 
-            // 3. Hide when entering Premium (Services) to avoid blocking CTAs
-            if (premium) {
-                const premiumRect = premium.getBoundingClientRect();
-                if (premiumRect.top < window.innerHeight && premiumRect.bottom > 0) {
-                    shouldShow = false;
-                }
-            }
+        // 3. Premium Section: Hide when visible
+        const premiumTrigger = ScrollTrigger.create({
+            trigger: '#premium-section', // Make sure this ID exists in Premium.jsx or wrapping div
+            start: 'top bottom',
+            end: 'bottom top',
+            onEnter: () => hideBtn(),
+            onLeave: () => showBtn(),
+            onEnterBack: () => hideBtn(),
+            onLeaveBack: () => showBtn()
+        });
 
-            // 4. Re-show at Testimonials and after
-            if (testimonials) {
-                const testimonialsRect = testimonials.getBoundingClientRect();
-                if (testimonialsRect.top < window.innerHeight) {
-                    shouldShow = true;
-                }
-            }
+        // Note: Testimonials logic is covered by "onLeave" of Premium (it follows Premium)
+        // If there's a gap or other sections, default is "Show" unless a trigger says Hide.
 
-            setVisible(shouldShow);
+        return () => {
+            heroTrigger.kill();
+            offerTrigger.kill();
+            premiumTrigger.kill();
         };
-
-        window.addEventListener('scroll', handleScroll);
-        // Trigger once on mount
-        handleScroll();
-
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const scrollToOffer = () => {
@@ -71,29 +85,28 @@ const MobileStickyButton = () => {
     return (
         <>
             <button
+                ref={buttonRef}
                 onClick={scrollToOffer}
                 style={{
                     position: 'fixed',
                     bottom: '20px',
                     left: '50%',
-                    transform: visible ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(200%)',
+                    transform: 'translate(-50%, 100px)', // Initial hidden state transform
                     zIndex: 1000,
                     backgroundColor: 'var(--color-bordeaux)',
                     color: 'white',
                     border: 'none',
-                    padding: '1.1rem 0', // Vertical padding only, width handles horizontal
-                    fontSize: '1rem', // Legible size
+                    padding: '1.1rem 0',
+                    fontSize: '1rem',
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
                     borderRadius: '50px',
-                    cursor: visible ? 'pointer' : 'default',
-                    opacity: visible ? 1 : 0,
-                    transition: 'transform 0.5s ease, opacity 0.5s ease',
-                    pointerEvents: visible ? 'auto' : 'none',
+                    cursor: 'pointer',
+                    opacity: 0, // Initial hidden state opacity
                     whiteSpace: 'nowrap',
-                    width: 'calc(100% - 48px)', // Wide but with margins
-                    maxWidth: '380px', // Don't get too wide on tablets
+                    width: 'calc(100% - 48px)',
+                    maxWidth: '380px',
                     fontWeight: 500
                 }}
                 className="mobile-sticky-btn"

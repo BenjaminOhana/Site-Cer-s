@@ -34,16 +34,16 @@ const Navbar = () => {
             justifyContent: 'space-between',
             padding: '0 40px',
             borderBottom: '1px solid rgba(0,0,0,0.05)',
-            animation: 'fadeIn 0.5s ease-out'
+            animation: 'slideDownFade 0.6s ease-out'
         }} className="desktop-navbar">
             <div style={{ fontFamily: 'var(--font-title)', fontSize: '1.2rem', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>
                 Cérès.
             </div>
 
-            <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 500 }}>
-                <a href="#horoscope">Horoscope</a>
-                <a href="#accompagnement">Accompagnement</a>
-                <a href="mailto:contact@ceresfrance.com">Contact</a>
+            <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 500 }} className="nav-links">
+                <a href="#horoscope" className="nav-link">Horoscope</a>
+                <a href="#accompagnement" className="nav-link">Accompagnement</a>
+                <a href="mailto:contact@ceresfrance.com" className="nav-link">Contact</a>
             </div>
 
             <style>{`
@@ -52,9 +52,36 @@ const Navbar = () => {
                         display: flex !important;
                     }
                 }
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(-10px); }
-                    to { opacity: 1; transform: translateY(0); }
+                @keyframes slideDownFade {
+                    from { 
+                        opacity: 0; 
+                        transform: translateY(-20px); 
+                    }
+                    to { 
+                        opacity: 1; 
+                        transform: translateY(0); 
+                    }
+                }
+                
+                .nav-link {
+                    position: relative;
+                    padding-bottom: 4px;
+                    transition: color 0.3s ease;
+                }
+                
+                .nav-link::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 1px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: var(--color-text);
+                    transition: width 0.3s ease-out;
+                }
+                
+                .nav-link:hover::after {
+                    width: 100%;
                 }
             `}</style>
         </nav>
