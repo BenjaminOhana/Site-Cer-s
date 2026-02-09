@@ -11,7 +11,7 @@ const Hero = () => {
     const bgImage = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2550&auto=format&fit=crop";
 
     return (
-        <section style={{
+        <section id="hero-section" style={{
             height: '100vh',
             width: '100vw',
             position: 'relative',

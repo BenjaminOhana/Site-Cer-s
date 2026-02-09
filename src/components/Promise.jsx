@@ -9,10 +9,11 @@ const Promise = () => {
     const line1Ref = useRef(null);
     const line2Ref = useRef(null);
     const line3Ref = useRef(null);
+    const logoRef = useRef(null);
 
     useEffect(() => {
         const section = sectionRef.current;
-        const lines = [line1Ref.current, line2Ref.current, line3Ref.current];
+        const lines = [line1Ref.current, line2Ref.current, line3Ref.current, logoRef.current];
 
         // Animation scroll-driven Apple-style pour chaque ligne
         lines.forEach((line, index) => {
@@ -76,7 +77,7 @@ const Promise = () => {
                     Mais tu ne sais pas par où commencer.
                 </p>
                 <div style={{ height: '2rem' }}></div>
-                <p ref={line3Ref} style={{
+                <p id="promise-end-trigger" ref={line3Ref} style={{
                     ...baseStyle,
                     fontFamily: 'var(--font-body)',
                     fontWeight: 700,
@@ -90,6 +91,20 @@ const Promise = () => {
                 }}>
                     Fais confiance à ce qui t'a amené ici.
                 </p>
+
+                {/* Petit logo de fin de section */}
+                <div ref={logoRef} style={{
+                    marginTop: '6rem',
+                    fontFamily: 'var(--font-title)',
+                    fontSize: '1.7rem',
+                    fontWeight: 900,
+                    letterSpacing: '-0.03em',
+                    color: 'var(--color-noir)',
+                    opacity: 0, // Initial state for animation
+                    filter: 'blur(12px)'
+                }}>
+                    Cérès.
+                </div>
             </div>
         </section>
     );

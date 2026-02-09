@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import local portrait image
-import portraitImage from '../assets/priscilla-portrait.png';
+import portraitImage from '../assets/priscilla-portrait.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

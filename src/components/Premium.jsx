@@ -1,65 +1,159 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import soinImage from '../assets/soin-energetique.png.jpeg';
+import coachingImage from '../assets/Coaching-intuitif.png.jpeg';
+import questionImage from '../assets/pose-ta-question.jpeg';
 
 const Premium = () => {
-    // Placeholders
-    const img1 = "https://images.unsplash.com/photo-1515023115689-589c33041697?q=80&w=2670&auto=format&fit=crop";
-    const img2 = "https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=2669&auto=format&fit=crop";
-    const img3 = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=2574&auto=format&fit=crop";
+    const [activeCard, setActiveCard] = useState(0);
+    const containerRef = useRef(null);
+    // Images
+    const img1 = soinImage;
+    const img2 = coachingImage;
+    const img3 = questionImage;
 
     const cards = [
         {
             title: "Le Soin Énergétique",
-            desc1: "Ton corps sait ce que ta tête refuse de voir.",
-            desc2: "Laisse-moi t'aider à le libérer. Et retrouver ta légèreté.",
+            quotes: [
+                "Ton corps sait ce que ta tête refuse de voir.",
+                "Laisse-moi t'aider à le libérer."
+            ],
+            highlight: "Et retrouver ta légèreté.",
             cta: "Réserver",
             img: img1
         },
         {
             title: "Coaching Intuitif",
-            desc1: "Une question. Un blocage. Une décision à prendre.",
-            desc2: "En une séance, on pose les mots. On éclaire ce qui était flou.",
+            quotes: [
+                "Une question. Un blocage. Une décision à prendre.",
+                "En une séance, on pose les mots.",
+                "On éclaire ce qui était flou."
+            ],
             highlight: "Tu repars avec ta réponse.",
             cta: "Réserver",
-            img: img2
+            img: img2,
+            backgroundPosition: 'center 20%'
         },
         {
             title: "Pose ta question",
-            desc1: "Tu n'es pas sûre de vouloir une séance complète ?",
-            desc2: "Commence par une question.",
+            quotes: [
+                "Tu n'es pas sûre de vouloir une séance complète ?",
+                "Commence par une question."
+            ],
             highlight: "Et retrouve de la clarté sur un point précis.",
             cta: "Réserver",
             img: img3
         }
     ];
 
+    const handleScroll = () => {
+        if (containerRef.current) {
+            const container = containerRef.current;
+            const scrollLeft = container.scrollLeft;
+            const index = Math.round(scrollLeft / (container.scrollWidth / 3));
+            setActiveCard(Math.min(Math.max(index, 0), 2));
+        }
+    };
+
+    const scrollToCard = (index) => {
+        if (containerRef.current) {
+            const container = containerRef.current;
+            const card = container.children[index];
+            if (card) {
+                const scrollLeft = card.offsetLeft - (container.offsetWidth - card.offsetWidth) / 2;
+                container.scrollTo({
+                    left: scrollLeft,
+                    behavior: 'smooth'
+                });
+                setActiveCard(index);
+            }
+        }
+    };
+
     return (
-        <section style={{ padding: '4rem 0', backgroundColor: 'var(--color-blanc-nacre)' }}>
-            <h2 className="text-center" style={{ fontSize: '2.5rem', marginBottom: '3rem', padding: '0 20px' }}>
-                Pour une clarté profonde, avec moi
-            </h2>
+        <section id="premium-section" style={{
+            padding: '0',
+            paddingBottom: '4rem', // Restore solid padding
+            backgroundColor: 'var(--color-blanc-nacre)',
+            // Removed marginBottom to hide hero background
+        }}>
+            <div style={{ padding: '4rem 20px 2rem 20px' }}>
+                <h2 className="text-center" style={{
+                    fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                    marginBottom: '1rem',
+                    fontFamily: 'var(--font-editorial)',
+                    color: 'var(--color-bordeaux)',
+                    fontWeight: 400
+                }}>
+                    Pour une clarté plus profonde
+                </h2>
+                <p className="text-center" style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.9rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.2em',
+                    opacity: 0.6,
+                    marginBottom: '3rem'
+                }}>
+                    Avec Priscilla
+                </p>
+            </div>
 
             {/* Container */}
-            <div className="premium-cards-container">
+            <div
+                className="premium-cards-container"
+                ref={containerRef}
+                onScroll={handleScroll}
+            >
                 {cards.map((card, index) => (
-                    <div key={index} className="premium-card" style={{ backgroundImage: `url(${card.img})` }}>
-                        <div className="card-overlay">
-                            <h3 style={{ marginBottom: '1rem', fontSize: '1.8rem' }}>{card.title}</h3>
-                            <div className="card-desc">
-                                <p>{card.desc1}</p>
-                                <p>{card.desc2}</p>
-                                {card.highlight && <p style={{ fontWeight: 600, marginTop: '0.5rem' }}>{card.highlight}</p>}
+                    <div key={index} className="premium-card">
+                        <div className="card-image" style={{
+                            backgroundImage: `url(${card.img})`,
+                            backgroundPosition: card.backgroundPosition || 'center'
+                        }}></div>
+                        <div className="card-content">
+                            <h3 style={{
+                                fontFamily: 'var(--font-editorial)',
+                                fontSize: '1.6rem',
+                                marginBottom: '1.5rem',
+                                color: 'var(--color-noir)'
+                            }}>
+                                {card.title}
+                            </h3>
+
+                            <div className="card-quotes">
+                                {card.quotes.map((quote, i) => (
+                                    <p key={i} style={{ minHeight: quote === "" ? '1rem' : 'auto' }}>
+                                        {quote}
+                                    </p>
+                                ))}
+                                {card.highlight && (
+                                    <p style={{
+                                        fontWeight: 600,
+                                        marginTop: '1rem',
+                                        color: 'var(--color-bordeaux) !important'
+                                    }}>
+                                        {card.highlight}
+                                    </p>
+                                )}
                             </div>
+
                             <button className="btn-card">{card.cta}</button>
                         </div>
                     </div>
                 ))}
             </div>
 
-            {/* Dots for mobile pagination visualization */}
+            {/* Functional Dots */}
             <div className="mobile-dots">
-                <span className="dot active"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
+                {cards.map((_, index) => (
+                    <button
+                        key={index}
+                        className={`dot ${activeCard === index ? 'active' : ''}`}
+                        onClick={() => scrollToCard(index)}
+                        aria-label={`Voir le service ${index + 1}`}
+                    />
+                ))}
             </div>
 
             <style>{`
@@ -67,67 +161,105 @@ const Premium = () => {
                     display: flex;
                     overflow-x: auto;
                     scroll-snap-type: x mandatory;
-                    gap: 1rem;
-                    padding: 0 20px 2rem 20px;
+                    gap: 1.5rem;
+                    padding: 0 10px 2rem 10px;
                     -webkit-overflow-scrolling: touch; /* smooth scroll ios */
+                    scrollbar-width: none; /* Hide scrollbar Firefox */
+                }
+                .premium-cards-container::-webkit-scrollbar {
+                    display: none; /* Hide scrollbar Chrome/Safari */
                 }
 
                 .premium-card {
                     flex: 0 0 85%; /* Mobile: 85% width */
                     scroll-snap-align: center;
-                    height: 60vh;
-                    border-radius: 0; /* No rounded corners */
-                    background-size: cover;
-                    background-position: center;
-                    position: relative;
-                    color: white;
+                    background-color: #fff; /* Solid background */
+                    border: 1px solid rgba(0,0,0,0.05);
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+                    display: flex;
+                    flex-direction: column;
+                    height: auto; /* Let content dictate height, but min-height for alignment */
+                    min-height: 550px;
+                    border-radius: 4px;
                     overflow: hidden;
                 }
 
-                .card-overlay {
+                .card-image {
+                    width: 100%;
+                    height: 350px; /* Increased height */
+                    background-size: cover;
+                    background-position: center;
+                    position: relative;
+                }
+
+                .card-image::after {
+                    content: '';
                     position: absolute;
-                    top: 0; left: 0; right: 0; bottom: 0;
-                    background: rgba(0,0,0,0.4);
-                    padding: 2rem;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 30%; /* Blur height */
+                    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+                }
+
+                .card-content {
+                    padding: 2rem 1.5rem;
+                    flex: 1;
                     display: flex;
-                    flexDirection: column;
-                    justify-content: flex-end;
+                    flex-direction: column;
                     align-items: center;
                     text-align: center;
-                    transition: background 0.3s ease;
+                    justify-content: space-between; /* Space out content and button */
+                    background-color: white;
                 }
                 
-                .card-desc {
+                .card-quotes p {
                     font-family: var(--font-body);
                     font-weight: 300;
-                    margin-bottom: 2rem;
-                    font-size: 1rem;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    color: #555;
                 }
 
                 .btn-card {
-                    background-color: var(--color-bordeaux);
-                    color: white;
-                    border: none;
-                    padding: 0.8rem 1.5rem;
+                    background-color: transparent;
+                    color: var(--color-bordeaux);
+                    border: 1px solid var(--color-bordeaux);
+                    padding: 0.8rem 2rem;
                     font-family: var(--font-body);
                     text-transform: uppercase;
+                    font-size: 0.8rem;
+                    letter-spacing: 0.1em;
                     cursor: pointer;
+                    margin-top: 2rem;
+                    transition: all 0.3s ease;
+                }
+
+                .btn-card:hover {
+                    background-color: var(--color-bordeaux);
+                    color: white;
                 }
 
                 .mobile-dots {
                     display: flex;
                     justify-content: center;
-                    gap: 8px;
-                    margin-top: 1rem;
+                    gap: 12px;
+                    margin-bottom: 2rem;
                 }
                 .dot {
                     width: 8px;
                     height: 8px;
-                    background: #ccc;
+                    background: #ddd;
                     border-radius: 50%;
+                    border: none;
+                    padding: 0;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
                 }
                 .dot.active {
                     background: var(--color-bordeaux);
+                    transform: scale(1.2);
                 }
 
                 /* Desktop */
@@ -136,19 +268,25 @@ const Premium = () => {
                         justify-content: center;
                         overflow: visible;
                         padding: 0 40px;
-                        gap: 2rem;
+                        gap: 3rem;
+                        max-width: 1200px;
+                        margin: 0 auto;
                     }
                     .premium-card {
                         flex: 1; /* Side by side */
-                        height: 70vh;
-                        transition: transform 0.3s ease;
+                        scroll-snap-align: none;
+                        min-height: 600px;
+                        transition: transform 0.4s ease, box-shadow 0.4s ease;
                     }
                     .premium-card:hover {
-                        transform: scale(1.03);
-                        z-index: 2;
+                        transform: translateY(-10px);
+                        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
                     }
                     .mobile-dots {
                         display: none;
+                    }
+                    .card-image {
+                        height: 400px;
                     }
                 }
             `}</style>

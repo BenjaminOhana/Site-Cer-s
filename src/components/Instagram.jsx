@@ -1,63 +1,116 @@
 import React from 'react';
+import insta1 from '../assets/insta-1.jpg';
+import insta2 from '../assets/insta-2.png';
+import insta3 from '../assets/insta-3.png';
+import insta4 from '../assets/insta-4.jpg';
+import insta5 from '../assets/insta-5.png';
 
 const Instagram = () => {
-    // Placeholders
+    // User provided images
     const images = [
-        "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?q=80&w=2574&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1542038784456-1ea0e93ca64b?q=80&w=2670&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=2670&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1616053075249-14a09e078869?q=80&w=2669&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=2680&auto=format&fit=crop", // Magazine vibes
-        "https://images.unsplash.com/photo-1520697830682-8be6018301fc?q=80&w=2670&auto=format&fit=crop"
+        insta1,
+        insta2,
+        insta3,
+        insta4,
+        insta5
     ];
 
     return (
         <section style={{ backgroundColor: 'white', padding: '4rem 0' }}>
             <div className="text-center" style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Retrouve-moi au quotidien</h2>
-                <a
-                    href="https://www.instagram.com/ceresfrance_/"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{ fontSize: '1.2rem', textDecoration: 'underline' }}
-                >
-                    @ceresfrance_
-                </a>
+                <h2 style={{
+                    fontSize: '2.5rem',
+                    marginBottom: '0.5rem',
+                    fontFamily: 'var(--font-editorial)',
+                    fontWeight: 400,
+                    color: 'var(--color-bordeaux)'
+                }}>
+                    Ta dose de clarté quotidienne.
+                </h2>
             </div>
 
             <div className="insta-grid">
                 {images.map((img, i) => (
                     <div key={i} className="insta-item">
-                        <img src={img} alt="Instagram post" />
-                        <div className="insta-overlay">
-                            <svg width="30" height="30" viewBox="0 0 24 24" fill="white" stroke="none">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                            </svg>
+                        <div className="polaroid-inner">
+                            <img src={img} alt="Instagram post" />
+                            <div className="insta-overlay">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
 
+            <div className="text-center" style={{ marginTop: '3rem' }}>
+                <a
+                    href="https://www.instagram.com/ceresfrance_/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="insta-link"
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>@ceresfrance_</span>
+                </a>
+            </div>
+
             <style>{`
                 .insta-grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr); /* Mobile: 2 cols x 3 rows = 6 images */
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 2rem;
+                    padding: 0 20px;
+                    max-width: 1200px;
+                    margin: 0 auto;
                 }
                 .insta-item {
+                    flex: 0 0 calc(50% - 2rem); /* Mobile: 2 per row */
+                    max-width: 300px;
                     position: relative;
-                    aspect-ratio: 1/1; /* Square */
+                    transition: transform 0.3s ease, z-index 0.3s;
+                }
+                .polaroid-inner {
+                    background: white;
+                    padding: 10px 10px 35px 10px; /* Classic Polaroid bottom */
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                    transition: box-shadow 0.3s ease;
+                    position: relative;
                     overflow: hidden;
-                    cursor: pointer;
                 }
                 .insta-item img {
                     width: 100%;
-                    height: 100%;
+                    aspect-ratio: 1/1;
                     object-fit: cover;
-                    transition: transform 0.3s ease;
+                    display: block;
+                    filter: sepia(0.1) contrast(1.05); /* Vintage touch */
                 }
+                
+                /* Random Rotations */
+                .insta-item:nth-child(odd) { transform: rotate(-2deg); }
+                .insta-item:nth-child(even) { transform: rotate(2deg); margin-top: 1rem; }
+                .insta-item:nth-child(3n) { transform: rotate(1deg); margin-top: -1rem; }
+
+                /* Hover Effect */
+                .insta-item:hover {
+                    transform: scale(1.05) rotate(0deg);
+                    z-index: 10;
+                }
+                .insta-item:hover .polaroid-inner {
+                    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+                }
+
                 .insta-overlay {
                     position: absolute;
-                    top: 0; left: 0; right: 0; bottom: 0;
+                    top: 10px; left: 10px; right: 10px; bottom: 35px; /* Match padding */
                     background: rgba(0,0,0,0.3);
                     display: flex;
                     justify-content: center;
@@ -65,14 +118,56 @@ const Instagram = () => {
                     opacity: 0;
                     transition: opacity 0.3s ease;
                 }
+                .insta-item:hover .insta-overlay {
+                    opacity: 1;
+                }
+
                 /* Desktop */
                 @media (min-width: 768px) {
+                    .insta-item {
+                        flex: 0 0 calc(33.333% - 2rem); /* 3 per row on desktop */
+                    }
                     .insta-grid {
-                        grid-template-columns: repeat(6, 1fr); /* Desktop: 6 cols in one line */
+                        gap: 3rem;
                     }
-                    .insta-item:hover .insta-overlay {
-                        opacity: 1;
-                    }
+                    /* More nuanced rotations on desktop */
+                    .insta-item:nth-child(1) { transform: rotate(-3deg); margin-top: 20px; }
+                    .insta-item:nth-child(2) { transform: rotate(2deg); margin-top: -10px; }
+                    .insta-item:nth-child(3) { transform: rotate(-1deg); margin-top: 10px; }
+                    .insta-item:nth-child(4) { transform: rotate(1deg); margin-top: -5px; }
+                    .insta-item:nth-child(5) { transform: rotate(-2deg); margin-top: 15px; }
+                    .insta-item:nth-child(6) { transform: rotate(3deg); margin-top: -15px; }
+                }
+
+                .insta-link {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.8rem;
+                    margin-top: 1.5rem;
+                    padding: 0.8rem 2.5rem;
+                    border: 1px solid var(--color-bordeaux);
+                    border-radius: 50px;
+                    color: var(--color-bordeaux);
+                    font-family: var(--font-body);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                    text-decoration: none;
+                }
+                .insta-link:hover {
+                    background-color: var(--color-bordeaux);
+                    color: white !important;
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 20px rgba(128, 0, 32, 0.2);
+                }
+                .insta-link svg {
+                    transition: transform 0.3s ease;
+                }
+                .insta-link:hover svg {
+                    transform: scale(1.1);
                 }
             `}</style>
         </section>

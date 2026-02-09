@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import local image
-import horoscopeImage from '../assets/horoscope-magazine.png';
+import horoscopeImage from '../assets/horoscope-magazine.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,24 +113,24 @@ const Offer = () => {
                 }
             );
 
-            // Benefits - Robust Batch Animation using ScrollTrigger.batch
+            // Benefits - "Cascade" Animation (Best for storytelling)
+            // Triggers the whole list at once, ensuring a perfect 1-2-3-4 sequence
             if (benefits) {
                 const items = benefits.querySelectorAll('.benefit-item');
 
-                // Set initial state via GSAP (safer than inline styles)
-                gsap.set(items, { opacity: 0, y: 30 });
-
-                ScrollTrigger.batch(items, {
-                    onEnter: batch => gsap.to(batch, {
-                        opacity: 1,
-                        y: 0,
-                        stagger: 0.2,
-                        duration: 1,
-                        ease: 'power3.out',
-                        overwrite: true
-                    }),
-                    start: 'top 95%', // Starts almost immediately when entering viewport
-                    once: true // Play only once for performance 
+                // Using .from so they animate FROM hidden TO visible (default CSS)
+                gsap.from(items, {
+                    opacity: 0,
+                    y: 30,
+                    filter: 'blur(10px)',
+                    duration: 1,
+                    stagger: 0.4, // Increased to 0.4s for distinct "phrase by phrase"
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: benefits, // Trigger the container
+                        start: 'top 85%',
+                        // once: true // letting it re-trigger if needed, or simply standard scrollTrigger
+                    }
                 });
             }
 
@@ -209,6 +209,7 @@ const Offer = () => {
             </div>
 
             <section
+                id="offer-section"
                 ref={sectionRef}
                 style={{
                     backgroundColor: 'var(--color-blanc-nacre)',
@@ -346,6 +347,7 @@ const Offer = () => {
 
                 {/* CTA */}
                 <div
+                    id="offer-cta-container"
                     ref={ctaRef}
                     style={{
                         textAlign: 'center',
