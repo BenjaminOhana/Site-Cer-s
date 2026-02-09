@@ -128,14 +128,14 @@ const Hero = () => {
             <style>{`
                 /* Base Styles (Mobile Default) */
                 .hero-background {
-                    position: fixed; /* Fixed on mobile for smooth parallax */
+                    position: absolute; /* Absolute on mobile - no parallax to prevent Safari jumps */
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
                     background-image: url(${bgImageMobile});
                     background-size: cover;
-                    background-position: center 30%; /* Default Mobile */
+                    background-position: center 30%;
                     z-index: -1;
                 }
 
