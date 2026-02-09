@@ -6,37 +6,36 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
     const [loaded, setLoaded] = useState(false);
+    // Use JS height to strictly prevent address-bar resize jumps
+    const [heroHeight, setHeroHeight] = useState('100vh'); // Default for SSR/initial
     const containerRef = useRef(null);
     const bgRef = useRef(null);
 
     useEffect(() => {
         setLoaded(true);
+        // Set fixed height on mount to lock it in (prevents resize when address bar moves)
+        setHeroHeight(`${window.innerHeight}px`);
 
-        // GSAP Parallax Animation - Desktop ONLY (Safari mobile cannot handle it)
+        // GSAP Parallax Animation
         const bg = bgRef.current;
         const container = containerRef.current;
-        const isDesktop = window.innerWidth >= 768;
 
-        if (bg && container && isDesktop) {
+        if (bg && container) {
             gsap.to(bg, {
-                yPercent: 10,
+                yPercent: 10, // Move image down by 10% of its height (subtle effect)
                 ease: "none",
-                force3D: true,
                 scrollTrigger: {
                     trigger: container,
                     start: "top top",
                     end: "bottom top",
-                    scrub: 1,
-                    invalidateOnRefresh: true
+                    scrub: true
                 }
             });
         }
 
         // Cleanup
         return () => {
-            if (isDesktop) {
-                ScrollTrigger.getAll().forEach(t => t.kill());
-            }
+            ScrollTrigger.getAll().forEach(t => t.kill());
         };
     }, []);
 
@@ -49,7 +48,8 @@ const Hero = () => {
             id="hero-section"
             ref={containerRef}
             style={{
-                height: '100dvh', // Dynamic viewport height (adjusts with Safari address bar)
+                height: heroHeight,
+                minHeight: '100dvh', // Fallback/Modern mobile stability
                 width: '100%',
                 position: 'relative',
                 overflow: 'hidden',
@@ -63,16 +63,12 @@ const Hero = () => {
                 ref={bgRef}
             ></div>
 
-            {/* 2. Content Overlay (Gradient) */}
+            {/* 2. Content Overlay (Gradient) - Needs to be absolute to cover VIEWPORT */}
             <div style={{
                 position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
+                top: 0, left: 0, right: 0, bottom: 0,
                 background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%)',
-                zIndex: 1,
-                pointerEvents: 'none'
+                zIndex: 1
             }}></div>
 
             {/* Logo */}
@@ -125,17 +121,18 @@ const Hero = () => {
             </div>
 
             <style>{`
-                /* Base Styles (Mobile Default) - Static, no parallax */
+                /* Base Styles (Mobile Default) */
                 .hero-background {
                     position: absolute;
-                    top: 0;
+                    top: -5%; /* Start slightly above to allow for downward parallax movement */
                     left: 0;
                     width: 100%;
-                    height: 100%;
+                    height: 110%; /* Slightly taller than viewport for parallax */
                     background-image: url(${bgImageMobile});
                     background-size: cover;
-                    background-position: center 30%;
+                    background-position: center 30%; /* Default Mobile */
                     z-index: -1;
+                    will-change: transform;
                 }
 
                 .hero-text-container {
@@ -145,14 +142,11 @@ const Hero = () => {
                     fontSize: 2.8rem; /* Mobile Size */
                 }
                 
-                /* Desktop & Tablet - With parallax */
+                /* Desktop & Tablet */
                 @media (min-width: 768px) {
                     .hero-background {
-                        top: -5%;
-                        height: 110%;
                         background-image: url(${bgImageDesktop});
-                        background-position: center center !important;
-                        will-change: transform;
+                        background-position: center center !important; /* Desktop Center */
                     }
                     .hero-text-container {
                         top: 65%; 
