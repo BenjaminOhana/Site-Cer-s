@@ -129,7 +129,7 @@ const Offer = () => {
                     scrollTrigger: {
                         trigger: benefits, // Trigger the container
                         start: 'top 85%',
-                        // once: true // letting it re-trigger if needed, or simply standard scrollTrigger
+                        toggleActions: 'play none none reverse'
                     }
                 });
             }

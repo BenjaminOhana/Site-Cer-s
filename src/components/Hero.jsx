@@ -12,25 +12,15 @@ const Hero = () => {
 
     return (
         <section id="hero-section" style={{
-            height: '100vh',
+            height: '100svh', // Mobile: 100svh avoids resize jump when address bar hides
             width: '100vw',
             position: 'relative',
             overflow: 'hidden',
-            // Background is handled by fixed div now
         }} className="hero-section">
 
             {/* 1. Fixed Background Image (The "Sticky" Part) */}
             <div className="hero-fixed-background" style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
                 backgroundImage: `url(${bgImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center 30%', // Default Mobile
-                zIndex: -1, // Behind everything
-                willChange: 'transform' // Performance opt
             }}></div>
 
             {/* 2. Content Overlay (Gradient) - Needs to be absolute to cover VIEWPORT */}
@@ -91,6 +81,19 @@ const Hero = () => {
             </div>
 
             <style>{`
+                /* Base Styles (Mobile Default) */
+                .hero-fixed-background {
+                    position: absolute; /* Mobile: Scrolls with page to prevent "jump" */
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center 30%; /* Default Mobile */
+                    z-index: -1;
+                    will-change: transform;
+                }
+
                 .hero-text-container {
                     top: 62%; /* Mobile: Fine-tuned balance */
                 }
@@ -98,13 +101,10 @@ const Hero = () => {
                     fontSize: 2.8rem; /* Mobile Size */
                 }
                 
-                /* Clean scroll behavior */
-                .hero-section {
-                    /* No background here anymore */
-                }
-
+                /* Desktop & Tablet */
                 @media (min-width: 768px) {
                     .hero-fixed-background {
+                        position: fixed; /* Desktop: Restore Parallax/Fixed effect */
                         background-position: center center !important; /* Desktop Center */
                     }
                     .hero-text-container {
@@ -114,6 +114,7 @@ const Hero = () => {
                         fontSize: 4.5rem;
                     }
                 }
+                
                 @keyframes pulse {
                     0% { transform: translateY(0); opacity: 0.5; }
                     50% { transform: translateY(5px); opacity: 1; }
