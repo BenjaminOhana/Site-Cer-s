@@ -23,10 +23,14 @@ const MobileStickyButton = () => {
                 shouldShow = true;
             }
 
-            // 2. Hide when entering Offer (Horoscope) to avoid overlap/clutter
-            if (offer) {
-                const offerRect = offer.getBoundingClientRect();
-                if (offerRect.top < window.innerHeight && offerRect.bottom > 0) {
+            // 2. Hide ONLY when the actual Horoscope CTA appears on screen
+            // preventing duplicate buttons.
+            const offerCta = document.getElementById('offer-cta-container');
+            if (offerCta) {
+                const ctaRect = offerCta.getBoundingClientRect();
+                // If CTA is entering the viewport from the bottom OR is currently visible
+                // simple check: if top is less than window height (visible) AND bottom is > 0
+                if (ctaRect.top < window.innerHeight && ctaRect.bottom > 0) {
                     shouldShow = false;
                 }
             }

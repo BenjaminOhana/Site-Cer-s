@@ -27,13 +27,13 @@ const Promise = () => {
                     opacity: 1,
                     filter: 'blur(0px)',
                     y: 0,
-                    duration: 1,
+                    duration: 1.5, // Slower base duration
                     ease: 'power2.out',
                     scrollTrigger: {
                         trigger: section,
-                        start: `top ${55 - index * 12}%`, // Déclenche plus tard (quand section atteint 55%/43%/31% du viewport)
-                        end: `top ${30 - index * 10}%`,   // Termine plus tard aussi
-                        scrub: 0.6, // Légèrement plus réactif
+                        start: `top ${60 - index * 15}%`, // Spreads out start points more
+                        end: `top ${25 - index * 10}%`,   // Extends end points for slower "scrub" duration
+                        scrub: 1.5, // Heavy scrub = smooth lag/inertia effect
                         toggleActions: 'play none none reverse'
                     }
                 }
