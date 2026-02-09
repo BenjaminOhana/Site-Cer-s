@@ -6,15 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
     const [loaded, setLoaded] = useState(false);
-    // Use JS height to strictly prevent address-bar resize jumps
-    const [heroHeight, setHeroHeight] = useState('100vh'); // Default for SSR/initial
     const containerRef = useRef(null);
     const bgRef = useRef(null);
 
     useEffect(() => {
         setLoaded(true);
-        // Set fixed height on mount to lock it in (prevents resize when address bar moves)
-        setHeroHeight(`${window.innerHeight}px`);
 
         // GSAP Parallax Animation - Desktop ONLY (Safari mobile cannot handle it)
         const bg = bgRef.current;
@@ -53,8 +49,7 @@ const Hero = () => {
             id="hero-section"
             ref={containerRef}
             style={{
-                height: heroHeight,
-                minHeight: '100dvh', // Fallback/Modern mobile stability
+                height: '100dvh', // Dynamic viewport height (adjusts with Safari address bar)
                 width: '100%',
                 position: 'relative',
                 overflow: 'hidden',
