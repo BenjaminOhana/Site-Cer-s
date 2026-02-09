@@ -16,31 +16,31 @@ const Hero = () => {
         // Set fixed height on mount to lock it in (prevents resize when address bar moves)
         setHeroHeight(`${window.innerHeight}px`);
 
-        // GSAP Parallax Animation - Desktop only
+        // GSAP Parallax Animation - Optimized for Safari mobile
         const bg = bgRef.current;
         const container = containerRef.current;
 
-        // Only apply GSAP parallax on desktop (viewport >= 768px)
-        const isDesktop = window.innerWidth >= 768;
+        if (bg && container) {
+            // Detect if mobile for different parallax intensity
+            const isMobile = window.innerWidth < 768;
 
-        if (bg && container && isDesktop) {
             gsap.to(bg, {
-                yPercent: 10, // Move image down by 10% of its height (subtle effect)
+                yPercent: isMobile ? 5 : 10, // Subtler on mobile (5% vs 10%)
                 ease: "none",
+                force3D: true, // Force GPU acceleration for Safari
                 scrollTrigger: {
                     trigger: container,
                     start: "top top",
                     end: "bottom top",
-                    scrub: true
+                    scrub: 1, // Smooth with 1s delay instead of instant (true)
+                    invalidateOnRefresh: true // Recalculate on window resize
                 }
             });
         }
 
         // Cleanup
         return () => {
-            if (isDesktop) {
-                ScrollTrigger.getAll().forEach(t => t.kill());
-            }
+            ScrollTrigger.getAll().forEach(t => t.kill());
         };
     }, []);
 
@@ -126,9 +126,9 @@ const Hero = () => {
             </div>
 
             <style>{`
-                /* Base Styles (Mobile Default) */
+                /* Base Styles (Mobile Default) - Static, no parallax */
                 .hero-background {
-                    position: absolute; /* Absolute on mobile - no parallax to prevent Safari jumps */
+                    position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
@@ -146,14 +146,14 @@ const Hero = () => {
                     fontSize: 2.8rem; /* Mobile Size */
                 }
                 
-                /* Desktop & Tablet */
+                /* Desktop & Tablet - With parallax */
                 @media (min-width: 768px) {
                     .hero-background {
-                        position: absolute; /* Absolute on desktop for GSAP animation */
                         top: -5%;
                         height: 110%;
                         background-image: url(${bgImageDesktop});
-                        background-position: center center !important; /* Desktop Center */
+                        background-position: center center !important;
+                        will-change: transform;
                     }
                     .hero-text-container {
                         top: 65%; 
