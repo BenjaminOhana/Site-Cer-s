@@ -63,12 +63,16 @@ const Hero = () => {
                 ref={bgRef}
             ></div>
 
-            {/* 2. Content Overlay (Gradient) - Needs to be absolute to cover VIEWPORT */}
+            {/* 2. Content Overlay (Gradient) */}
             <div style={{
                 position: 'absolute',
-                top: 0, left: 0, right: 0, bottom: 0,
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
                 background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%)',
-                zIndex: 1
+                zIndex: 1,
+                pointerEvents: 'none'
             }}></div>
 
             {/* Logo */}
