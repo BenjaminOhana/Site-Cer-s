@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 const Hero = () => {
     const [loaded, setLoaded] = useState(false);
+    // Use JS height to strictly prevent address-bar resize jumps
+    const [heroHeight, setHeroHeight] = useState('100vh'); // Default for SSR/initial
 
     useEffect(() => {
         setLoaded(true);
+        // Set fixed height on mount to lock it in (prevents resize when address bar moves)
+        setHeroHeight(`${window.innerHeight}px`);
     }, []);
 
     // Placeholder image: Black and white elegant portrait
@@ -12,8 +16,8 @@ const Hero = () => {
 
     return (
         <section id="hero-section" style={{
-            height: '100svh', // Mobile: 100svh avoids resize jump when address bar hides
-            width: '100vw',
+            height: heroHeight,
+            width: '100%', // 100% is safer than 100vw for scrollbars
             position: 'relative',
             overflow: 'hidden',
         }} className="hero-section">
