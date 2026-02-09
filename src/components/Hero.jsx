@@ -16,11 +16,14 @@ const Hero = () => {
         // Set fixed height on mount to lock it in (prevents resize when address bar moves)
         setHeroHeight(`${window.innerHeight}px`);
 
-        // GSAP Parallax Animation
+        // GSAP Parallax Animation - Desktop only
         const bg = bgRef.current;
         const container = containerRef.current;
 
-        if (bg && container) {
+        // Only apply GSAP parallax on desktop (viewport >= 768px)
+        const isDesktop = window.innerWidth >= 768;
+
+        if (bg && container && isDesktop) {
             gsap.to(bg, {
                 yPercent: 10, // Move image down by 10% of its height (subtle effect)
                 ease: "none",
@@ -35,7 +38,9 @@ const Hero = () => {
 
         // Cleanup
         return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
+            if (isDesktop) {
+                ScrollTrigger.getAll().forEach(t => t.kill());
+            }
         };
     }, []);
 
@@ -123,16 +128,15 @@ const Hero = () => {
             <style>{`
                 /* Base Styles (Mobile Default) */
                 .hero-background {
-                    position: absolute;
-                    top: -5%; /* Start slightly above to allow for downward parallax movement */
+                    position: fixed; /* Fixed on mobile for smooth parallax */
+                    top: 0;
                     left: 0;
                     width: 100%;
-                    height: 110%; /* Slightly taller than viewport for parallax */
+                    height: 100%;
                     background-image: url(${bgImageMobile});
                     background-size: cover;
                     background-position: center 30%; /* Default Mobile */
                     z-index: -1;
-                    will-change: transform;
                 }
 
                 .hero-text-container {
@@ -145,6 +149,9 @@ const Hero = () => {
                 /* Desktop & Tablet */
                 @media (min-width: 768px) {
                     .hero-background {
+                        position: absolute; /* Absolute on desktop for GSAP animation */
+                        top: -5%;
+                        height: 110%;
                         background-image: url(${bgImageDesktop});
                         background-position: center center !important; /* Desktop Center */
                     }
