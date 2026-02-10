@@ -4,17 +4,30 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
+        let rafId = null;
+        let ticking = false;
+
         const handleScroll = () => {
-            // Show after passing mostly through the first section (e.g., > 80vh)
-            if (window.scrollY > window.innerHeight * 0.8) {
-                setVisible(true);
-            } else {
-                setVisible(false);
+            if (!ticking) {
+                ticking = true;
+                rafId = requestAnimationFrame(() => {
+                    // Show after passing mostly through the first section (e.g., > 80vh)
+                    if (window.scrollY > window.innerHeight * 0.8) {
+                        setVisible(true);
+                    } else {
+                        setVisible(false);
+                    }
+                    ticking = false;
+                });
             }
         };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        // passive: true allows the browser to optimize scroll without waiting for JS
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (rafId) cancelAnimationFrame(rafId);
+        };
     }, []);
 
     if (!visible) return null;

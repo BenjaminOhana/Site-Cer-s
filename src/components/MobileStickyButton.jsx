@@ -90,8 +90,8 @@ const MobileStickyButton = () => {
                 style={{
                     position: 'fixed',
                     bottom: '20px',
-                    left: '50%',
-                    transform: 'translate(-50%, 100px)', // Initial hidden state transform
+                    left: '24px',
+                    right: '24px',
                     zIndex: 1000,
                     backgroundColor: 'var(--color-bordeaux)',
                     color: 'white',
@@ -104,9 +104,10 @@ const MobileStickyButton = () => {
                     borderRadius: '50px',
                     cursor: 'pointer',
                     opacity: 0, // Initial hidden state opacity
+                    willChange: 'transform, opacity', // GPU compositing for fixed element
                     whiteSpace: 'nowrap',
-                    width: 'calc(100% - 48px)',
                     maxWidth: '380px',
+                    margin: '0 auto',
                     fontWeight: 500
                 }}
                 className="mobile-sticky-btn"

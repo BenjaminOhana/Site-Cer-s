@@ -26,6 +26,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
   overflow-x: hidden;
 }
 

@@ -16,27 +16,25 @@ const Hero = () => {
         // Set fixed height on mount to lock it in (prevents resize when address bar moves)
         setHeroHeight(`${window.innerHeight}px`);
 
-        // GSAP Parallax Animation
-        const bg = bgRef.current;
-        const container = containerRef.current;
+        // GSAP Context for scoped cleanup (won't destroy other components' triggers)
+        const ctx = gsap.context(() => {
+            const bg = bgRef.current;
 
-        if (bg && container) {
-            gsap.to(bg, {
-                yPercent: 10, // Move image down by 10% of its height (subtle effect)
-                ease: "none",
-                scrollTrigger: {
-                    trigger: container,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-        }
+            if (bg) {
+                gsap.to(bg, {
+                    yPercent: 10, // Move image down by 10% of its height (subtle effect)
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 0.5 // Smoother than scrub: true — adds 0.5s inertia lag
+                    }
+                });
+            }
+        }, containerRef);
 
-        // Cleanup
-        return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     // Placeholder image: Black and white elegant portrait
@@ -133,6 +131,7 @@ const Hero = () => {
                     background-position: center 30%; /* Default Mobile */
                     z-index: -1;
                     will-change: transform;
+                    transform: translateZ(0); /* Force GPU compositing layer */
                 }
 
                 .hero-text-container {

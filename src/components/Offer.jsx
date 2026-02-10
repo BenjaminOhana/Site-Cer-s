@@ -13,7 +13,8 @@ const BenefitItem = ({ icon, title, description, className }) => (
         display: 'flex',
         alignItems: 'flex-start',
         gap: '1rem',
-        marginBottom: '2.2rem'
+        marginBottom: '2.2rem',
+        willChange: 'transform, opacity' // GPU compositing for staggered animation
     }}>
         <div style={{
             flexShrink: 0,
@@ -83,11 +84,11 @@ const Offer = () => {
                 }
             );
 
-            // Titre sur l'image
+            // Titre sur l'image — PERF: removed filter: blur(), using opacity + y only
             gsap.fromTo(title,
-                { opacity: 0, filter: 'blur(10px)', y: 15 },
+                { opacity: 0, y: 15 },
                 {
-                    opacity: 1, filter: 'blur(0px)', y: 0,
+                    opacity: 1, y: 0,
                     ease: 'power2.out',
                     scrollTrigger: {
                         trigger: section,
@@ -113,22 +114,20 @@ const Offer = () => {
                 }
             );
 
-            // Benefits - "Cascade" Animation (Best for storytelling)
-            // Triggers the whole list at once, ensuring a perfect 1-2-3-4 sequence
+            // Benefits - "Cascade" Animation
+            // PERF: Removed filter: blur(10px), reduced stagger for less total animation time
             if (benefits) {
                 const items = benefits.querySelectorAll('.benefit-item');
 
-                // Using .from so they animate FROM hidden TO visible (default CSS)
                 gsap.from(items, {
                     opacity: 0,
                     y: 30,
-                    filter: 'blur(10px)',
-                    duration: 1.5, // Slower duration for each item
-                    stagger: 0.8, // Much larger stagger to really separate them (almost 1s between each)
+                    duration: 1.2,
+                    stagger: 0.4, // Reduced from 0.8 — less total animation time = fewer frames under load
                     ease: 'power3.out',
                     scrollTrigger: {
-                        trigger: benefits, // Trigger the container
-                        start: 'top 75%', // Trigger a bit earlier/higher to ensure visibility
+                        trigger: benefits,
+                        start: 'top 75%',
                         toggleActions: 'play none none reverse'
                     }
                 });
@@ -233,7 +232,8 @@ const Offer = () => {
                                 position: 'relative',
                                 width: '100%',
                                 marginBottom: '2.5rem',
-                                opacity: 0
+                                opacity: 0,
+                                willChange: 'transform, opacity' // GPU compositing
                             }}
                         >
                             <img
@@ -269,7 +269,8 @@ const Offer = () => {
                                     color: 'white',
                                     textShadow: '0 2px 10px rgba(0,0,0,0.5), 0 4px 25px rgba(0,0,0,0.4)',
                                     margin: 0,
-                                    opacity: 0
+                                    opacity: 0,
+                                    willChange: 'transform, opacity'
                                 }}
                             >
                                 Ton horoscope personnalisé

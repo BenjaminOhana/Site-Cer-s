@@ -12,47 +12,46 @@ const Promise = () => {
     const logoRef = useRef(null);
 
     useEffect(() => {
-        const section = sectionRef.current;
         const lines = [line1Ref.current, line2Ref.current, line3Ref.current, logoRef.current];
 
-        // Animation scroll-driven Apple-style pour chaque ligne
-        lines.forEach((line, index) => {
-            gsap.fromTo(line,
-                {
-                    opacity: 0,
-                    filter: 'blur(12px)',
-                    y: 30
-                },
-                {
-                    opacity: 1,
-                    filter: 'blur(0px)',
-                    y: 0,
-                    duration: 1.5, // Slower base duration
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: section,
-                        start: `top ${60 - index * 15}%`, // Spreads out start points more
-                        end: `top ${25 - index * 10}%`,   // Extends end points for slower "scrub" duration
-                        scrub: 1.5, // Heavy scrub = smooth lag/inertia effect
-                        toggleActions: 'play none none reverse'
+        // Scoped cleanup — won't affect other components' ScrollTriggers
+        const ctx = gsap.context(() => {
+            // Animation scroll-driven Apple-style pour chaque ligne
+            // PERF: Using opacity + y only (no filter: blur) to avoid expensive repaints on mobile
+            lines.forEach((line, index) => {
+                gsap.fromTo(line,
+                    {
+                        opacity: 0,
+                        y: 30
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.5,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: sectionRef.current,
+                            start: `top ${60 - index * 15}%`,
+                            end: `top ${25 - index * 10}%`,
+                            scrub: 1.5, // Heavy scrub = smooth lag/inertia effect
+                            toggleActions: 'play none none reverse'
+                        }
                     }
-                }
-            );
-        });
+                );
+            });
+        }, sectionRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     const baseStyle = {
         opacity: 0,
-        filter: 'blur(12px)',
         marginBottom: '2rem',
         fontSize: '1.2rem',
         fontWeight: 300,
         color: 'var(--color-text)',
-        lineHeight: 1.6
+        lineHeight: 1.6,
+        willChange: 'transform, opacity' // Hint browser to promote to GPU layer
     };
 
     return (
@@ -101,7 +100,7 @@ const Promise = () => {
                     letterSpacing: '-0.03em',
                     color: 'var(--color-noir)',
                     opacity: 0, // Initial state for animation
-                    filter: 'blur(12px)'
+                    willChange: 'transform, opacity'
                 }}>
                     Cérès.
                 </div>

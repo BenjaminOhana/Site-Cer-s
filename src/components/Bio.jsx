@@ -13,47 +13,47 @@ const Bio = () => {
     const imageWrapperRef = useRef(null);
 
     useEffect(() => {
-        const section = sectionRef.current;
-        const imageWrapper = imageWrapperRef.current;
-        const image = imageRef.current;
+        // Scoped cleanup with gsap.context
+        const ctx = gsap.context(() => {
+            const imageWrapper = imageWrapperRef.current;
+            const image = imageRef.current;
 
-        // Reveal animation: opacity + scale instead of clip-path to avoid white flash
-        gsap.fromTo(imageWrapper,
-            {
-                opacity: 0,
-                scale: 1.1
-            },
-            {
-                opacity: 1,
-                scale: 1,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 90%',
-                    end: 'top 30%',
-                    scrub: 0.8
+            // Reveal animation: opacity + scale instead of clip-path to avoid white flash
+            gsap.fromTo(imageWrapper,
+                {
+                    opacity: 0,
+                    scale: 1.1
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: 'top 90%',
+                        end: 'top 30%',
+                        scrub: 0.8
+                    }
                 }
-            }
-        );
+            );
 
-        // Parallax subtil sur l'image elle-même
-        gsap.fromTo(image,
-            { y: '-10%' },
-            {
-                y: '5%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true
+            // Parallax subtil sur l'image elle-même
+            gsap.fromTo(image,
+                { y: '-10%' },
+                {
+                    y: '5%',
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 0.5 // Smoother than scrub: true
+                    }
                 }
-            }
-        );
+            );
+        }, sectionRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (
@@ -79,7 +79,8 @@ const Bio = () => {
                         width: '100%',
                         height: '65vh',
                         overflow: 'hidden',
-                        opacity: 0 // Initial state
+                        opacity: 0, // Initial state
+                        willChange: 'transform, opacity' // GPU compositing hint
                     }}
                 >
                     <div
@@ -91,7 +92,8 @@ const Bio = () => {
                             backgroundImage: `url(${portraitImage})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center top',
-                            transform: 'translateY(-10%)'
+                            transform: 'translateY(-10%)',
+                            willChange: 'transform' // GPU compositing hint for parallax
                         }}
                     />
                 </div>
