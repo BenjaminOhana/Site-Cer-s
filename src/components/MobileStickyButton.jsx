@@ -35,43 +35,30 @@ const MobileStickyButton = () => {
         gsap.set(btn, { y: 100, opacity: 0, pointerEvents: 'none' });
 
         // Batch triggers for better performance
-        // 1. Hero Section: Show when leaving hero, Hide when entering back
+        // 1. Hero Section: Show when leaving hero (slightly earlier), Hide when entering back
         const heroTrigger = ScrollTrigger.create({
             trigger: '#hero-section',
-            start: 'bottom top', // when bottom of hero hits top of viewport
+            start: 'bottom 15%', // Appears when Hero is ~85% scrolled out (bottom hits 15% from top)
             onLeave: () => showBtn(),
             onEnterBack: () => hideBtn(),
         });
 
-        // 2. Offer CTA: Hide when visible
-        const offerTrigger = ScrollTrigger.create({
-            trigger: '#offer-cta-container',
-            start: 'top bottom',
-            end: 'bottom top',
+        // 2. Exclusion Zone: Hide button when scrolling through Offer -> Premium -> Testimonials
+        // The button should disappear when entering Offer, and ONLY reappear after consistent scrolling past Testimonials.
+        const exclusionTrigger = ScrollTrigger.create({
+            trigger: '#offer-section', // Start of exclusion zone
+            endTrigger: '#testimonials-section', // End of exclusion zone (inclusive)
+            start: 'top bottom', // Hide when top of Offer hits bottom of viewport
+            end: 'bottom bottom', // Show again when bottom of Testimonials hits bottom of viewport
             onEnter: () => hideBtn(),
             onLeave: () => showBtn(),
             onEnterBack: () => hideBtn(),
             onLeaveBack: () => showBtn()
         });
-
-        // 3. Premium Section: Hide when visible
-        const premiumTrigger = ScrollTrigger.create({
-            trigger: '#premium-section', // Make sure this ID exists in Premium.jsx or wrapping div
-            start: 'top bottom',
-            end: 'bottom top',
-            onEnter: () => hideBtn(),
-            onLeave: () => showBtn(),
-            onEnterBack: () => hideBtn(),
-            onLeaveBack: () => showBtn()
-        });
-
-        // Note: Testimonials logic is covered by "onLeave" of Premium (it follows Premium)
-        // If there's a gap or other sections, default is "Show" unless a trigger says Hide.
 
         return () => {
             heroTrigger.kill();
-            offerTrigger.kill();
-            premiumTrigger.kill();
+            exclusionTrigger.kill();
         };
     }, []);
 
