@@ -124,10 +124,10 @@ const Bio = () => {
                     }}>
                         <p style={{ marginBottom: '1rem' }}>Je m'appelle Priscilla.</p>
                         <p style={{ marginBottom: '1rem' }}>
-                            Depuis plus de 5 ans, j'accompagne des femmes qui ont tout pour elles — sauf la clarté.
+                            Depuis plus de 5 ans, j'accompagne des personnes qui ont tout pour elles — sauf la clarté.
                         </p>
                         <p>
-                            L'astrologie est ma boussole. L'intuition, mon outil. Ta transformation, mon engagement.
+                            L’astrologie est mon outil. L’intuition ma boussole. Ta transformation, mon engagement.
                         </p>
                     </div>
                 </div>

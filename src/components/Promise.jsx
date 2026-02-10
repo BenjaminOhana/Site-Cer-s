@@ -81,10 +81,13 @@ const Promise = () => {
                     fontFamily: 'var(--font-body)',
                     fontWeight: 700,
                     fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-                    background: 'linear-gradient(135deg, #800020 0%, #A0324F 50%, #800020 100%)',
+                    width: '100%',
+                    display: 'inline-block', // Helps some browsers clip correctly
+                    backgroundImage: 'linear-gradient(135deg, #A12323 0%, #D64545 50%, #A12323 100%)',
                     WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent', // Non-standard fallback
                     marginTop: '2rem',
                     lineHeight: '1.3'
                 }}>
@@ -98,14 +101,14 @@ const Promise = () => {
                     fontSize: '1.7rem',
                     fontWeight: 900,
                     letterSpacing: '-0.03em',
-                    color: 'var(--color-noir)',
+                    color: 'var(--color-vert-profond)',
                     opacity: 0, // Initial state for animation
                     willChange: 'transform, opacity'
                 }}>
-                    Cérès.
+                    Priscilla
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

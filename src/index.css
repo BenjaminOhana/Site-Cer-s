@@ -1,8 +1,8 @@
 :root {
-  --color-bordeaux: #800020;
+  --color-bordeaux: #A12323;
   --color-blanc-nacre: #FDFBF7;
   --color-rose-vintage: #D4A5A5;
-  --color-vert-profond: #1A3C34;
+  --color-vert-profond: #14352A;
   --color-noir: #111111;
   --color-text: #111111;
 
@@ -26,7 +26,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth iOS scroll */
   overflow-x: hidden;
 }
 
@@ -64,7 +65,7 @@ a {
 
 .btn-primary {
   display: inline-block;
-  background-color: var(--color-bordeaux);
+  background-color: var(--color-vert-profond);
   color: #fff;
   padding: 1rem 2rem;
   font-family: var(--font-body);
@@ -73,6 +74,7 @@ a {
   text-transform: uppercase;
   letter-spacing: 1px;
   border: none;
+  border-radius: 50px;
   cursor: pointer;
   transition: opacity 0.3s ease;
   font-size: 1rem;

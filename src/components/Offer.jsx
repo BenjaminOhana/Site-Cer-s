@@ -183,28 +183,20 @@ const Offer = () => {
 
     return (
         <>
-            {/* Élément de liaison / Respiration visuelle */}
+            {/* Trait minimaliste de transition */}
             <div style={{
-                height: '18vh',
-                paddingTop: '3vh',
-                backgroundColor: 'var(--color-blanc-nacre)',
+                height: '15vh',
                 display: 'flex',
-                alignItems: 'flex-start',
-                justifyContent: 'center'
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'var(--color-blanc-nacre)'
             }}>
                 <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1.5rem',
-                    opacity: 0.4
-                }}>
-                    <div style={{ width: '60px', height: '1px', backgroundColor: 'var(--color-bordeaux)' }} />
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-bordeaux)" strokeWidth="1">
-                        <circle cx="12" cy="12" r="3" />
-                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-                    </svg>
-                    <div style={{ width: '60px', height: '1px', backgroundColor: 'var(--color-bordeaux)' }} />
-                </div>
+                    width: '80px',
+                    height: '1px',
+                    backgroundColor: 'var(--color-bordeaux)',
+                    opacity: 0.3
+                }} />
             </div>
 
             <section

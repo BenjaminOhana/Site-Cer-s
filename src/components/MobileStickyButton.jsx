@@ -80,7 +80,7 @@ const MobileStickyButton = () => {
                     left: '24px',
                     right: '24px',
                     zIndex: 1000,
-                    backgroundColor: 'var(--color-bordeaux)',
+                    backgroundColor: 'var(--color-vert-profond)',
                     color: 'white',
                     border: 'none',
                     padding: '1.1rem 0',
