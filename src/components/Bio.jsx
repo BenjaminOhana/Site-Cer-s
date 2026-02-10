@@ -108,10 +108,12 @@ const Bio = () => {
                     backgroundColor: 'var(--color-blanc-nacre)'
                 }}>
                     <h2 style={{
-                        fontSize: '3rem',
+                        fontSize: '1.4rem', // Reduced from 1.8rem
                         marginBottom: '1rem',
-                        fontFamily: 'var(--font-title)',
-                        fontWeight: 400
+                        fontFamily: 'var(--font-body)',
+                        fontWeight: 500,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em' // Reduced from 0.1em
                     }}>
                         Priscilla Owona
                     </h2>

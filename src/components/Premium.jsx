@@ -16,7 +16,7 @@ const Premium = () => {
             title: "Le Soin Énergétique",
             quotes: [
                 "Ton corps sait ce que ta tête refuse de voir.",
-                "Laisse-moi t'aider à le libérer."
+                "Offre-toi ce renouveau."
             ],
             highlight: "Et retrouver ta légèreté.",
             cta: "Réserver",
@@ -29,7 +29,7 @@ const Premium = () => {
                 "En une séance, on pose les mots.",
                 "On éclaire ce qui était flou."
             ],
-            highlight: "Tu repars avec ta réponse.",
+            highlight: "Tu repars alignée. Et tu sais quoi faire.",
             cta: "Réserver",
             img: img2,
             backgroundPosition: 'center 20%'

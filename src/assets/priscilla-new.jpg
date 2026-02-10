@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>NoSuchBucket</Code><Message>The specified bucket does not exist</Message><BucketName>anthropic-ai-static</BucketName><RequestId>R6QR0BYP6QPDZTEX</RequestId><HostId>KqP/kcdic65byInbJNSifKeKWY31pfKfaBATpJzXW+gZPm1fKXIrdH1BkrWZUCAoVMe8Bxc+eUM=</HostId></Error>
