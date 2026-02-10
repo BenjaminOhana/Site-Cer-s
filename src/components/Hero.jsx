@@ -21,14 +21,20 @@ const Hero = () => {
             const bg = bgRef.current;
 
             if (bg) {
+                // CRITICAL: Pre-set the initial transform state BEFORE creating ScrollTrigger.
+                // This prevents the "zoom pop" on Safari iOS where the element jumps
+                // from "no GSAP transform" to "GSAP transform" on the first scroll pixel.
+                gsap.set(bg, { yPercent: 0, force3D: true });
+
                 gsap.to(bg, {
-                    yPercent: 10, // Move image down by 10% of its height (subtle effect)
+                    yPercent: 8, // Subtle parallax (reduced from 10 for less aggressive movement)
                     ease: "none",
+                    force3D: true, // Keep on GPU compositor throughout
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: "top top",
                         end: "bottom top",
-                        scrub: 0.5 // Smoother than scrub: true — adds 0.5s inertia lag
+                        scrub: 0.8 // Smoother lag — 0.8s inertia prevents visible stepping on Safari
                     }
                 });
             }
@@ -47,7 +53,6 @@ const Hero = () => {
             ref={containerRef}
             style={{
                 height: heroHeight,
-                minHeight: '100dvh', // Fallback/Modern mobile stability
                 width: '100%',
                 position: 'relative',
                 overflow: 'hidden',
@@ -131,7 +136,6 @@ const Hero = () => {
                     background-position: center 30%; /* Default Mobile */
                     z-index: -1;
                     will-change: transform;
-                    transform: translateZ(0); /* Force GPU compositing layer */
                 }
 
                 .hero-text-container {
