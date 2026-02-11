@@ -11,6 +11,8 @@ import Navbar from './components/Navbar';
 import MobileStickyButton from './components/MobileStickyButton';
 import MobileMenu from './components/MobileMenu';
 
+import FAQ from './components/FAQ';
+
 function App() {
     return (
         <main>
@@ -23,6 +25,7 @@ function App() {
                 <Premium />
             </div>
             <Testimonials />
+            <FAQ />
             <Instagram />
             <Footer />
             <MobileStickyButton />

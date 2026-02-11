@@ -319,13 +319,13 @@ const Offer = () => {
                             <BenefitItem
                                 className="benefit-item"
                                 icon={MoonIcon}
-                                title="Personnalisé pour ton signe"
-                                description="Pas de généralités, c'est écrit pour toi."
+                                title="Aligné sur ton signe"
+                                description="Basé sur tes infos de naissance."
                             />
                             <BenefitItem
                                 className="benefit-item"
                                 icon={StarIcon}
-                                title="Les dates clés de ton mois"
+                                title="Les points clés de ton mois"
                                 description="Anticipe les moments forts et les tournants."
                             />
                             <BenefitItem
@@ -363,6 +363,27 @@ const Offer = () => {
                             >
                                 Recevoir mon horoscope
                             </a>
+
+                            {/* Reassurance text */}
+                            <div className="offer-reassurance" style={{
+                                marginTop: '1.5rem',
+                                marginBottom: '0.5rem',
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                justifyContent: 'center',
+                                gap: '0.8rem',
+                                fontFamily: 'var(--font-body)',
+                                fontSize: '0.8rem',
+                                color: '#666',
+                                maxWidth: '300px', // Limit width on mobile so it doesn't span too wide
+                                margin: '1.5rem auto 0.5rem auto' // Center block on mobile
+                            }}>
+                                <span>Sans engagement</span>
+                                <span style={{ opacity: 0.3 }}>•</span>
+                                <span>Déjà +200 abonnés</span>
+                                <span style={{ opacity: 0.3 }}>•</span>
+                                <span>Paiement 100 % sécurisé</span>
+                            </div>
 
                             <p style={{
                                 marginTop: '1rem',
@@ -453,9 +474,34 @@ const Offer = () => {
                              margin-left: 0 !important;
                              margin-right: 0 !important;
                          }
+
+                         /* Align Reassurance List */
+                         .offer-reassurance {
+                            justify-content: flex-start !important;
+                            max-width: none !important; /* Allow full width */
+                            margin-left: 0 !important;
+                            margin-right: 0 !important;
+                         }
                     }
                 `}</style>
             </section>
+
+            {/* Trait minimaliste de transition bas */}
+            <div style={{
+                height: '10vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'var(--color-blanc-nacre)'
+            }}>
+                <div style={{
+                    width: '60px',
+                    height: '1px',
+                    backgroundColor: 'var(--color-bordeaux)',
+                    opacity: 0.2
+                }} />
+            </div>
+
         </>
     );
 };

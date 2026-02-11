@@ -97,11 +97,11 @@ const Promise = () => {
                 {/* Petit logo de fin de section */}
                 <div ref={logoRef} style={{
                     marginTop: '6rem',
-                    fontFamily: 'var(--font-title)',
-                    fontSize: '1.7rem',
-                    fontWeight: 900,
-                    letterSpacing: '-0.03em',
-                    color: 'var(--color-vert-profond)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '1.2rem',
+                    fontWeight: 500,
+                    letterSpacing: '0.05em',
+                    color: 'var(--color-text)',
                     opacity: 0, // Initial state for animation
                     willChange: 'transform, opacity'
                 }}>
