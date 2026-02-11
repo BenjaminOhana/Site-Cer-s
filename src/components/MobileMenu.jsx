@@ -277,6 +277,29 @@ const MobileMenu = () => {
                     </a>
 
                     <a
+                        href="#faq-section"
+                        onClick={handleLinkClick}
+                        ref={addToLinksRef}
+                        style={{
+                            fontFamily: 'var(--font-editorial)',
+                            fontSize: '2rem',
+                            color: 'var(--color-noir)',
+                            textDecoration: 'none'
+                        }}
+                    >
+                        FAQ
+                        <span style={{
+                            display: 'block',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.8rem',
+                            color: '#666',
+                            marginTop: '5px',
+                            fontWeight: 300,
+                            letterSpacing: '1px'
+                        }}>VOS QUESTIONS</span>
+                    </a>
+
+                    <a
                         href="mailto:astronyma@gmail.com"
                         onClick={handleLinkClick}
                         ref={addToLinksRef}

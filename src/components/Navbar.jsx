@@ -56,6 +56,7 @@ const Navbar = () => {
             <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 500 }} className="nav-links">
                 <a href="#horoscope" className="nav-link">Horoscope</a>
                 <a href="#accompagnement" className="nav-link">Accompagnement</a>
+                <a href="#faq-section" className="nav-link">FAQ</a>
                 <a href="mailto:contact@ceresfrance.com" className="nav-link">Contact</a>
             </div>
 
