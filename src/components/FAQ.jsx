@@ -137,7 +137,7 @@ const FAQ = () => {
             questions: [
                 {
                     q: "C'est quoi un soin énergétique à distance ?",
-                    a: "C'est une séance où Priscilla travaille sur tes blocages énergétiques, sans que tu aies besoin d'être physiquement présent·e. L'énergie ne connaît pas la distance. Concrètement, tu réserves ton créneau, tu te poses dans un endroit calme au moment de la séance, et Priscilla fait le travail de son côté. Tu reçois ensuite un retour détaillé de ce qui a été vu et libéré."
+                    a: "C'est un format complet d'1h. On commence par 30 min d'échange (visio ou téléphone) pour faire le point. Ensuite, je coupe et travaille à distance pendant 30 min sur tes énergies. Tu reçois enfin un compte-rendu vocal détaillé de tout ce qui a été libéré."
                 },
                 {
                     q: "Comment se passe une séance de coaching intuitif ?",
