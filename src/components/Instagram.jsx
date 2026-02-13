@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import insta1 from '../assets/insta-1.webp';
 import insta2 from '../assets/insta-2.webp';
 import insta3 from '../assets/insta-3.webp';
 import insta4 from '../assets/insta-4.webp';
 import insta5 from '../assets/insta-5.webp';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Instagram = () => {
+    const containerRef = useRef(null);
+
     // User provided images
     const images = [
         insta1,
@@ -14,6 +20,28 @@ const Instagram = () => {
         insta4,
         insta5
     ];
+
+    useEffect(() => {
+        let ctx = gsap.context(() => {
+            const items = containerRef.current.querySelectorAll('.insta-item');
+
+            gsap.from(items, {
+                opacity: 0,
+                y: 50,
+                scale: 0.9,
+                duration: 1,
+                stagger: 0.15,
+                ease: 'back.out(1.5)', // Pop-up effect
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: 'top 80%', // Reveal when near bottom of screen
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
         <section style={{ backgroundColor: 'white', padding: '4rem 0' }}>
@@ -29,7 +57,7 @@ const Instagram = () => {
                 </h2>
             </div>
 
-            <div className="insta-grid">
+            <div ref={containerRef} className="insta-grid">
                 {images.map((img, i) => (
                     <div key={i} className="insta-item">
                         <div className="polaroid-inner">

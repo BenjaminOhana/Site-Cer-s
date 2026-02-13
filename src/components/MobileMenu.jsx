@@ -18,22 +18,18 @@ const MobileMenu = () => {
     useEffect(() => {
         const menu = menuRef.current;
         const links = linksRef.current;
-        const circle = circleRef.current;
 
         if (isOpen) {
-            // Open animation
-            gsap.to(circle, {
-                duration: 0.6,
-                scale: 1500, // Massive scale to cover screen
-                ease: "power3.inOut"
-            });
+            // Open animation with clip-path
+            // Center of the button is approx ~45px from right, ~45px from top (20px margin + 25px half-height)
 
             gsap.to(menu, {
-                duration: 0.4,
-                delay: 0.2,
+                duration: 0.6,
+                clipPath: "circle(150% at calc(100% - 45px) 45px)",
                 opacity: 1,
                 visibility: 'visible',
-                pointerEvents: 'all'
+                pointerEvents: 'all',
+                ease: "power3.inOut"
             });
 
             gsap.fromTo(links,
@@ -42,9 +38,9 @@ const MobileMenu = () => {
                     y: 0,
                     opacity: 1,
                     stagger: 0.1,
-                    duration: 0.5,
-                    delay: 0.4,
-                    ease: "power2.out"
+                    duration: 0.6, // slightly slower for grace
+                    delay: 0.3,
+                    ease: "back.out(1.2)" // Slight overshoot as requested
                 }
             );
 
@@ -61,22 +57,17 @@ const MobileMenu = () => {
             });
 
             gsap.to(menu, {
-                duration: 0.3,
-                delay: 0.2,
-                opacity: 0,
+                duration: 0.5,
+                clipPath: "circle(0px at calc(100% - 45px) 45px)",
+                delay: 0.1,
+                ease: "power3.inOut",
                 onComplete: () => {
                     if (menu) {
                         menu.style.visibility = 'hidden';
                         menu.style.pointerEvents = 'none';
+                        menu.style.opacity = 0; // ensure reset
                     }
                 }
-            });
-
-            gsap.to(circle, {
-                duration: 0.6,
-                delay: 0.1,
-                scale: 1,
-                ease: "power3.inOut"
             });
 
             document.body.style.overflow = '';
@@ -170,25 +161,7 @@ const MobileMenu = () => {
                 }}></span>
             </button>
 
-            {/* 2. Background Circle (For expansion effect) */}
-            <div
-                ref={circleRef}
-                style={{
-                    position: 'fixed',
-                    top: '45px', // Center of button (20 + 50/2)
-                    right: '45px', // Center of button
-                    width: '2px',
-                    height: '2px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(253, 251, 247, 0.3)', // Very light, mostly decorative
-                    backdropFilter: 'none', // Remove since main effect is on overlay
-                    zIndex: 1999,
-                    pointerEvents: 'none',
-                    transform: 'scale(1)' // Start tiny
-                }}
-            />
-
-            {/* 3. Full Screen Menu Overlay */}
+            {/* 2. Full Screen Menu Overlay - Clip Path Animated */}
             <div
                 ref={menuRef}
                 style={{
@@ -204,9 +177,11 @@ const MobileMenu = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     opacity: 0,
-                    backgroundColor: 'rgba(253, 251, 247, 0.7)', // Semi-transparent
-                    backdropFilter: 'blur(20px) saturate(180%)', // Apple glass effect
-                    WebkitBackdropFilter: 'blur(20px) saturate(180%)', // Safari support
+                    backgroundColor: 'rgba(253, 251, 247, 0.95)', // Increased opacity for better legibility without blur heavy reliance
+                    backdropFilter: 'blur(10px)', // Reduced blur for performance (clip-path handles transition)
+                    // Initial clip path state (closed) - important for first render
+                    clipPath: 'circle(0px at calc(100% - 45px) 45px)',
+                    WebkitClipPath: 'circle(0px at calc(100% - 45px) 45px)',
                 }}
             >
                 <nav style={{

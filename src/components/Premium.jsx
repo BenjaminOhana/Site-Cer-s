@@ -40,7 +40,7 @@ const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
                         <h3 style={{
                             fontFamily: 'var(--font-editorial)',
                             fontSize: '1.6rem',
-                            marginBottom: '1.5rem',
+                            marginBottom: '1rem',
                             color: 'var(--color-noir)'
                         }}>
                             {card.title}
@@ -410,7 +410,7 @@ const Premium = () => {
                 /* FRONT CONTENT */
                 .card-image {
                     width: 100%;
-                    height: 400px; /* Increased from 350px */
+                    height: 280px; /* Reduced to fit mobile screen */
                     background-size: cover;
                     background-position: center;
                     position: relative;
@@ -424,7 +424,7 @@ const Premium = () => {
                 }
 
                 .card-content {
-                    padding: 1.5rem;
+                    padding: 1rem; /* Reduced padding */
                     flex: 1;
                     display: flex;
                     flex-direction: column;
@@ -447,10 +447,10 @@ const Premium = () => {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    gap: 1rem;
+                    gap: 0.8rem;
                     width: 100%;
                     margin-top: auto; /* Push to bottom */
-                    padding-top: 1.5rem;
+                    padding-top: 1rem; /* Reduced spacing */
                 }
 
                 .btn-card {
@@ -462,7 +462,7 @@ const Premium = () => {
                     transition: all 0.3s ease;
                     width: 100%;
                     max-width: 250px;
-                    padding: 0.8rem 1rem;
+                    padding: 0.7rem 1rem;
                 }
 
                 .btn-card.primary {

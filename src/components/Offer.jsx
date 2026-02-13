@@ -57,6 +57,7 @@ const BenefitItem = ({ icon, title, description, className }) => (
 const Offer = () => {
     const sectionRef = useRef(null);
     const imageContainerRef = useRef(null);
+    const imageRef = useRef(null); // Ref for the image itself
     const titleRef = useRef(null);
     const taglineRef = useRef(null);
     const benefitsRef = useRef(null);
@@ -66,22 +67,40 @@ const Offer = () => {
         let ctx = gsap.context(() => {
             const section = sectionRef.current;
             const imageContainer = imageContainerRef.current;
+            const image = imageRef.current;
             const title = titleRef.current;
             const tagline = taglineRef.current;
             const benefits = benefitsRef.current;
             const cta = ctaRef.current;
 
-            // Image container reveal
+            // 1. Container Appearance (Fade + Slide Up)
             gsap.fromTo(imageContainer,
-                { opacity: 0, scale: 1.05, y: 40 },
+                { opacity: 0, y: 40 },
                 {
-                    opacity: 1, scale: 1, y: 0,
+                    opacity: 1, y: 0,
                     ease: 'power2.out',
                     scrollTrigger: {
                         trigger: section,
                         start: 'top 85%',
                         end: 'top 40%',
                         scrub: 0.6
+                    }
+                }
+            );
+
+            // 2. Cinematic Image Zoom (Scroll Parallax)
+            // Starts at scale 1, zooms in to 1.15 as user scrolls past
+            gsap.fromTo(image,
+                { scale: 1 },
+                {
+                    scale: 1.15,
+                    ease: 'none',
+                    force3D: true,
+                    scrollTrigger: {
+                        trigger: imageContainer,
+                        start: 'top bottom', // Start when container enters viewport
+                        end: 'bottom top',   // End when container leaves
+                        scrub: true
                     }
                 }
             );
@@ -227,17 +246,21 @@ const Offer = () => {
                                 width: '100%',
                                 marginBottom: '2.5rem',
                                 opacity: 0,
+                                overflow: 'hidden', // Essential for zoom effect
+                                borderRadius: '4px', // Slight rounding for polish
                                 willChange: 'transform, opacity' // GPU compositing
                             }}
                         >
                             <img
+                                ref={imageRef}
                                 src={horoscopeImage}
                                 alt="Horoscope mensuel personnalisé par Priscilla Owona — Cérès"
                                 style={{
                                     width: '100%',
                                     height: 'auto',
                                     display: 'block',
-                                    aspectRatio: '0.733' // 733/1000 - Reserves space to prevent CLS
+                                    aspectRatio: '0.733', // 733/1000 - Reserves space to prevent CLS
+                                    willChange: 'transform' // Optimize for zoom
                                 }}
                                 onLoad={() => ScrollTrigger.refresh()}
                                 loading="lazy"
