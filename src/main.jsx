@@ -1,6 +1,8 @@
+import './gsapConfig'; // MUST BE FIRST
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
+// GSAP is now configured in ./gsapConfig
 import App from './App.jsx'
 import './index.css'
 

@@ -3,7 +3,13 @@ import LegalLayout from '../../components/LegalLayout';
 
 const PolitiqueConfidentialite = () => {
     return (
-        <LegalLayout title="Politique de Confidentialité">
+        <LegalLayout
+            title="Politique de Confidentialité"
+            seoTitle="Politique de Confidentialité | Cérès"
+            seoDescription="Politique de confidentialité de Cérès. Découvrez comment nous protégeons vos données personnelles et respectons votre vie privée."
+            robots="index, follow"
+            canonical="https://ceresfrance.com/politique-confidentialite"
+        >
             <p>
                 La protection de vos données personnelles est une priorité pour Cérès.
                 Cette politique de confidentialité vous explique comment nous collectons, utilisons et protégeons vos informations.

@@ -68,7 +68,7 @@ const Hero = () => {
                 srcSet={`${bgImageMobile} 800w, ${bgImageDesktop} 1920w`}
                 sizes="100vw"
                 alt="Priscilla Owona, astrologue et coach intuitive — portrait"
-                fetchPriority="high"
+                fetchpriority="high"
             />
 
             {/* 2. Content Overlay (Gradient) - Needs to be absolute to cover VIEWPORT */}
@@ -106,7 +106,7 @@ const Hero = () => {
                 transition: 'opacity 1.5s ease-out',
                 padding: '0 20px' // Prevent text touching edges on small mobile
             }}>
-                <p className="hero-title" style={{
+                <h1 className="hero-title" style={{
                     fontFamily: 'var(--font-editorial)', // Forum
                     fontWeight: 400,
                     letterSpacing: '0.05em',
@@ -115,7 +115,7 @@ const Hero = () => {
                     lineHeight: 1.1 // Tighter line height for multiline on mobile
                 }}>
                     Le flou s'arrête ici.
-                </p>
+                </h1>
 
                 {/* Scroll Chevron */}
                 <div style={{
@@ -146,7 +146,7 @@ const Hero = () => {
                     top: 62%; /* Mobile: Fine-tuned balance */
                 }
                 .hero-title {
-                    font-size: clamp(1.8rem, 8vw, 2.8rem); /* Adaptive size: starts smaller, grows with width */
+                    font-size: clamp(1.2rem, 7vw, 2.8rem); /* Adaptive size: starts smaller, grows with width */
                     white-space: nowrap; /* Force single line */
                     width: 100%;
                     overflow: visible; /* Allow text to be seen */

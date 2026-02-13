@@ -196,7 +196,7 @@ const MobileMenu = () => {
                     top: 0,
                     left: 0,
                     width: '100vw',
-                    height: '100vh',
+                    height: '100svh',
                     zIndex: 2000,
                     visibility: 'hidden',
                     display: 'flex',

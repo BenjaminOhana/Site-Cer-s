@@ -28,7 +28,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch;
   /* Smooth iOS scroll */
+  /* Smooth iOS scroll */
   overflow-x: hidden;
+  scroll-padding-top: 80px;
+  /* Prevent anchor jumps behind fixed header */
+}
+
+html {
+  height: -webkit-fill-available;
+  /* Fix for iOS viewport height */
 }
 
 h1,

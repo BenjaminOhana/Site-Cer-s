@@ -3,7 +3,13 @@ import LegalLayout from '../../components/LegalLayout';
 
 const MentionsLegales = () => {
     return (
-        <LegalLayout title="Mentions Légales">
+        <LegalLayout
+            title="Mentions Légales"
+            seoTitle="Mentions Légales | Cérès"
+            seoDescription="Mentions légales du site Cérès - Priscilla Owona. Informations sur l'éditeur, l'hébergement et la propriété intellectuelle."
+            robots="index, follow"
+            canonical="https://ceresfrance.com/mentions-legales"
+        >
             <h2>1. Éditeur du site</h2>
             <p>
                 Le site <strong>Cérès</strong> est édité par :<br />

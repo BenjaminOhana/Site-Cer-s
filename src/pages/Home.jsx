@@ -43,8 +43,9 @@ const Home = () => {
             "jobTitle": "Astrologue & Coach Intuitive",
             "url": "https://ceresfrance.com",
             "sameAs": ["https://www.instagram.com/ceresfrance_"],
-            "description": "Astrologue et coach intuitive, fondatrice de Cérès Magazine. Accompagnement premium en astrologie, soins énergétiques et coaching intuitif.",
-            "knowsAbout": ["Astrologie", "Coaching intuitif", "Soins énergétiques", "Horoscope personnalisé"],
+            "description": "Priscilla Owona, astrologue et coach intuitive, fondatrice de Cérès. J'accompagne les femmes à retrouver clarté et sérénité grâce à l'astrologie et aux soins énergétiques.",
+            "image": "https://ceresfrance.com/assets/priscilla-portrait.webp",
+            "knowsAbout": ["Astrologie", "Coaching intuitif", "Soins énergétiques", "Horoscope personnalisé", "Développement personnel"],
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Vernon",
@@ -62,6 +63,11 @@ const Home = () => {
             "logo": "https://ceresfrance.com/favicon.png",
             "founder": { "@type": "Person", "name": "Priscilla Owona" },
             "sameAs": ["https://www.instagram.com/ceresfrance_"],
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "contact@ceresfrance.com",
+                "contactType": "customer service"
+            },
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Vernon",
@@ -75,56 +81,68 @@ const Home = () => {
             "@context": "https://schema.org",
             "@type": "Product",
             "name": "Horoscope Mensuel Personnalisé — Cérès",
-            "description": "Horoscope mensuel personnalisé basé sur vos informations de naissance, rédigé par Priscilla Owona. Points clés du mois, guidance intuitive.",
+            "description": "Votre horoscope mensuel 100% personnalisé basé sur votre date, heure et lieu de naissance. Rédigé avec soin par Priscilla Owona pour éclairer votre mois.",
             "brand": { "@type": "Brand", "name": "Cérès" },
+            "image": "https://ceresfrance.com/assets/horoscope-magazine.webp",
             "offers": {
                 "@type": "Offer",
                 "price": "7.99",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://ceresfrance.com/#horoscope"
+                "url": "https://ceresfrance.com/#horoscope",
+                "priceValidUntil": "2025-12-31"
             }
         },
         {
             "@context": "https://schema.org",
             "@type": "Service",
-            "serviceType": "Soin Énergétique à Distance",
+            "name": "Soin Énergétique à Distance",
+            "serviceType": "Soin Énergétique",
             "provider": { "@type": "Person", "name": "Priscilla Owona" },
             "areaServed": "FR",
-            "description": "Soin énergétique à distance par Priscilla Owona. Libération des blocages émotionnels et karmiques."
+            "description": "Soin énergétique à distance pour nettoyer, harmoniser et recharger vos énergies vitales. Compte-rendu vocal inclus.",
+            "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "price": "60.00",
+                "priceCurrency": "EUR"
+            }
         },
         {
             "@context": "https://schema.org",
             "@type": "Service",
-            "serviceType": "Coaching Intuitif",
+            "name": "Coaching Intuitif",
+            "serviceType": "Coaching de Vie",
             "provider": { "@type": "Person", "name": "Priscilla Owona" },
             "areaServed": "FR",
-            "description": "Séance individuelle de coaching intuitif pour obtenir de la clarté sur vos blocages émotionnels."
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": "Guidance Rapide (Pose ta question)",
-            "provider": { "@type": "Person", "name": "Priscilla Owona" },
-            "areaServed": "FR",
-            "description": "Format court de guidance pour répondre à une question précise et éclairer votre chemin."
+            "description": "Séance individuelle de coaching intuitif d'1h en visio pour débloquer une situation et retrouver de la clarté.",
+            "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "price": "90.00",
+                "priceCurrency": "EUR"
+            }
         },
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Cérès — Priscilla Owona",
-            "url": "https://ceresfrance.com"
+            "url": "https://ceresfrance.com",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://ceresfrance.com/?s={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
         }
     ];
 
     return (
         <main>
             <SEO
-                title="Priscilla Owona — Astrologue et Coach Intuitive en ligne | Vernon, Eure (27)"
-                description="Priscilla Owona, astrologue & coach intuitive en ligne. Horoscope mensuel personnalisé (7,99€/mois), soins énergétiques et coaching intuitif. Retrouvez votre clarté."
+                title="Priscilla Owona — Astrologue, Coach Intuitive & Soin Énergétique | Cérès"
+                description="Astrologue et coach intuitive, Priscilla Owona vous guide avec Cérès. Horoscope mensuel personnalisé, soins énergétiques et coaching pour retrouver votre clarté."
                 schemas={schemas}
             />
-            <h1 className="visually-hidden">Priscilla Owona — Astrologue et Coach Intuitive en ligne | Vernon, Eure (27)</h1>
             <Navbar />
             <div id="hero-section">
                 <Hero />

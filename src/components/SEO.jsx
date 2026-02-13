@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 
-const SEO = ({ title, description, image, url, type, schemas }) => {
+const SEO = ({ title, description, image, url, type, schemas, noIndex, robots }) => {
     const siteTitle = "Cérès";
     const defaultDescription = "Découvrez votre horoscope mensuel personnalisé et les accompagnements de Priscilla Owona. Astrologie intuitive, soins énergétiques et clarté pour avancer.";
     const defaultImage = "https://ceresfrance.com/og-image.webp"; // To be updated with actual URL or local path handling if needed for prod
@@ -20,6 +20,13 @@ const SEO = ({ title, description, image, url, type, schemas }) => {
             <title>{metaTitle}</title>
             <meta name="description" content={metaDescription} />
             <link rel="canonical" href={metaUrl} />
+
+            {/* Robots: noIndex prop takes precedence over robots string prop */}
+            {noIndex ? (
+                <meta name="robots" content="noindex, nofollow" />
+            ) : (
+                robots ? <meta name="robots" content={robots} /> : null
+            )}
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content={metaType} />
@@ -53,6 +60,8 @@ SEO.propTypes = {
     url: PropTypes.string,
     type: PropTypes.string,
     schemas: PropTypes.arrayOf(PropTypes.object),
+    noIndex: PropTypes.bool,
+    robots: PropTypes.string,
 };
 
 export default SEO;

@@ -5,31 +5,9 @@ import questionImage from '../assets/pose-ta-question.webp';
 
 const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
     const [isFlipped, setIsFlipped] = useState(false);
-    const [cardHeight, setCardHeight] = useState('auto');
-    const frontRef = useRef(null);
-    const backRef = useRef(null);
 
-    // Measure both faces and set the container to the tallest one
-    const measureHeight = useCallback(() => {
-        const frontH = frontRef.current?.scrollHeight || 0;
-        const backH = backRef.current?.scrollHeight || 0;
-        const maxH = Math.max(frontH, backH);
-        if (maxH > 0) {
-            setCardHeight(maxH + 'px');
-        }
-    }, []);
-
-    useEffect(() => {
-        // Measure on mount and after fonts/images load
-        measureHeight();
-        window.addEventListener('resize', measureHeight);
-        // Re-measure after a short delay (fonts, images)
-        const timer = setTimeout(measureHeight, 500);
-        return () => {
-            window.removeEventListener('resize', measureHeight);
-            clearTimeout(timer);
-        };
-    }, [measureHeight]);
+    // Refs for flipping logic can stay if needed, but height is now CSS
+    // No more measureHeight
 
     const handleFlip = (e) => {
         e.stopPropagation();
@@ -37,13 +15,13 @@ const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
     };
 
     return (
-        <div
+        <article
             className={`premium-card-container ${isFlipped ? 'flipped' : ''}`}
-            style={{ height: cardHeight }}
+        // Removed style={{ height: cardHeight }} - CSS flexbox will handle it
         >
             <div className="premium-card-inner">
                 {/* FRONT */}
-                <div className="premium-card-front" ref={frontRef}>
+                <div className="premium-card-front">
                     <div className="card-image" style={{ position: 'relative', overflow: 'hidden' }}>
                         <img
                             src={card.img}
@@ -53,7 +31,8 @@ const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
                                 width: '100%',
                                 height: '100%',
                                 objectFit: 'cover',
-                                objectPosition: card.backgroundPosition || 'center'
+                                objectPosition: card.backgroundPosition || 'center',
+                                aspectRatio: '3/4' // Explicit ratio for stability
                             }}
                         />
                     </div>
@@ -96,7 +75,7 @@ const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
                 </div>
 
                 {/* BACK */}
-                <div className="premium-card-back" ref={backRef}>
+                <div className="premium-card-back">
                     <div className="back-content-wrapper">
                         <div className="back-header">
                             <h3 style={{
@@ -144,7 +123,7 @@ const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
     );
 };
 
@@ -289,13 +268,13 @@ const Premium = () => {
     };
 
     return (
-        <section id="premium-section" style={{
+        <section id="premium-section" aria-labelledby="premium-title" style={{
             padding: '0',
             paddingBottom: '4rem',
             backgroundColor: 'var(--color-blanc-nacre)',
         }}>
             <div style={{ padding: '4rem 20px 2rem 20px' }}>
-                <h2 className="text-center" style={{
+                <h2 id="premium-title" className="text-center" style={{
                     fontSize: 'clamp(2.5rem, 6vw, 4rem)',
                     marginBottom: '1rem',
                     fontFamily: 'var(--font-editorial)',
@@ -354,6 +333,7 @@ const Premium = () => {
                     padding: 0 10px 2rem 10px;
                     -webkit-overflow-scrolling: touch;
                     scrollbar-width: none;
+                    contain: content; /* Isolates layout, style, paint */
                 }
                 .premium-cards-container::-webkit-scrollbar {
                     display: none;
@@ -366,6 +346,7 @@ const Premium = () => {
                     /* height is now set dynamically via JS */
                     perspective: 1500px;
                     background-color: transparent;
+                    /* Removed will-change here to avoid too many layers, inner card has it */
                 }
 
                 .premium-card-inner {
@@ -377,6 +358,11 @@ const Premium = () => {
                     transform-style: preserve-3d;
                     box-shadow: 0 10px 30px rgba(0,0,0,0.03);
                     border-radius: 4px;
+                    will-change: transform; /* Hint for GPU */
+                    
+                    /* NEW: Grid for auto-height alignment */
+                    display: grid;
+                    grid-template-columns: 1fr;
                 }
 
                 /* STATE: Flipped */
@@ -386,9 +372,15 @@ const Premium = () => {
 
                 /* FRONT & BACK COMMON */
                 .premium-card-front, .premium-card-back {
-                    position: absolute;
+                    /* Changed from absolute to grid placement */
+                    grid-row: 1;
+                    grid-column: 1;
+                    position: relative; 
+                    
                     width: 100%;
-                    height: 100%;
+                    /* Height auto to let content dictate size */
+                    min-height: 100%; 
+                    
                     -webkit-backface-visibility: hidden; /* Safari */
                     backface-visibility: hidden;
                     border-radius: 4px;

@@ -6,6 +6,8 @@ import MentionsLegales from './pages/Legal/MentionsLegales';
 import PolitiqueConfidentialite from './pages/Legal/PolitiqueConfidentialite';
 import CGV from './pages/Legal/CGV';
 
+import NotFound from './pages/NotFound';
+
 function App() {
     return (
         <Router>
@@ -15,6 +17,7 @@ function App() {
                 <Route path="/mentions-legales" element={<MentionsLegales />} />
                 <Route path="/confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/cgv" element={<CGV />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     );

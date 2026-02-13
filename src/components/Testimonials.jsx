@@ -36,12 +36,68 @@ const Testimonials = () => {
     const starsRef = useRef(null);
     const containerRef = useRef(null);
 
+    const touchStart = useRef(null);
+    const touchEnd = useRef(null);
+    const minSwipeDistance = 50;
+
+    // Helper to change slide with animation direction consideration if needed (GSAP handles transition on index change anyway)
+    const nextTestimonial = () => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    };
+
+    const prevTestimonial = () => {
+        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    };
+
+    // Swipe Handlers
+    const onTouchStart = (e) => {
+        touchEnd.current = null; // Reset
+        touchStart.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchMove = (e) => {
+        touchEnd.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart.current || !touchEnd.current) return;
+        const distance = touchStart.current - touchEnd.current;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            nextTestimonial();
+        }
+        if (isRightSwipe) {
+            prevTestimonial();
+        }
+    };
+
+    // Auto-advance timer - resets whenever currentIndex changes (manual or auto)
     useEffect(() => {
         const interval = setInterval(() => {
-            // Animate Out
+            // Animate Out before changing index? 
+            // The existing logic used a GSAP timeline inside the interval to animate out, THEN change index.
+            // If we just change index (manual swipe), we want the same "animate out" effect?
+            // Actually, the current logic cycles index, and then a SECOND useEffect animates IN.
+            // The animation OUT was happening *inside* the interval callback.
+            // Problem: If I swipe, I change index immediately. The "animate out" is skipped.
+            // Solution: For manual swipe, we accept a hard cut or we trigger animation?
+            // Given the complexity of "animate out -> wait -> change index", for manual swipe usually immediate response is preferred.
+            // We can keep the interval doing the "nice" transition, and manual swipe just doing the immediate change (which triggers animate IN).
+            // BUT, if we just setIndex, the old element is replaced immediately.
+            // The existing `useEffect` on line 61 handles Animate IN.
+            // The interval handled Animate OUT.
+            // If we swipe, we skip Animate OUT. That is acceptable for touch response.
+
+            // However, we shoud simulate the animate out?
+            // No, just trigger next.
+
+            // To keep the auto-rotation looking good, we keep the animate out logic in the timer.
+
             const tl = gsap.timeline({
                 onComplete: () => {
-                    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+                    nextTestimonial();
                 }
             });
 
@@ -56,7 +112,7 @@ const Testimonials = () => {
         }, 6000);
 
         return () => clearInterval(interval);
-    }, [testimonials.length]);
+    }, [currentIndex, testimonials.length]); // Dependencies: reset timer on any index change
 
     // Animate In when index changes
     useEffect(() => {
@@ -81,7 +137,7 @@ const Testimonials = () => {
             color: 'var(--color-blanc-nacre)',
             padding: '8rem 20px',
             textAlign: 'center',
-            minHeight: '70vh',
+            minHeight: '70svh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -100,7 +156,12 @@ const Testimonials = () => {
                 pointerEvents: 'none'
             }}></div>
 
-            <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+            <div
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+                style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2, width: '100%' }} // Added width 100% for touch target
+            >
 
                 <h2 className="visually-hidden">Avis Clients</h2>
 

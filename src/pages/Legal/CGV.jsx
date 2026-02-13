@@ -3,7 +3,13 @@ import LegalLayout from '../../components/LegalLayout';
 
 const CGV = () => {
     return (
-        <LegalLayout title="Conditions Générales de Vente">
+        <LegalLayout
+            title="Conditions Générales de Vente"
+            seoTitle="CGV - Conditions Générales de Vente | Cérès"
+            seoDescription="Conditions Générales de Vente (CGV) de Cérès. Informations sur les services, tarifs, paiements et modalités de livraison."
+            robots="index, follow"
+            canonical="https://ceresfrance.com/cgv"
+        >
             <h2>1. Objet</h2>
             <p>
                 Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre <strong>Priscilla Owona (Cérès)</strong>

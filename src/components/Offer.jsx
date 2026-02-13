@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Composant pour un bénéfice avec icône
 const BenefitItem = ({ icon, title, description, className }) => (
-    <div className={className} style={{
+    <article className={className} style={{
         display: 'flex',
         alignItems: 'flex-start',
         gap: '1rem',
@@ -28,28 +28,30 @@ const BenefitItem = ({ icon, title, description, className }) => (
             {icon}
         </div>
         <div>
-            <p style={{
+            <h3 style={{
                 fontFamily: 'var(--font-body)',
                 fontWeight: 500,
                 fontSize: '1rem',
                 color: 'var(--color-noir)',
+                margin: 0,
                 marginBottom: '0.3rem',
                 lineHeight: 1.4
             }}>
                 {title}
-            </p>
+            </h3>
             <p style={{
                 fontFamily: 'var(--font-body)',
                 fontWeight: 300,
                 fontSize: '0.9rem',
                 color: '#666',
+                margin: 0,
                 lineHeight: 1.5,
                 fontStyle: 'italic'
             }}>
                 {description}
             </p>
         </div>
-    </div>
+    </article>
 );
 
 const Offer = () => {
@@ -185,7 +187,7 @@ const Offer = () => {
         <>
             {/* Trait minimaliste de transition */}
             <div style={{
-                height: '15vh',
+                height: '15svh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -231,7 +233,12 @@ const Offer = () => {
                             <img
                                 src={horoscopeImage}
                                 alt="Horoscope mensuel personnalisé par Priscilla Owona — Cérès"
-                                style={{ width: '100%', height: 'auto', display: 'block' }}
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: 'block',
+                                    aspectRatio: '0.733' // 733/1000 - Reserves space to prevent CLS
+                                }}
                                 onLoad={() => ScrollTrigger.refresh()}
                                 loading="lazy"
                             />
@@ -489,7 +496,7 @@ const Offer = () => {
 
             {/* Trait minimaliste de transition bas */}
             <div style={{
-                height: '10vh',
+                height: '10svh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

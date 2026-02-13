@@ -1,11 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import MobileMenu from './MobileMenu';
+import SEO from './SEO';
 
-const LegalLayout = ({ children, title }) => {
+const LegalLayout = ({ children, title, seoTitle, seoDescription, robots, canonical }) => {
     return (
-        <div style={{ backgroundColor: 'var(--color-blanc-nacre)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ backgroundColor: 'var(--color-blanc-nacre)', minHeight: '100svh', display: 'flex', flexDirection: 'column' }}>
+            <SEO
+                title={seoTitle || title}
+                description={seoDescription || `Page légale : ${title} - Cérès`}
+                url={canonical}
+                robots={robots}
+            />
             <Navbar />
             <MobileMenu />
 
@@ -67,6 +75,15 @@ const LegalLayout = ({ children, title }) => {
             `}</style>
         </div>
     );
+};
+
+LegalLayout.propTypes = {
+    children: PropTypes.node.isRequired,
+    title: PropTypes.string.isRequired,
+    seoTitle: PropTypes.string,
+    seoDescription: PropTypes.string,
+    robots: PropTypes.string,
+    canonical: PropTypes.string,
 };
 
 export default LegalLayout;

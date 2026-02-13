@@ -77,7 +77,7 @@ const Bio = () => {
                     className="bio-image-wrapper"
                     style={{
                         width: '100%',
-                        height: '65vh',
+                        height: '65svh', // Using svh to prevent jump when address bar hides
                         overflow: 'hidden',
                         opacity: 0, // Initial state
                         willChange: 'transform, opacity' // GPU compositing hint
@@ -87,7 +87,7 @@ const Bio = () => {
                         ref={imageRef}
                         className="bio-image"
                         src={portraitImage}
-                        alt="Priscilla Owona, fondatrice de Cérès Magazine"
+                        alt="Priscilla Owona, astrologue et coach intuitive — Portrait officiel"
                         loading="lazy"
                         style={{
                             width: '100%',

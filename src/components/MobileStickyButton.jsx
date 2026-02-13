@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,9 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 const MobileStickyButton = () => {
     const buttonRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const btn = buttonRef.current;
         if (!btn) return;
+
+        // Force a refresh to ensure start/end points are correct
+        ScrollTrigger.refresh();
 
         // Helper functions for animation
         // using overwite: 'auto' to handle conflicts gracefully
@@ -79,7 +82,7 @@ const MobileStickyButton = () => {
                     bottom: '20px',
                     left: '24px',
                     right: '24px',
-                    zIndex: 1000,
+                    zIndex: 9999,
                     backgroundColor: 'var(--color-vert-profond)',
                     color: 'white',
                     border: 'none',

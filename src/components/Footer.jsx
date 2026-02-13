@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <footer style={{
-            padding: '4rem 2rem',
+            padding: '4rem 2rem 100px 2rem', // Added bottom padding for sticky button
             textAlign: 'center',
             backgroundColor: 'var(--color-blanc-nacre)',
             borderTop: '1px solid #eee'

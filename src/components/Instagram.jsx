@@ -33,7 +33,7 @@ const Instagram = () => {
                 {images.map((img, i) => (
                     <div key={i} className="insta-item">
                         <div className="polaroid-inner">
-                            <img src={img} alt="Publication Instagram Cérès - Astrologie et Guidance" loading="lazy" />
+                            <img src={img} alt={`Publication Instagram Cérès par Priscilla Owona ${i + 1} - Astrologie et Spiritualité`} loading="lazy" />
                             <div className="insta-overlay">
                                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

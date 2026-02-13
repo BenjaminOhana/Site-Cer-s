@@ -59,7 +59,7 @@ const Promise = () => {
             id="promise-section"
             ref={sectionRef}
             style={{
-                minHeight: '80vh',
+                minHeight: '80svh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
