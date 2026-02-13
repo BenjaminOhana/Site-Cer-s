@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const MobileMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
     const linksRef = useRef([]);
     const circleRef = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     // Toggle menu state
     const toggleMenu = () => {
@@ -19,14 +22,12 @@ const MobileMenu = () => {
 
         if (isOpen) {
             // Open animation
-            // 1. Expand the circle background
             gsap.to(circle, {
                 duration: 0.6,
                 scale: 1500, // Massive scale to cover screen
                 ease: "power3.inOut"
             });
 
-            // 2. Fade in the menu container (for content)
             gsap.to(menu, {
                 duration: 0.4,
                 delay: 0.2,
@@ -35,7 +36,6 @@ const MobileMenu = () => {
                 pointerEvents: 'all'
             });
 
-            // 3. Stagger in the links
             gsap.fromTo(links,
                 { y: 50, opacity: 0 },
                 {
@@ -48,12 +48,10 @@ const MobileMenu = () => {
                 }
             );
 
-            // Prevent body scroll
             document.body.style.overflow = 'hidden';
 
         } else {
             // Close animation
-            // 1. Fade out links
             gsap.to(links, {
                 y: 20,
                 opacity: 0,
@@ -62,7 +60,6 @@ const MobileMenu = () => {
                 ease: "power2.in"
             });
 
-            // 2. Hide menu container
             gsap.to(menu, {
                 duration: 0.3,
                 delay: 0.2,
@@ -75,15 +72,13 @@ const MobileMenu = () => {
                 }
             });
 
-            // 3. Shrink circle
             gsap.to(circle, {
                 duration: 0.6,
-                delay: 0.1, // Wait for content to fade slightly
+                delay: 0.1,
                 scale: 1,
                 ease: "power3.inOut"
             });
 
-            // Restore body scroll
             document.body.style.overflow = '';
         }
 
@@ -92,9 +87,27 @@ const MobileMenu = () => {
         };
     }, [isOpen]);
 
-    // Handle link click (close menu)
-    const handleLinkClick = () => {
-        setIsOpen(false);
+    // Handle navigation logic
+    const handleNavigation = (hash) => {
+        setIsOpen(false); // Close menu first
+
+        const targetId = hash.replace('#', '');
+
+        if (location.pathname === '/') {
+            // Look for element to scroll to
+            const element = document.getElementById(targetId);
+            if (element) {
+                // Small delay to allow menu close animation to start
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            } else if (hash === '#hero-section' || hash === '') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        } else {
+            // Navigate to home with state to trigger scroll after load
+            navigate('/', { state: { scrollTo: hash } });
+        }
     };
 
     const addToLinksRef = (el) => {
@@ -213,18 +226,19 @@ const MobileMenu = () => {
                             marginBottom: '1rem'
                         }}
                     >
-                        Cérès.
+                        Cérès .
                     </div>
 
                     <a
                         href="#hero-section"
-                        onClick={handleLinkClick}
+                        onClick={(e) => { e.preventDefault(); handleNavigation('#hero-section'); }}
                         ref={addToLinksRef}
                         style={{
                             fontFamily: 'var(--font-editorial)',
                             fontSize: '2rem',
                             color: 'var(--color-noir)',
-                            textDecoration: 'none'
+                            textDecoration: 'none',
+                            cursor: 'pointer'
                         }}
                     >
                         Accueil
@@ -232,13 +246,14 @@ const MobileMenu = () => {
 
                     <a
                         href="#offer-section"
-                        onClick={handleLinkClick}
+                        onClick={(e) => { e.preventDefault(); handleNavigation('#offer-section'); }}
                         ref={addToLinksRef}
                         style={{
                             fontFamily: 'var(--font-editorial)',
                             fontSize: '2rem',
                             color: 'var(--color-noir)',
-                            textDecoration: 'none'
+                            textDecoration: 'none',
+                            cursor: 'pointer'
                         }}
                     >
                         Mon Horoscope
@@ -255,13 +270,14 @@ const MobileMenu = () => {
 
                     <a
                         href="#accompagnement"
-                        onClick={handleLinkClick}
+                        onClick={(e) => { e.preventDefault(); handleNavigation('#accompagnement'); }}
                         ref={addToLinksRef}
                         style={{
                             fontFamily: 'var(--font-editorial)',
                             fontSize: '2rem',
                             color: 'var(--color-noir)',
-                            textDecoration: 'none'
+                            textDecoration: 'none',
+                            cursor: 'pointer'
                         }}
                     >
                         Accompagnement
@@ -278,13 +294,14 @@ const MobileMenu = () => {
 
                     <a
                         href="#faq-section"
-                        onClick={handleLinkClick}
+                        onClick={(e) => { e.preventDefault(); handleNavigation('#faq-section'); }}
                         ref={addToLinksRef}
                         style={{
                             fontFamily: 'var(--font-editorial)',
                             fontSize: '2rem',
                             color: 'var(--color-noir)',
-                            textDecoration: 'none'
+                            textDecoration: 'none',
+                            cursor: 'pointer'
                         }}
                     >
                         FAQ
@@ -301,7 +318,7 @@ const MobileMenu = () => {
 
                     <a
                         href="mailto:astronyma@gmail.com"
-                        onClick={handleLinkClick}
+                        onClick={() => setIsOpen(false)}
                         ref={addToLinksRef}
                         style={{
                             fontFamily: 'var(--font-editorial)',

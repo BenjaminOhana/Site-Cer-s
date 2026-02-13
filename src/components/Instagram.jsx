@@ -1,9 +1,9 @@
 import React from 'react';
-import insta1 from '../assets/insta-1.jpg';
-import insta2 from '../assets/insta-2.png';
-import insta3 from '../assets/insta-3.png';
-import insta4 from '../assets/insta-4.jpg';
-import insta5 from '../assets/insta-5.png';
+import insta1 from '../assets/insta-1.webp';
+import insta2 from '../assets/insta-2.webp';
+import insta3 from '../assets/insta-3.webp';
+import insta4 from '../assets/insta-4.webp';
+import insta5 from '../assets/insta-5.webp';
 
 const Instagram = () => {
     // User provided images
@@ -33,7 +33,7 @@ const Instagram = () => {
                 {images.map((img, i) => (
                     <div key={i} className="insta-item">
                         <div className="polaroid-inner">
-                            <img src={img} alt="Instagram post" />
+                            <img src={img} alt="Publication Instagram Cérès - Astrologie et Guidance" loading="lazy" />
                             <div className="insta-overlay">
                                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

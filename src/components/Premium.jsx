@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import soinImage from '../assets/soin-energetique.png.jpeg';
-import coachingImage from '../assets/Coaching-intuitif.png.jpeg';
-import questionImage from '../assets/pose-ta-question.jpeg';
+import soinImage from '../assets/soin-energetique.webp';
+import coachingImage from '../assets/Coaching-intuitif.webp';
+import questionImage from '../assets/pose-ta-question.webp';
 
 const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -44,10 +44,19 @@ const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
             <div className="premium-card-inner">
                 {/* FRONT */}
                 <div className="premium-card-front" ref={frontRef}>
-                    <div className="card-image" style={{
-                        backgroundImage: `url(${card.img})`,
-                        backgroundPosition: card.backgroundPosition || 'center'
-                    }}></div>
+                    <div className="card-image" style={{ position: 'relative', overflow: 'hidden' }}>
+                        <img
+                            src={card.img}
+                            alt={card.alt || card.title}
+                            loading="lazy"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: card.backgroundPosition || 'center'
+                            }}
+                        />
+                    </div>
                     <div className="card-content">
                         <h3 style={{
                             fontFamily: 'var(--font-editorial)',
@@ -210,7 +219,8 @@ const Premium = () => {
             ],
             benefitIcons: [FeatherIcon, SunIcon, LightningIcon],
             cta: "Réserver",
-            img: img1
+            img: img1,
+            alt: "Soin énergétique à distance — Cérès"
         },
         {
             title: "Coaching Intuitif",
@@ -230,7 +240,8 @@ const Premium = () => {
             benefitIcons: [EyeIcon, TargetIcon, SparkleIcon],
             cta: "Réserver",
             img: img2,
-            backgroundPosition: 'center 20%'
+            backgroundPosition: 'center 20%',
+            alt: "Coaching intuitif — Séance avec Priscilla Owona"
         },
         {
             title: "Pose ta question",
@@ -248,7 +259,8 @@ const Premium = () => {
             ],
             benefitIcons: [LightningIcon, FeatherIcon, TargetIcon],
             cta: "Réserver",
-            img: img3
+            img: img3,
+            alt: "Pose ta question à Priscilla — Guidance rapide"
         }
     ];
 

@@ -230,9 +230,10 @@ const Offer = () => {
                         >
                             <img
                                 src={horoscopeImage}
-                                alt="Femme lisant un magazine Ceres"
+                                alt="Horoscope mensuel personnalisé par Priscilla Owona — Cérès"
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
                                 onLoad={() => ScrollTrigger.refresh()}
+                                loading="lazy"
                             />
 
                             {/* Overlay gradient */}

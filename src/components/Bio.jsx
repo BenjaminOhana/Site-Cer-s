@@ -83,15 +83,17 @@ const Bio = () => {
                         willChange: 'transform, opacity' // GPU compositing hint
                     }}
                 >
-                    <div
+                    <img
                         ref={imageRef}
                         className="bio-image"
+                        src={portraitImage}
+                        alt="Priscilla Owona, fondatrice de Cérès Magazine"
+                        loading="lazy"
                         style={{
                             width: '100%',
                             height: '120%',
-                            backgroundImage: `url(${portraitImage})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center top',
+                            objectFit: 'cover',
+                            objectPosition: 'center top',
                             transform: 'translateY(-10%)',
                             willChange: 'transform' // GPU compositing hint for parallax
                         }}

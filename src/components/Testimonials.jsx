@@ -102,6 +102,8 @@ const Testimonials = () => {
 
             <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
 
+                <h2 className="visually-hidden">Avis Clients</h2>
+
                 {/* Stars */}
                 <div ref={starsRef} style={{ fontSize: '1.5rem', color: '#D4AF37', marginBottom: '2rem', letterSpacing: '5px' }}>
                     ★★★★★
@@ -193,6 +195,29 @@ const Testimonials = () => {
                             }}
                         />
                     ))}
+                </div>
+
+                {/* Social Proof */}
+                <div style={{
+                    marginTop: '3.5rem',
+                    paddingTop: '1.5rem',
+                    borderTop: '1px solid rgba(255,255,255,0.1)',
+                    width: '100%',
+                    maxWidth: '500px',
+                    margin: '3.5rem auto 0 auto',
+                    fontFamily: 'var(--font-editorial)', // Editorial for italics
+                    fontStyle: 'italic',
+                    fontSize: '1.1rem',
+                    opacity: 0.8,
+                    fontWeight: 400,
+                    display: 'flex',
+                    flexDirection: 'column', // Stack vertically
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem' // Gap between text and heart
+                }}>
+                    <span>Merci aux plus de <span style={{ color: '#D4AF37', fontWeight: 500 }}>50 000 personnes</span> qui me font confiance sur instagram</span>
+                    <span style={{ fontSize: '1.2rem', color: '#D4AF37' }}>♡</span>
                 </div>
 
             </div>

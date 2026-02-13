@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         let rafId = null;
@@ -30,6 +33,23 @@ const Navbar = () => {
         };
     }, []);
 
+    const handleNavigation = (hash) => {
+        const targetId = hash.replace('#', '');
+
+        if (location.pathname === '/') {
+            if (targetId === '' || hash === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const element = document.getElementById(targetId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        } else {
+            navigate('/', { state: { scrollTo: hash } });
+        }
+    };
+
     if (!visible) return null;
 
     return (
@@ -49,14 +69,35 @@ const Navbar = () => {
             borderBottom: '1px solid rgba(0,0,0,0.05)',
             animation: 'slideDownFade 0.6s ease-out'
         }} className="desktop-navbar">
-            <div style={{ fontFamily: 'var(--font-title)', fontSize: '1.2rem', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>
-                Cérès.
+            <div
+                style={{ fontFamily: 'var(--font-title)', fontSize: '1.2rem', cursor: 'pointer' }}
+                onClick={() => handleNavigation('#')}
+            >
+                Cérès .
             </div>
 
             <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 500 }} className="nav-links">
-                <a href="#horoscope" className="nav-link">Horoscope</a>
-                <a href="#accompagnement" className="nav-link">Accompagnement</a>
-                <a href="#faq-section" className="nav-link">FAQ</a>
+                <a
+                    href="#offer-section"
+                    className="nav-link"
+                    onClick={(e) => { e.preventDefault(); handleNavigation('#offer-section'); }}
+                >
+                    Horoscope
+                </a>
+                <a
+                    href="#accompagnement"
+                    className="nav-link"
+                    onClick={(e) => { e.preventDefault(); handleNavigation('#accompagnement'); }}
+                >
+                    Accompagnement
+                </a>
+                <a
+                    href="#faq-section"
+                    className="nav-link"
+                    onClick={(e) => { e.preventDefault(); handleNavigation('#faq-section'); }}
+                >
+                    FAQ
+                </a>
                 <a href="mailto:contact@ceresfrance.com" className="nav-link">Contact</a>
             </div>
 
@@ -81,6 +122,9 @@ const Navbar = () => {
                     position: relative;
                     padding-bottom: 4px;
                     transition: color 0.3s ease;
+                    text-decoration: none;
+                    color: var(--color-text);
+                    cursor: pointer;
                 }
                 
                 .nav-link::after {

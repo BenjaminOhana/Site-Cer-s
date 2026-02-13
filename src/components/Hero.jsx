@@ -45,7 +45,7 @@ const Hero = () => {
 
     // Placeholder image: Black and white elegant portrait
     const bgImageMobile = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop";
-    const bgImageDesktop = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2550&auto=format&fit=crop";
+    const bgImageDesktop = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1920&auto=format&fit=crop";
 
     return (
         <section
@@ -61,10 +61,15 @@ const Hero = () => {
         >
 
             {/* 1. Background Image (Absolute with GSAP Parallax) */}
-            <div
+            <img
                 className="hero-background"
                 ref={bgRef}
-            ></div>
+                src={bgImageMobile}
+                srcSet={`${bgImageMobile} 800w, ${bgImageDesktop} 1920w`}
+                sizes="100vw"
+                alt="Priscilla Owona, astrologue et coach intuitive — portrait"
+                fetchPriority="high"
+            />
 
             {/* 2. Content Overlay (Gradient) - Needs to be absolute to cover VIEWPORT */}
             <div style={{
@@ -85,7 +90,7 @@ const Hero = () => {
                 opacity: 0.9, // Slightly more visible
                 zIndex: 10
             }}>
-                Cérès.
+                Cérès .
             </div>
 
             {/* Text */}
@@ -101,7 +106,7 @@ const Hero = () => {
                 transition: 'opacity 1.5s ease-out',
                 padding: '0 20px' // Prevent text touching edges on small mobile
             }}>
-                <h1 className="hero-title" style={{
+                <p className="hero-title" style={{
                     fontFamily: 'var(--font-editorial)', // Forum
                     fontWeight: 400,
                     letterSpacing: '0.05em',
@@ -110,7 +115,7 @@ const Hero = () => {
                     lineHeight: 1.1 // Tighter line height for multiline on mobile
                 }}>
                     Le flou s'arrête ici.
-                </h1>
+                </p>
 
                 {/* Scroll Chevron */}
                 <div style={{
@@ -131,9 +136,8 @@ const Hero = () => {
                     left: 0;
                     width: 100%;
                     height: 110%; /* Slightly taller than viewport for parallax */
-                    background-image: url(${bgImageMobile});
-                    background-size: cover;
-                    background-position: center 30%; /* Default Mobile */
+                    object-fit: cover;
+                    object-position: center 30%; /* Default Mobile */
                     z-index: -1;
                     will-change: transform;
                 }
@@ -142,20 +146,22 @@ const Hero = () => {
                     top: 62%; /* Mobile: Fine-tuned balance */
                 }
                 .hero-title {
-                    fontSize: 2.8rem; /* Mobile Size */
+                    font-size: clamp(1.8rem, 8vw, 2.8rem); /* Adaptive size: starts smaller, grows with width */
+                    white-space: nowrap; /* Force single line */
+                    width: 100%;
+                    overflow: visible; /* Allow text to be seen */
                 }
                 
                 /* Desktop & Tablet */
                 @media (min-width: 768px) {
                     .hero-background {
-                        background-image: url(${bgImageDesktop});
-                        background-position: center center !important; /* Desktop Center */
+                        object-position: center center !important; /* Desktop Center */
                     }
                     .hero-text-container {
                         top: 65%; 
                     }
                     .hero-title {
-                        fontSize: 4.5rem;
+                        font-size: 4.5rem;
                     }
                 }
                 

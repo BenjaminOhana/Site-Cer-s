@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -8,13 +8,16 @@ const Footer = () => {
             backgroundColor: 'var(--color-blanc-nacre)',
             borderTop: '1px solid #eee'
         }}>
-            <div style={{
-                fontFamily: 'var(--font-title)',
-                fontSize: '2rem',
-                marginBottom: '1rem'
-            }}>
-                Cérès.
-            </div>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div style={{
+                    fontFamily: 'var(--font-title)',
+                    fontSize: '2rem',
+                    marginBottom: '1rem',
+                    cursor: 'pointer'
+                }}>
+                    Cérès .
+                </div>
+            </Link>
 
             <a href="mailto:contact@ceresfrance.com" style={{
                 display: 'block',
@@ -34,12 +37,13 @@ const Footer = () => {
                 flexWrap: 'wrap',
                 marginBottom: '1rem'
             }}>
-                <a href="#">Mentions légales</a>
+                <Link to="/mentions-legales">Mentions légales</Link>
                 <span>·</span>
-                <a href="#">CGV</a>
+                <Link to="/cgv">CGV</Link>
                 <span>·</span>
-                <a href="#">Confidentialité</a>
+                <Link to="/confidentialite">Confidentialité</Link>
             </div>
+
 
             <div style={{ fontSize: '0.8rem', color: '#999' }}>
                 © 2026 Priscilla Owona
