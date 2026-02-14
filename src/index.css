@@ -20,6 +20,7 @@
 }
 
 body {
+  height: 100%;
   font-family: var(--font-body);
   background-color: var(--color-blanc-nacre);
   color: var(--color-text);
@@ -35,8 +36,8 @@ body {
 }
 
 html {
-  height: -webkit-fill-available;
-  /* Fix for iOS viewport height */
+  height: 100%;
+  /* Fix for iOS viewport stabilization */
 }
 
 h1,

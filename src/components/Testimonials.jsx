@@ -294,7 +294,13 @@ const Testimonials = () => {
                 gap: '0.5rem'
             }}>
                 <span>Merci aux plus de <span style={{ color: '#D4AF37', fontWeight: 500 }}>50 000 personnes</span> qui me font confiance sur instagram</span>
-                <span style={{ fontSize: '1.2rem', color: '#D4AF37' }}>♡</span>
+                <span style={{ color: '#D4AF37', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '0.2rem' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </span>
             </div>
 
         </section>

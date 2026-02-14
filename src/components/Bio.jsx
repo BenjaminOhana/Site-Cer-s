@@ -69,7 +69,7 @@ const Bio = () => {
             <div className="bio-container" style={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100vh'
+                minHeight: '100svh'
             }}>
                 {/* Photo avec reveal effect */}
                 <div

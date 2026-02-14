@@ -209,7 +209,13 @@ const Premium = () => {
                 "En une séance, on pose les mots.",
                 "On éclaire ce qui était flou."
             ],
-            highlight: "Tu repars alignée. Et tu sais quoi faire.",
+            highlight: (
+                <>
+                    Tu repars alignée. Et tu sais quoi faire.
+                    <br />
+                    <span style={{ fontSize: '0.9em', opacity: 0.8, fontStyle: 'italic' }}>Places limitées.</span>
+                </>
+            ),
             process: "1h en visio. Un espace sacré pour déposer tes doutes. J'utilise mon intuition et mes outils pour éclairer ta route et débloquer la suite.",
             benefits: [
                 "Clarté radicale sur ta situation",

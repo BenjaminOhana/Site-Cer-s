@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 // CRITICAL: Ignore mobile address bar resize events to prevent layout jumps
 ScrollTrigger.config({
     ignoreMobileResize: true,
-    autoRefreshEvents: "DOMContentLoaded,load,resize" // Limit refresh triggers
+    autoRefreshEvents: "DOMContentLoaded,load,visibilitychange" // Exclude 'resize' to prevent jumps on mobile
 });
 
 // Normalize scroll behavior (optional but helpful for smooth scroll on mobile)

@@ -262,7 +262,6 @@ const Offer = () => {
                                     aspectRatio: '0.733', // 733/1000 - Reserves space to prevent CLS
                                     willChange: 'transform' // Optimize for zoom
                                 }}
-                                onLoad={() => ScrollTrigger.refresh()}
                                 loading="lazy"
                             />
 

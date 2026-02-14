@@ -8,6 +8,7 @@ import Offer from '../components/Offer';
 import Premium from '../components/Premium';
 import Testimonials from '../components/Testimonials';
 import Instagram from '../components/Instagram';
+import SignatureCTA from '../components/SignatureCTA';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import MobileStickyButton from '../components/MobileStickyButton';
@@ -160,6 +161,7 @@ const Home = () => {
                 <FAQ />
             </div>
             <Instagram />
+            <SignatureCTA />
             <Footer />
             <MobileStickyButton />
             <MobileMenu />
