@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const SEO = ({ title, description, image, url, type, schemas, noIndex, robots }) => {
     const siteTitle = "Cérès";
     const defaultDescription = "Découvrez votre horoscope mensuel personnalisé et les accompagnements de Priscilla Owona. Astrologie intuitive, soins énergétiques et clarté pour avancer.";
-    const defaultImage = "https://ceresfrance.com/og-image.jpg"; // Generated programmatically
+    const defaultImage = "https://ceresfrance.com/share-image.jpg"; // Renamed for cache busting
     const siteUrl = "https://ceresfrance.com";
 
     const metaDescription = description || defaultDescription;
