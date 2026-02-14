@@ -44,15 +44,20 @@ const CGV = () => {
 
             <h2>6. Droit de rétractation</h2>
             <p>
-                <span className="highlight-missing">[IMPORTANT : VÉRIFIER CETTE CLAUSE]</span><br />
-                Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les contrats :
+                Conformément aux dispositions de l'article L.221-18 du Code de la Consommation, le Client dispose en principe d'un délai de quatorze (14) jours à compter de la commande pour exercer son droit de rétractation sans avoir à justifier de motifs ni à payer de pénalité.
             </p>
+            <p><strong>Exceptions légales (Article L.221-28 du Code de la Consommation) :</strong></p>
             <ul>
-                <li>De fourniture de contenu numérique non fourni sur un support matériel dont l'exécution a commencé après accord préalable exprès du consommateur et renoncement exprès à son droit de rétractation (ex: horoscope envoyé immédiatement).</li>
-                <li>De fourniture de services pleinement exécutés avant la fin du délai de rétractation (ex: séance effectuée).</li>
+                <li>
+                    <strong>Contenu numérique (Horoscopes) :</strong>Le droit de rétractation ne peut être exercé pour les contrats de fourniture d'un contenu numérique non fourni sur un support matériel, dont l'exécution a commencé après accord préalable exprès du consommateur et renoncement exprès à son droit de rétractation. En validant sa commande d'horoscope, le Client accepte que l'envoi puisse être effectué immédiatement et renonce expressément à son droit de rétractation une fois le fichier reçu.
+                </li>
+                <li>
+                    <strong>Services (Coaching / Soins) :</strong> Si le Client demande que la prestation commence avant l'expiration du délai de rétractation, il peut exercer son droit de rétractation mais restera redevable d'un montant proportionnel au service fourni jusqu'à la notification de sa rétractation. Si la séance est intégralement réalisée avant la fin du délai de 14 jours, le droit de rétractation ne peut plus être exercé.
+                </li>
             </ul>
             <p>
-                Pour les autres services, le Client dispose d'un délai de 14 jours pour exercer son droit de rétractation.
+                <strong>Exercice du droit :</strong> Pour exercer son droit de rétractation sur les services éligibles, le Client doit notifier sa décision par une déclaration dénuée d'ambiguïté à l'adresse email suivante : <a href="mailto:contact@ceresfrance.com">contact@ceresfrance.com</a>.
+                Le remboursement sera effectué dans un délai de 14 jours suivant la notification.
             </p>
 
             <h2>7. Annulation et report</h2>
