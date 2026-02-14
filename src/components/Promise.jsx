@@ -18,27 +18,25 @@ const Promise = () => {
         const ctx = gsap.context(() => {
             // Animation scroll-driven Apple-style pour chaque ligne
             // PERF: Using opacity + y only (no filter: blur) to avoid expensive repaints on mobile
-            lines.forEach((line, index) => {
-                gsap.fromTo(line,
-                    {
-                        opacity: 0,
-                        y: 30
-                    },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1.5,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: sectionRef.current,
-                            start: `top ${60 - index * 15}%`,
-                            end: `top ${25 - index * 10}%`,
-                            scrub: 1.5, // Heavy scrub = smooth lag/inertia effect
-                            toggleActions: 'play none none reverse'
-                        }
+            gsap.fromTo(lines,
+                {
+                    opacity: 0,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    stagger: 0.4,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top 70%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
                     }
-                );
-            });
+                }
+            );
             // Animation spécifique pour le dégradé du texte final (Shimmer effect)
             gsap.to(line3Ref.current, {
                 backgroundPosition: '200% center',

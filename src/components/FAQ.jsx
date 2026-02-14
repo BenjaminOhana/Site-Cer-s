@@ -108,7 +108,7 @@ const FAQ = () => {
                 },
                 {
                     q: "En quoi c'est différent d'un horoscope gratuit ?",
-                    a: "Les horoscopes gratuits sont souvent générés automatiquement et identiques d'un site à l'autre. Ici, c'est Priscilla qui rédige chaque mois, avec sa lecture astrologique et son intuition. Tu reçois un vrai travail d'analyse, pas un copié-collé. C'est la différence entre lire la météo et avoir quelqu'un qui te prépare pour la journée."
+                    a: "Les horoscopes gratuits sont souvent générés automatiquement et identiques d'un site à l'autre. Ici, c'est Priscilla qui rédige chaque mois, avec sa lecture astrologique et son intuition. Tu reçois un vrai travail d'analyse, pas un copié-collé."
                 }
             ]
         },

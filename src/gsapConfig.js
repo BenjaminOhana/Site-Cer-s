@@ -13,6 +13,7 @@ ScrollTrigger.config({
 });
 
 // Normalize scroll behavior (optional but helpful for smooth scroll on mobile)
+// Normalize scroll behavior (optional but helpful for smooth scroll on mobile)
 // ScrollTrigger.normalizeScroll(true);
 
 console.log('GSAP Configured: ignoreMobileResize = true');
