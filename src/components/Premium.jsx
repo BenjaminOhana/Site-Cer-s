@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import soinImage from '../assets/soin-energetique.webp';
-import coachingImage from '../assets/coaching-intuitif-2.jpg';
+import coachingImage from '../assets/coaching-intuitif-2.webp';
 import questionImage from '../assets/pose-ta-question.webp';
 
 const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
