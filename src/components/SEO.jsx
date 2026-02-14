@@ -10,7 +10,7 @@ const SEO = ({ title, description, image, url, type, schemas, noIndex, robots })
 
     const metaDescription = description || defaultDescription;
     const metaImage = image || defaultImage;
-    const metaTitle = title ? `${title} | ${siteTitle}` : `Priscilla Owona — Astrologue & Coach Intuitive | ${siteTitle}`;
+    const metaTitle = title ? `${title} | ${siteTitle}` : `${siteTitle} — Astrologie, Soin Énergétique & Coaching Intuitif par Priscilla Owona`;
     const metaUrl = url || siteUrl;
     const metaType = type || 'website';
 
