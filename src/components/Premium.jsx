@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import soinImage from '../assets/soin-energetique.webp';
-import coachingImage from '../assets/Coaching-intuitif.webp';
+import coachingImage from '../assets/Coaching-intuitif2.jpg';
 import questionImage from '../assets/pose-ta-question.webp';
 
 const PremiumCard = ({ card, index, activeCard, scrollToCard }) => {
@@ -211,7 +211,7 @@ const Premium = () => {
             ],
             highlight: (
                 <>
-                    Tu repars alignée. Et tu sais quoi faire.
+                    Tu repars aligné.e. Et tu sais quoi faire.
                     <br />
                     <span style={{ fontSize: '0.9em', opacity: 0.8, fontStyle: 'italic' }}>Places limitées.</span>
                 </>
@@ -225,14 +225,14 @@ const Premium = () => {
             benefitIcons: [EyeIcon, TargetIcon, SparkleIcon],
             cta: "Réserver",
             img: img2,
-            backgroundPosition: 'center 20%',
+            backgroundPosition: 'center 60%',
             alt: "Coaching intuitif — Séance avec Priscilla Owona"
         },
         {
             title: "Pose ta question",
             subtitle: "Guidance Ciblée",
             quotes: [
-                "Tu n'es pas sûre de vouloir une séance complète ?",
+                "Tu n'es pas sûr.e de vouloir une séance complète ?",
                 "Commence par une question."
             ],
             highlight: "Et retrouve de la clarté sur un point précis.",

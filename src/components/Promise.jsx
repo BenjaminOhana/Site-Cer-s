@@ -37,17 +37,6 @@ const Promise = () => {
                     }
                 }
             );
-            // Animation spécifique pour le dégradé du texte final (Shimmer effect)
-            gsap.to(line3Ref.current, {
-                backgroundPosition: '200% center',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 60%",
-                    end: "bottom 40%",
-                    scrub: 2, // Slow and smooth
-                }
-            });
 
         }, sectionRef);
 
@@ -92,13 +81,8 @@ const Promise = () => {
                     fontWeight: 700,
                     fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
                     width: '100%',
-                    display: 'inline-block', // Helps some browsers clip correctly
-                    backgroundImage: 'linear-gradient(135deg, #A12323 0%, #D64545 40%, #FF8C8C 50%, #D64545 60%, #A12323 100%)', // Enhanced gradient for shimmer
-                    backgroundSize: '200% auto', // Enable movement
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    color: 'transparent', // Non-standard fallback
+                    display: 'inline-block',
+                    color: '#6F1D44',
                     marginTop: '2rem',
                     lineHeight: '1.3'
                 }}>
@@ -116,7 +100,7 @@ const Promise = () => {
                     opacity: 0, // Initial state for animation
                     willChange: 'transform, opacity'
                 }}>
-                    Priscilla.
+                    Priscilla
                 </div>
             </div>
         </section >

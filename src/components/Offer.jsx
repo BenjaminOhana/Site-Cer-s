@@ -349,26 +349,26 @@ const Offer = () => {
                             <BenefitItem
                                 className="benefit-item"
                                 icon={MoonIcon}
-                                title="Aligné sur ton signe"
-                                description="Basé sur tes infos de naissance."
+                                title="Fidèle à ta signature astrale"
+                                description="Basé sur tes infos de naissance"
                             />
                             <BenefitItem
                                 className="benefit-item"
                                 icon={StarIcon}
                                 title="Les points clés de ton mois"
-                                description="Anticipe les moments forts et les tournants."
+                                description="Anticipe les moments forts et les tournants"
                             />
                             <BenefitItem
                                 className="benefit-item"
                                 icon={PenIcon}
                                 title="Rédigé par Priscilla"
-                                description="Sa lecture, son intuition, ses mots."
+                                description="Sa lecture, son intuition, ses mots"
                             />
                             <BenefitItem
                                 className="benefit-item"
                                 icon={MailIcon}
                                 title="Dans ta boîte mail"
-                                description="Chaque mois, sans rien faire."
+                                description="Chaque mois, sans rien faire"
                             />
                         </div>
 

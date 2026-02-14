@@ -104,7 +104,7 @@ const FAQ = () => {
             questions: [
                 {
                     q: "C'est quoi exactement l'horoscope Cérès ?",
-                    a: "C'est un horoscope mensuel rédigé entièrement par Priscilla, basé sur tes informations de naissance (date, heure et lieu). Ce n'est pas un horoscope générique qu'on retrouve partout : chaque signe reçoit un contenu pensé et écrit avec soin, avec les points clés de ton mois, les énergies à venir et des conseils concrets pour les traverser."
+                    a: "C'est un horoscope mensuel rédigé entièrement par Priscilla, basé sur tes informations de naissance (date, heure et lieu). Ce n'est pas un horoscope générique qu'on retrouve partout : en fonction de ton ascendant, tu reçois un contenu pensé et écrit avec soin, avec les points clés de ton mois, les énergies à venir et des conseils concrets pour les traverser."
                 },
                 {
                     q: "En quoi c'est différent d'un horoscope gratuit ?",
