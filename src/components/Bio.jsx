@@ -149,15 +149,23 @@ const Bio = () => {
                         width: 55% !important;
                         height: auto !important;
                         min-height: 100%;
+                        display: flex;
+                        align-items: flex-end;
                     }
                     .bio-image {
-                        height: 130% !important;
+                        height: auto !important;
+                        width: 100%;
+                        max-height: 90vh;
+                        object-fit: contain !important;
+                        object-position: bottom center !important;
+                        transform: none !important;
                     }
                     .bio-content {
                         width: 45%;
                         text-align: left !important;
                         padding: 4rem !important;
                         align-items: flex-start !important;
+                        justify-content: center;
                     }
                 }
             `}</style>

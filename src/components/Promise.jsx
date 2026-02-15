@@ -82,7 +82,7 @@ const Promise = () => {
                     fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
                     width: '100%',
                     display: 'inline-block',
-                    color: '#6F1D44',
+                    color: 'var(--color-bordeaux)',
                     marginTop: '2rem',
                     lineHeight: '1.3'
                 }}>

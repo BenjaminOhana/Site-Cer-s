@@ -2,35 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-    const [visible, setVisible] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        let rafId = null;
-        let ticking = false;
-
         const handleScroll = () => {
-            if (!ticking) {
-                ticking = true;
-                rafId = requestAnimationFrame(() => {
-                    // Show after passing mostly through the first section (e.g., > 80vh)
-                    if (window.scrollY > window.innerHeight * 0.8) {
-                        setVisible(true);
-                    } else {
-                        setVisible(false);
-                    }
-                    ticking = false;
-                });
+            // Toggle style when scrolling past 50px
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
             }
         };
 
-        // passive: true allows the browser to optimize scroll without waiting for JS
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            if (rafId) cancelAnimationFrame(rafId);
-        };
+        // Initial check
+        handleScroll();
+
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const handleNavigation = (hash) => {
@@ -50,7 +40,8 @@ const Navbar = () => {
         }
     };
 
-    if (!visible) return null;
+    // Note: Mobile visibility is handled by CSS (display: none by default)
+    // We remove the JS null return to ensure it renders on Desktop immediately
 
     return (
         <nav style={{
@@ -58,25 +49,26 @@ const Navbar = () => {
             top: 0,
             left: 0,
             width: '100%',
-            height: '60px',
-            backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            backdropFilter: 'blur(10px)',
+            height: '80px', // Slightly taller for elegance
+            backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+            backdropFilter: isScrolled ? 'blur(10px)' : 'none',
             zIndex: 1000,
-            display: 'none', // Mobile hidden
+            display: 'none', // Mobile hidden via CSS class below
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0 40px',
-            borderBottom: '1px solid rgba(0,0,0,0.05)',
-            animation: 'slideDownFade 0.6s ease-out'
+            borderBottom: isScrolled ? '1px solid rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 0.4s ease',
+            color: isScrolled ? 'var(--color-text)' : 'white',
         }} className="desktop-navbar">
             <div
-                style={{ fontFamily: 'var(--font-title)', fontSize: '1.2rem', cursor: 'pointer' }}
+                style={{ fontFamily: 'var(--font-title)', fontSize: '1.5rem', cursor: 'pointer' }}
                 onClick={() => handleNavigation('#')}
             >
                 Cérès .
             </div>
 
-            <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 500 }} className="nav-links">
+            <div style={{ display: 'flex', gap: '2.5rem', fontSize: '0.9rem', fontWeight: 500 }} className="nav-links">
                 <a
                     href="#offer-section"
                     className="nav-link"
@@ -107,24 +99,19 @@ const Navbar = () => {
                         display: flex !important;
                     }
                 }
-                @keyframes slideDownFade {
-                    from { 
-                        opacity: 0; 
-                        transform: translateY(-20px); 
-                    }
-                    to { 
-                        opacity: 1; 
-                        transform: translateY(0); 
-                    }
-                }
                 
                 .nav-link {
                     position: relative;
                     padding-bottom: 4px;
-                    transition: color 0.3s ease;
                     text-decoration: none;
-                    color: var(--color-text);
+                    color: inherit; /* Follows parent color (White or Black) */
                     cursor: pointer;
+                    opacity: 0.9;
+                    transition: opacity 0.3s ease;
+                }
+                
+                .nav-link:hover {
+                    opacity: 1;
                 }
                 
                 .nav-link::after {
@@ -134,7 +121,7 @@ const Navbar = () => {
                     height: 1px;
                     bottom: 0;
                     left: 0;
-                    background-color: var(--color-text);
+                    background-color: currentColor; /* Follows parent color */
                     transition: width 0.3s ease-out;
                 }
                 

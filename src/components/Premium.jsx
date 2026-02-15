@@ -183,25 +183,6 @@ const Premium = () => {
 
     const cards = [
         {
-            title: "Le Soin Énergétique",
-            subtitle: "Nettoyage & Harmonisation",
-            quotes: [
-                "Ton corps sait ce que ta tête refuse de voir.",
-                "Offre-toi ce renouveau."
-            ],
-            highlight: "Et retrouve ta légèreté.",
-            process: "30 min d'échange pour cibler tes besoins. Puis 30 min de soin à distance (pas besoin d'être disponible). Je t'envoie ensuite un compte-rendu vocal complet.",
-            benefits: [
-                "Allègement immédiat (physique/mental)",
-                "Libération des émotions cristallisées",
-                "Regain d'énergie vitale durable"
-            ],
-            benefitIcons: [FeatherIcon, SunIcon, LightningIcon],
-            cta: "Réserver",
-            img: img1,
-            alt: "Soin énergétique à distance — Cérès"
-        },
-        {
             title: "Coaching Intuitif",
             subtitle: "Mise en lumière & Action",
             quotes: [
@@ -227,6 +208,25 @@ const Premium = () => {
             img: img2,
             backgroundPosition: 'center 60%',
             alt: "Coaching intuitif — Séance avec Priscilla Owona"
+        },
+        {
+            title: "Le Soin Énergétique",
+            subtitle: "Nettoyage & Harmonisation",
+            quotes: [
+                "Ton corps sait ce que ta tête refuse de voir.",
+                "Offre-toi ce renouveau."
+            ],
+            highlight: "Et retrouve ta légèreté.",
+            process: "30 min d'échange pour cibler tes besoins. Puis 30 min de soin à distance (pas besoin d'être disponible). Je t'envoie ensuite un compte-rendu vocal complet.",
+            benefits: [
+                "Allègement immédiat (physique/mental)",
+                "Libération des émotions cristallisées",
+                "Regain d'énergie vitale durable"
+            ],
+            benefitIcons: [FeatherIcon, SunIcon, LightningIcon],
+            cta: "Réserver",
+            img: img1,
+            alt: "Soin énergétique à distance — Cérès"
         },
         {
             title: "Pose ta question",
@@ -618,20 +618,10 @@ const Premium = () => {
                         flex: 1;
                         scroll-snap-align: none;
                     }
-                    /* Ajout d'un effet hover subtil sur le container 3D global si non retourné */
-                    .premium-card-container:not(.flipped):hover .premium-card-inner {
-                         /* Pas de transfo globale ici sinon ça casse le flip */
-                        /* transform: translateY(-5px); 
-                           -> Attention: combiner rotateY et translateY peut être tricky.
-                           On va garder ça simple pour l'instant.
-                        */
-                    }
                     
-                    .premium-card-front:hover {
-                        /* On peut appliquer l'effet de levitation ici.
-                           Mais attention car le parent a transform propre.
-                           L'effet de levitation est désactivé pour éviter les conflits CSS 3D complexes.
-                        */
+                    /* HOVER EFFECT (Subtle lift instead of flip) */
+                    .premium-card-container:not(.flipped):hover .premium-card-inner {
+                        transform: translateY(-8px);
                     }
                     
                     .mobile-dots {

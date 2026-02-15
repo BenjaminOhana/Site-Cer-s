@@ -53,7 +53,7 @@ const Instagram = () => {
                     fontWeight: 400,
                     color: 'var(--color-bordeaux)'
                 }}>
-                    Ta dose de clarté quotidienne.
+                    Ta dose de clarté quotidienne
                 </h2>
             </div>
 

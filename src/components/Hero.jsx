@@ -96,15 +96,15 @@ const Hero = () => {
                 zIndex: 1
             }}></div>
 
-            {/* Logo */}
-            <div style={{
+            {/* Logo - Mobile Only (Desktop has Navbar) */}
+            <div className="hero-mobile-logo" style={{
                 position: 'absolute',
                 top: '20px',
                 left: '20px',
                 fontFamily: 'var(--font-title)',
                 color: 'white',
                 fontSize: '1.5rem',
-                opacity: 0.9, // Slightly more visible
+                opacity: 0.9,
                 zIndex: 10
             }}>
                 Cérès .
@@ -177,6 +177,13 @@ const Hero = () => {
 
                 .hero-text-container {
                     top: 58%; /* Mobile: Slightly lower than 55% */
+                }
+                
+                /* Desktop Only: Hide the static logo because Navbar is visible */
+                @media (min-width: 768px) {
+                    .hero-mobile-logo {
+                        display: none !important;
+                    }
                 }
                 .hero-title {
                     font-size: clamp(1.2rem, 7vw, 2.8rem); /* Adaptive size: starts smaller, grows with width */
