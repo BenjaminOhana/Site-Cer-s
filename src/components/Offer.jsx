@@ -339,13 +339,16 @@ const Offer = () => {
 
                         {/* Section Bénéfices */}
                         <div
+                            id="offer-details-target"
                             ref={benefitsRef}
                             style={{
                                 width: '100%',
                                 maxWidth: '400px',
                                 margin: '0 auto',
-                                marginBottom: '2.5rem'
+                                marginBottom: '2.5rem',
+                                scrollMarginTop: '100px' // Add some breathing room when scrolling
                             }}>
+
                             <BenefitItem
                                 className="benefit-item"
                                 icon={MoonIcon}

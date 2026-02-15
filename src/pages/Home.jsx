@@ -11,8 +11,9 @@ import Instagram from '../components/Instagram';
 import SignatureCTA from '../components/SignatureCTA';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import MobileStickyButton from '../components/MobileStickyButton';
 import MobileMenu from '../components/MobileMenu';
+import StickyCTA from '../components/StickyCTA';
+
 import FAQ from '../components/FAQ';
 
 const Home = () => {
@@ -163,8 +164,9 @@ const Home = () => {
             <Instagram />
             <SignatureCTA />
             <Footer />
-            <MobileStickyButton />
+            <StickyCTA />
             <MobileMenu />
+
         </main>
     );
 };
