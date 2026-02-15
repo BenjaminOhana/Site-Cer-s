@@ -4,6 +4,9 @@ import { gsap } from 'gsap';
 const FAQItem = ({ question, answer, isOpen, onClick }) => {
     const contentRef = useRef(null);
 
+    // Ensure question mark doesn't wrap alone by using non-breaking space
+    const formattedQuestion = question.replace(/\s\?/g, '\u00A0?');
+
     useEffect(() => {
         if (isOpen) {
             gsap.to(contentRef.current, {
@@ -50,7 +53,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => {
                     paddingRight: '2rem',
                     lineHeight: 1.2
                 }}>
-                    {question}
+                    {formattedQuestion}
                 </span>
                 <span style={{
                     fontSize: '1.5rem',
