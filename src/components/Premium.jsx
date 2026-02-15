@@ -245,6 +245,7 @@ const Premium = () => {
             benefitIcons: [LightningIcon, FeatherIcon, TargetIcon],
             cta: "Réserver",
             img: img3,
+            backgroundPosition: 'center 20%', // Adjusted down slightly from top
             alt: "Pose ta question à Priscilla — Guidance rapide"
         }
     ];
