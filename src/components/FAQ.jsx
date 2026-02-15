@@ -129,11 +129,11 @@ const FAQ = () => {
             questions: [
                 {
                     q: "C'est quoi un soin énergétique à distance ?",
-                    a: "C'est un format complet d'1h. On commence par 30 min d'échange (visio ou téléphone) pour faire le point. Ensuite, je coupe et travaille à distance pendant 30 min sur tes énergies. Tu reçois enfin un compte-rendu vocal détaillé de tout ce qui a été libéré."
+                    a: "C'est un format complet d'1h. La séance commence par 30 min d'échange (visio ou téléphone) pour faire le point. Ensuite, Priscilla travaille à distance pendant 30 min sur tes énergies. Tu reçois enfin un compte-rendu vocal détaillé de tout ce qui a été libéré."
                 },
                 {
                     q: "Comment se passe une séance de coaching intuitif ?",
-                    a: "C'est un appel en visio ou par téléphone, en tête-à-tête avec Priscilla. Tu arrives avec ta question, ton blocage ou ta décision à prendre. En une séance, on pose les mots sur ce qui est flou, on éclaire la situation et tu repars aligné·e, avec une direction claire. Pas de blabla, du concret."
+                    a: "C'est un appel en visio ou par téléphone, en tête-à-tête avec Priscilla. Tu arrives avec ta question, ton blocage ou ta décision à prendre. En une séance, elle t'aide à poser les mots sur ce qui est flou, à éclairer la situation et tu repars aligné·e, avec une direction claire. Pas de blabla, du concret."
                 }
             ]
         },
