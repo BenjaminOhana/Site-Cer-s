@@ -138,7 +138,7 @@ const FAQ = () => {
             category: "Pour les débutant·es",
             questions: [
                 {
-                    q: "Je n'y connais rien en astrologie, c'est pour moi quand même ?",
+                    q: "Je n'y connais rien en astrologie, c'est pour moi quand\u00A0même\u00A0?",
                     a: "Absolument. Tu n'as besoin d'aucune connaissance en astrologie. Priscilla traduit tout en langage clair et accessible. Que tu sois passionné·e ou simplement curieux·se, tout est fait pour que tu comprennes et que ça te parle."
                 }
             ]

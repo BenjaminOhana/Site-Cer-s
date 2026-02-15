@@ -115,7 +115,7 @@ const Bio = () => {
                         fontFamily: 'var(--font-body)',
                         fontWeight: 500,
                         textTransform: 'uppercase',
-                        letterSpacing: '0.05em' // Reduced from 0.1em
+                        letterSpacing: '0.02em' // Reduced from 0.05em
                     }}>
                         Priscilla Owona
                     </h2>
