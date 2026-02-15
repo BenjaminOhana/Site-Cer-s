@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import local image
-import horoscopeImage from '../assets/horoscope-magazine.webp';
+import horoscopeImage from '../assets/horoscope-reading.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
